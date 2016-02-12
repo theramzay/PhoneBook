@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Concrete
 {
-    class DBcon : IdentityDbContext<User>
+    internal class DBcon : IdentityDbContext<User>, IRepository
     {
-        public DBcon():base("DBcon", throwIfV1Schema:false)
+        public DBcon() : base("DBcon", false)
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
