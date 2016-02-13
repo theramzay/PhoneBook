@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PhoneBook.Domain.Entities
 {
-    internal class User : IdentityUser
+    public class User : IdentityUser
     {
         public string Password { get; set; }
         public string FirstName { get; set; }
