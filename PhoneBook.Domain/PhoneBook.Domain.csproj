@@ -60,6 +60,8 @@
     <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="Concrete\DBcon.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Infrastructure\ApplicationUserManager.cs" />
+    <Compile Include="Infrastructure\MainUserManager.cs" />
     <Compile Include="Migrations\201602131050388_init.cs" />
     <Compile Include="Migrations\201602131050388_init.Designer.cs">
       <DependentUpon>201602131050388_init.cs</DependentUpon>
@@ -78,6 +80,7 @@
       <DependentUpon>201602131050388_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
