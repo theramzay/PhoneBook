@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
 
 namespace PhoneBook.Core
 {
@@ -18,6 +19,10 @@ namespace PhoneBook.Core
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var builder = new ContainerBuilder();
+            // Register your MVC controllers.
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
         }
     }
 }
