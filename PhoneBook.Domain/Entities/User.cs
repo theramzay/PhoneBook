@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PhoneBook.Domain.Entities
 {
     public class User : IdentityUser
     {
+        [Key]
+        public string Id { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
