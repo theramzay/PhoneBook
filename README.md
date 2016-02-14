@@ -1,4 +1,4 @@
-# GalleryMVC_With_Auth
+# PhoneBook application
 PhoneBook RESTful application which have frontend at web-client on ReactJS.
 Android, iOS and Windows 10 mobile are planning.
 
