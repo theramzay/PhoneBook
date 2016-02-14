@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
+using PhoneBook.Domain.Abstract;
+using PhoneBook.Domain.Concrete;
 using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Infrastructure
 {
-    internal class MainUserManager
+    public class MainUserManager : IMainUserManager
     {
         private readonly ApplicationUserManager _applicationUserManager;
 
@@ -12,9 +14,9 @@ namespace PhoneBook.Domain.Infrastructure
             _applicationUserManager = applicationUserManager;
         }
 
-        public Task CreateAsync(string email, string password, bool isConfirmed = false)
+        public async Task CreateAsync(string email, string password, bool isConfirmed = false)
         {
-            return _applicationUserManager.CreateAsync(new User
+           await _applicationUserManager.CreateAsync(new User
             {
                 Email = email,
                 Password = password,
