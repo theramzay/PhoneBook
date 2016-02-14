@@ -1,18 +1,16 @@
+using System.Data.Entity.Migrations;
+using PhoneBook.Domain.Concrete;
+
 namespace PhoneBook.Domain.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<PhoneBook.Domain.Concrete.DBcon>
+    internal sealed class Configuration : DbMigrationsConfiguration<DBcon>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(PhoneBook.Domain.Concrete.DBcon context)
+        protected override void Seed(DBcon context)
         {
             //  This method will be called after migrating to the latest version.
 
