@@ -4,7 +4,7 @@ using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Concrete
 {
-    internal class DBcon : IdentityDbContext<User>, IRepository
+    public class DBcon : IdentityDbContext<User>, IRepository
     {
         public DBcon() : base("DBcon", false)
         {
