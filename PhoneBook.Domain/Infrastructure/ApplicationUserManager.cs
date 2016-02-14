@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Infrastructure
@@ -13,6 +14,26 @@ namespace PhoneBook.Domain.Infrastructure
         {
             _store = store;
             _userTokenProvider = userTokenProvider;
+
+            // Configure validation logic for usernames.
+            UserValidator = new UserValidator<User>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
+
+            // Configure validation logic for passwords.
+            PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 8
+            };
+
+            // Configure user lockout defaults
+            UserLockoutEnabledByDefault = true;
+            DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            MaxFailedAccessAttemptsBeforeLockout = 5;
+            UserTokenProvider = userTokenProvider;
+
         }
     }
 }
