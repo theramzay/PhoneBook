@@ -5,6 +5,7 @@ using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PhoneBook.Domain.Abstract;
+using PhoneBook.Domain.Concrete;
 using PhoneBook.Domain.Entities;
 using PhoneBook.Domain.Infrastructure;
 
@@ -25,9 +26,10 @@ namespace PhoneBook.Core.Util
             //builder.RegisterWebApiFilterProvider(config);
 
             //dependenses resolving
-            builder.RegisterType<MainUserManager>().As<IMainUserManager>();
-            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>();
-            //builder.RegisterType<ApplicationUserTokenProvider<User, string>>().As<IUserTokenProvider<User, string>>();
+            builder.RegisterType<MainUserManager>().As<IMainUserManager>().InstancePerRequest();
+            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>().WithParameter("context", new DBcon());
+
+
             builder.RegisterType<ApplicationUserManager>().AsSelf();
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
