@@ -6,10 +6,11 @@ namespace PhoneBook.Domain.Concrete
 {
     public class DBcon : IdentityDbContext<User>, IRepository
     {
-        public DBcon() : base("DBcon", false)
+        public DBcon() : base("DBcon", true)
         {
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
+            
         }
 
         public static DBcon Create()
