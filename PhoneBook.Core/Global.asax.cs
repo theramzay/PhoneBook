@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
+using PhoneBook.Core.Util;
 
 namespace PhoneBook.Core
 {
@@ -22,12 +23,8 @@ namespace PhoneBook.Core
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var builder = new ContainerBuilder();
-            // Get your HttpConfiguration.
-            var config = GlobalConfiguration.Configuration;
+            AutofacConfig.Configure();
 
-            // Register your Web API controllers.
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
         }
     }
 }
