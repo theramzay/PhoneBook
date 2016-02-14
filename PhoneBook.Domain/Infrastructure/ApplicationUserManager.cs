@@ -1,20 +1,17 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Owin.Security.AesDataProtectorProvider;
+using Owin.Security.AesDataProtectorProvider.CrypticProviders;
 using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Infrastructure
 {
     public class ApplicationUserManager : UserManager<User>
     {
-        private IUserStore<User> _store;
-        private IUserTokenProvider<User, string> _userTokenProvider;
-
-        public ApplicationUserManager(IUserStore<User> store, IUserTokenProvider<User, string> userTokenProvider)
+        public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
-            _store = store;
-            _userTokenProvider = userTokenProvider;
-
+            var _store = store; //FOR DEBUG TODO:DELETE ON REALESE
             // Configure validation logic for usernames.
             UserValidator = new UserValidator<User>(this)
             {
@@ -25,15 +22,19 @@ namespace PhoneBook.Domain.Infrastructure
             // Configure validation logic for passwords.
             PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 8
+                RequiredLength = 1
             };
 
             // Configure user lockout defaults
-            UserLockoutEnabledByDefault = true;
-            DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            MaxFailedAccessAttemptsBeforeLockout = 5;
-            UserTokenProvider = userTokenProvider;
+            UserLockoutEnabledByDefault = false;
+            //DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            //MaxFailedAccessAttemptsBeforeLockout = 5;
+            //var dataProtectionProvider = Startup.DataProtectionProvider;
+            var dataProtectionProvider = new AesDataProtectorProvider(new Sha512CspFactory(), new Sha256CspFactory(),
+                new AesCspFactory());
+            UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
 
+            var dbg = "bsa"; //FOR DEBUG TODO:DELETE ON REALESE
         }
     }
 }
