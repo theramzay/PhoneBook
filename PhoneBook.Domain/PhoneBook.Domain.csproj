@@ -95,7 +95,6 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Abstract\IMainUserManager.cs" />
-    <Compile Include="Infrastructure\ApplicationUserTokenProvider.cs" />
     <Compile Include="Infrastructure\MainUserManager.cs" />
     <Compile Include="Migrations\201602131050388_init.cs" />
     <Compile Include="Migrations\201602131050388_init.Designer.cs">
