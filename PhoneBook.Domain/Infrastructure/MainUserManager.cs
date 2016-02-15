@@ -19,7 +19,6 @@ namespace PhoneBook.Domain.Infrastructure
 
         public async Task<IdentityResult> CreateAsync(string email, string password, bool isConfirmed = false)
         {
-            var r = new Random();
             var u = new User
             {
                 Email = email,
@@ -27,12 +26,7 @@ namespace PhoneBook.Domain.Infrastructure
                 Id = $"{email} {DateTime.Now}".GetHashCode().ToString(),
                 HolidayTime = DateTime.Now,
                 BusinessTrip = false,
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                TwoFactorEnabled = true,
-                LockoutEndDateUtc = DateTime.Now,
-                LockoutEnabled = false,
-                AccessFailedCount = 1,
+                EmailConfirmed = isConfirmed,
                 UserName = email
             };
             return await _applicationUserManager.CreateAsync(u, password);
