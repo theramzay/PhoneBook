@@ -24,7 +24,7 @@ namespace PhoneBook.Domain.Infrastructure
             {
                 Email = email,
                 Password = password,
-                Id = r.Next(1000000).ToString(),
+                Id = $"{email} {DateTime.Now}".GetHashCode().ToString(),
                 HolidayTime = DateTime.Now,
                 BusinessTrip = false,
                 EmailConfirmed = true,
