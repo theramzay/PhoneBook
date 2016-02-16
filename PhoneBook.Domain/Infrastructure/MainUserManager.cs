@@ -45,6 +45,22 @@ namespace PhoneBook.Domain.Infrastructure
             return result;
         }
 
+        public async Task<User> FindAsync(string email,string password)
+        {
+            var user = await _applicationUserManager.FindByEmailAsync(email);
+            var check = await _applicationUserManager.CheckPasswordAsync(user,password);
+            if (check)
+            {
+                return user;
+            }
+            return (User) null;
+        }
+
+        public async Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType)
+        {
+            return await _applicationUserManager.CreateIdentityAsync(user, authenticationType);
+        }
+
         public async Task<List<User>> ShowAsync()
         {
             return await _applicationUserManager.Users.ToListAsync();
@@ -61,12 +77,6 @@ namespace PhoneBook.Domain.Infrastructure
             return await 
                 _applicationUserManager.ChangePasswordAsync(
                     _applicationUserManager.FindByEmailAsync(email).Id.ToString(), currentPassword, newPassword);
-        }
-
-
-        public MainUserManager Create()
-        {
-            return new MainUserManager(_applicationUserManager);
         }
     }
 }
