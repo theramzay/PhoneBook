@@ -1,13 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PhoneBook.Domain.Abstract;
 
 namespace PhoneBook.Domain.Entities
 {
     public class User : IdentityUser
     {
-        [Key]
-        public string Id { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -22,5 +22,13 @@ namespace PhoneBook.Domain.Entities
         public bool BusinessTrip { get; set; }
         public string Boss { get; set; } //Temp implementation TODO: create relation
         public string NotesForBoss { get; set; }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(IMainUserManager manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+            return userIdentity;
+        }
     }
 }
