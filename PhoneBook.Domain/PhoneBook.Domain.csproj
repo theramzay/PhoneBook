@@ -104,6 +104,18 @@
     <Compile Include="Migrations\201602142034033_addId.Designer.cs">
       <DependentUpon>201602142034033_addId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602152155240_RolesAdd.cs" />
+    <Compile Include="Migrations\201602152155240_RolesAdd.Designer.cs">
+      <DependentUpon>201602152155240_RolesAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602152237424_iddel.cs" />
+    <Compile Include="Migrations\201602152237424_iddel.Designer.cs">
+      <DependentUpon>201602152237424_iddel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602152255369_cleanupUserModel.cs" />
+    <Compile Include="Migrations\201602152255369_cleanupUserModel.Designer.cs">
+      <DependentUpon>201602152255369_cleanupUserModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +131,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602142034033_addId.resx">
       <DependentUpon>201602142034033_addId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152155240_RolesAdd.resx">
+      <DependentUpon>201602152155240_RolesAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152237424_iddel.resx">
+      <DependentUpon>201602152237424_iddel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602152255369_cleanupUserModel.resx">
+      <DependentUpon>201602152255369_cleanupUserModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

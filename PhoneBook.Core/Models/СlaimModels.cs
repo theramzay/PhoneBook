@@ -1,10 +1,8 @@
 ﻿namespace PhoneBook.Core.Models
 {
-    public class AccountRegistrationModel
+    public class ClaimAddModel
     {
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
     }
-
-
 }

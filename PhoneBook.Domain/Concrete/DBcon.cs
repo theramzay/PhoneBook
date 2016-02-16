@@ -13,7 +13,7 @@ namespace PhoneBook.Domain.Concrete
             
         }
 
-        public static DBcon Create()
+        public  DBcon Create()
         {
             return new DBcon();
         }
