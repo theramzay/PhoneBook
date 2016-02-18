@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using System.Web.Optimization.React;
 
 namespace PhoneBook.Core
 {
@@ -22,6 +23,14 @@ namespace PhoneBook.Core
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
+            bundles.Add(new ScriptBundle("~/bundles/reactJS").Include(
+                "~/Scripts/react/react-0.14.0.min.js",
+                "~/Scripts/react/react-dom-0.14.0.min.js"));
+            bundles.Add(new BabelBundle("~/bundles/reactApp").Include(
+                "~/Scripts/views/Modals.jsx",
+                "~/Scripts/views/buttons.jsx"
+                ));
         }
     }
 }
