@@ -1,41 +1,48 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
     <title>@ViewBag.Title</title>
-    <script src="~/Scripts/Sakura.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sakura")
+    @Scripts.Render("~/bundles/reactJS")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
-            </div>
+<body >
+<!-- Modal -->
+<div id="registrationModal" class="modal fade" role="dialog"></div>
+<div id="authorizationModal" class="modal fade" role="dialog"></div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home", new {area = ""}, null)</li>
+                <li>@Html.ActionLink("API", "Index", "Help", new {area = ""}, null)</li>
+            </ul>
+            <!-- Trigger the modal with a button -->
+            <div id="logins"></div>
         </div>
     </div>
-    <div class="splash">
-        <div class="splashWebGlPart">
-            <canvas id="sakura"></canvas>
-            <div class="btnbg">
-                <button type="button" onclick="toggleAnimation(this)">Stop</button>
-            </div>
+</div>
+<div class="splash">
+<div class="splashWebGlPart">
+<canvas id="sakura"></canvas>
+<div class="btnbg">
+    <button type="button" onclick="toggleAnimation(this)">Stop</button>
+</div>
 
-            <!-- sakura shader -->
-            <script id="sakura_point_vsh" type="x-shader/x_vertex">
+<!-- sakura shader -->
+<script id="sakura_point_vsh" type="x-shader/x_vertex">
                 uniform mat4 uProjection;
                 uniform mat4 uModelview;
                 uniform vec3 uResolution;
@@ -127,7 +134,7 @@
                 distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
                 }
             </script>
-            <script id="sakura_point_fsh" type="x-shader/x_fragment">
+<script id="sakura_point_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -199,8 +206,8 @@
                 gl_FragColor = vec4(col * 0.5, alpha);
                 }
             </script>
-            <!-- effects -->
-            <script id="fx_common_vsh" type="x-shader/x_vertex">
+<!-- effects -->
+<script id="fx_common_vsh" type="x-shader/x_vertex">
                 uniform vec3 uResolution;
                 attribute vec2 aPosition;
 
@@ -213,7 +220,7 @@
                 screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
                 }
             </script>
-            <script id="bg_fsh" type="x-shader/x_fragment">
+<script id="bg_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -233,7 +240,7 @@
                 gl_FragColor = vec4(col * 0.5, 1.0);
                 }
             </script>
-            <script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
+<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -249,7 +256,7 @@
                 gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
                 }
             </script>
-            <script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
+<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -270,8 +277,8 @@
                 gl_FragColor = col / 5.0;
                 }
             </script>
-            <!-- effect fragment shader template -->
-            <script id="fx_common_fsh" type="x-shader/x_fragment">
+<!-- effect fragment shader template -->
+<script id="fx_common_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -286,8 +293,8 @@
                 gl_FragColor = texture2D(uSrc, texCoord);
                 }
             </script>
-            <!-- post processing -->
-            <script id="pp_final_vsh" type="x-shader/x_vertex">
+<!-- post processing -->
+<script id="pp_final_vsh" type="x-shader/x_vertex">
                 uniform vec3 uResolution;
                 attribute vec2 aPosition;
                 varying vec2 texCoord;
@@ -298,7 +305,7 @@
                 screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
                 }
             </script>
-            <script id="pp_final_fsh" type="x-shader/x_fragment">
+<script id="pp_final_fsh" type="x-shader/x_fragment">
                 #ifdef GL_ES
                 //precision mediump float;
                 precision highp float;
@@ -321,23 +328,21 @@
                 }
             </script>
 
-        </div>
-    </div>
-    <div class="splashText" style="text-align: center">
-        <h1>Phone Book.</h1>
-        <p class="lead">We are thinking when your are dreaming.</p>
-    </div>
-    <div class="container body-content" style="padding-top: 100px">
-
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - e100 application for bosses!</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+</div>
+</div>
+<div class="splashText" style="text-align: center">
+    <h1>Phone Book.</h1>
+    <p class="lead">We are thinking when your are dreaming.</p>
+</div>
+<div class="container body-content" style="padding-top: 100px">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - e100 application for bosses!</p>
+    </footer>
+</div>
+@Scripts.Render("~/bundles/reactApp")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>
