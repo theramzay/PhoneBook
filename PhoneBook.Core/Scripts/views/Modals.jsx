@@ -45,8 +45,8 @@
         </div>
         <div className="modal-body">
             <form onSubmit={this.submit}>
-                <input placeholder="email" className="form-control" id="Email" type="email" name="Email" label="Email:"/>
-                <input placeholder="password" className="form-control" id="Password" type="password" name="Password" label="Password:"/>
+                <input placeholder="email" required={true} className="form-control" id="Email" type="email" name="Email" label="Email:"/>
+                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="Password" type="password" name="Password" label="Password:"/>
                 <button className="btn btn-success" type="submit">Submit</button>
             </form>
         </div>
@@ -121,9 +121,9 @@ var AuthUser = React.createClass({
             <form onSubmit={this.submitAuth}>
                 <h3>Вход на сайт</h3>
                 <label>Введите email</label><br/>
-                <input placeholder="email" className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
+                <input placeholder="email" required={true} className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
                 <label>Введите пароль</label><br/>
-                <input placeholder="password" className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
+                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
                 <button className="btn btn-success" type="submit">Submit</button>
             </form>
         </div>
