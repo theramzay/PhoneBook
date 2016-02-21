@@ -99,7 +99,7 @@ var AuthUser = React.createClass({
             sessionStorage.setItem(userNameKey, data.userName);
             console.log(data.access_token);
         }).fail(function(data) {
-            alert("При логине возникла ошибка");
+            alert("Error under login");
         });
 
     },
