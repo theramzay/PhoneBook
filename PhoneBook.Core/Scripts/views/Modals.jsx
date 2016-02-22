@@ -12,7 +12,8 @@
 
         var data = {
             Email: $("#Email").val(),
-            Password: $("#Password").val()
+            Password: $("#Password").val(),
+            ConfirmPassword: $("#ConfirmPassword").val()
         };
 
         // Submit form via jQuery/AJAX
@@ -23,6 +24,7 @@
             })
             .done(function(data) {
                 self.clearForm();
+                $('#registrationModal').modal('hide')
             })
             .fail(function(jqXhr) {
                 console.log("failed to register");
@@ -32,7 +34,8 @@
     clearForm: function() {
         this.setState({
             Email: "",
-            Password: ""
+            Password: "",
+            ConfirmPassword: ""
         });
     },
     render: function() {
@@ -45,8 +48,9 @@
         </div>
         <div className="modal-body">
             <form onSubmit={this.submit}>
-                <input placeholder="email" required={true} className="form-control" id="Email" type="email" name="Email" label="Email:"/>
-                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="Password" type="password" name="Password" label="Password:"/>
+                <input placeholder="Email" required={true} className="form-control" id="Email" type="email" name="Email" label="Email:"/>
+                <input placeholder="Password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="Password" type="password" name="Password" label="Password:"/>
+                <input placeholder="Confirm password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:" />
                 <button className="btn btn-success" type="submit">Submit</button>
             </form>
         </div>
@@ -93,7 +97,7 @@ var AuthUser = React.createClass({
             $('#regBtn').css('visibility', 'hidden');
             $('#logOutBtn').css('visibility', 'visible');
             $("#hello").css('visibility', 'visible');
-            $('#authorizationModal').modal('hide')
+            $('#authorizationModal').modal('hide');
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
             sessionStorage.setItem(userNameKey, data.userName);
@@ -138,7 +142,7 @@ var AuthUser = React.createClass({
 
 
 ReactDOM.render(
-    <AddUser url="/api/PhoneBook/Create"/>,
+    <AddUser url="api/Account/Register"/>,
     document.getElementById("registrationModal")
 );
 
