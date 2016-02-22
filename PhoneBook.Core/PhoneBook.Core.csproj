@@ -305,7 +305,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\СlaimModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\ApplicationOAuthProvider.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
