@@ -41,7 +41,7 @@
     <div className="modal-content">
         <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">Modal Header</h4>
+            <h4 className="modal-title">Registration</h4>
         </div>
         <div className="modal-body">
             <form onSubmit={this.submit}>
@@ -115,7 +115,7 @@ var AuthUser = React.createClass({
     <div className="modal-content">
         <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">Modal Header</h4>
+            <h4 className="modal-title">Authorization</h4>
         </div>
         <div className="modal-body">
             <form onSubmit={this.submitAuth}>
