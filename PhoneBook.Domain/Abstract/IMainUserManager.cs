@@ -9,10 +9,16 @@ namespace PhoneBook.Domain.Abstract
     public interface IMainUserManager
     {
         Task<IdentityResult> ChangePasswordAsync(string email, string currentPassword, string newPassword);
-        Task<IdentityResult> CreateAsync(string email, string password, bool isConfirmed = false);
+        Task<IdentityResult> CreateAsync(User u);
         Task<List<User>> ShowAsync();
         Task<IdentityResult> AddClaimToUserAsync(string email, string claimName);
         Task<User> FindAsync(string name, string password);
         Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType);
+        Task<User> FindByIdAsync(string userId);
+        Task<IdentityResult> AddPasswordAsync(string userId, string newPassword);
+        Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo userInfo);
+        Task<IdentityResult> RemovePasswordAsync(string userId);
+        Task<IdentityResult> RemoveLoginAsync(string userId, UserLoginInfo userInfo);
+        Task<User> FindAsync(UserLoginInfo userLoginInfo);
     }
 }
