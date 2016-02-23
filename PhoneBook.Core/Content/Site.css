@@ -16,6 +16,15 @@ textarea {
     max-width: 280px;
 }
 
+#whoLog {
+    color: cyan;
+    transition: color 1s;
+}
+
+#whoLog:hover {
+    color: greenyellow;
+}
+
 
 /* sakura*/
 
