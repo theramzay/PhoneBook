@@ -22,14 +22,30 @@
         $('#authBtn').css('visibility', 'visible');
         $('#regBtn').css('visibility', 'visible');
     },
+    profile:function() {
+        ReactDOM.render(
+          <Info url="api/Account/UserInfo" />,
+          document.getElementById('content')
+);
+    },
+    MainPage:function() {
+        ReactDOM.render(
+          <MainPage />,
+          document.getElementById('content')
+        );
+    },
     render: function() {
         return (
             <div>
-                <button id="regBtn" type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#registrationModal">Registration</button>
-                <button id="authBtn" type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#authorizationModal">Authorization</button>
-                <button id="logOutBtn" className="btn btn-info btn-lg" onClick={this.logOut}>Log Out</button>
-                 <div id="hello"><p style={{ color: 'rgb(245, 197, 198)' } }>Приветствуем вас, <span style={{ color: 'cyan' }} id="whoLog"></span></p></div>
-      </div>
+                <ul className="nav navbar-nav">
+                    <li><a href="#" onClick={this.MainPage}>Home</a></li>
+                    <li><a href="/Help">Api</a></li>
+                    <li><a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal">Registration</a></li>
+                    <li><a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal">Authorization</a></li>
+                    <li><a href="#" id="logOutBtn" onClick={this.logOut}>Log Out</a></li>
+                    <li><a id="hello" href="#" onClick={this.profile}>Hello, <span id="whoLog"></span></a></li>
+                </ul>
+</div>
     );
 }
 });
