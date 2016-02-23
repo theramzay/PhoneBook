@@ -30,7 +30,9 @@ namespace PhoneBook.Core
                 "~/Scripts/react/react-dom-0.14.0.min.js"));
             bundles.Add(new BabelBundle("~/bundles/reactApp").Include(
                 "~/Scripts/views/Modals.jsx",
-                "~/Scripts/views/buttons.jsx"
+                "~/Scripts/views/buttons.jsx",
+                "~/Scripts/views/MainPage.jsx",
+                "~/Scripts/views/ProfilePage.jsx"
                 ));
         }
     }
