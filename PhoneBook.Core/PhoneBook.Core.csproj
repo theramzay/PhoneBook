@@ -296,7 +296,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -380,8 +379,8 @@
     <Content Include="Scripts\views\Modals.jsx" />
     <Content Include="Scripts\views\buttons.jsx" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Scripts\views\ProfilePage.jsx" />
+    <Content Include="Scripts\views\MainPage.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
