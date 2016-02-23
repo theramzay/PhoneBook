@@ -19,19 +19,19 @@ namespace PhoneBook.Domain.Infrastructure
             _applicationUserManager = applicationUserManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(string email, string password, bool isConfirmed = false)
+        public async Task<IdentityResult> CreateAsync(User u)
         {
             var user = new User
             {
-                Email = email,
-                Password = password,
-                Id = $"{email} {DateTime.Now}".GetHashCode().ToString(),
+                Email = u.Email,
+                Password = u.Password,
+                Id = u.Id,
                 HolidayTime = DateTime.Now,
                 BusinessTrip = false,
-                EmailConfirmed = isConfirmed,
-                UserName = email
+                EmailConfirmed = u.EmailConfirmed,
+                UserName = u.Email
             };
-            var result = await _applicationUserManager.CreateAsync(user, password);
+            var result = await _applicationUserManager.CreateAsync(user, u.Password);
             if (result.Succeeded)
             {
                 // создаем claim для хранения года рождения
@@ -56,9 +56,39 @@ namespace PhoneBook.Domain.Infrastructure
             return (User) null;
         }
 
+        public async Task<User> FindAsync(UserLoginInfo userLoginInfo)
+        {
+            return await _applicationUserManager.FindAsync(userLoginInfo);
+        }
+
         public async Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType)
         {
             return await _applicationUserManager.CreateIdentityAsync(user, authenticationType);
+        }
+
+        public async Task<User> FindByIdAsync(string id)
+        {
+            return await _applicationUserManager.FindByIdAsync(id);
+        }
+
+        public async Task<IdentityResult> AddPasswordAsync(string userId, string newPassword)
+        {
+            return await _applicationUserManager.AddPasswordAsync(userId, newPassword);
+        }
+
+        public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo userInfo)
+        {
+            return await _applicationUserManager.AddLoginAsync(userId, userInfo);
+        }
+
+        public async Task<IdentityResult> RemovePasswordAsync(string userId)
+        {
+            return await _applicationUserManager.RemovePasswordAsync(userId);
+        }
+
+        public async Task<IdentityResult> RemoveLoginAsync(string userId, UserLoginInfo userInfo)
+        {
+            return await _applicationUserManager.RemoveLoginAsync(userId, userInfo);
         }
 
         public async Task<List<User>> ShowAsync()

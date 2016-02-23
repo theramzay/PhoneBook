@@ -17,11 +17,12 @@ namespace PhoneBook.Core
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap.min.js",
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
+                "~/Content/bootstrap.min.css",
+                "~/Content/bootstrap-theme.min.css",
                 "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
             bundles.Add(new ScriptBundle("~/bundles/reactJS").Include(
@@ -29,7 +30,9 @@ namespace PhoneBook.Core
                 "~/Scripts/react/react-dom-0.14.0.min.js"));
             bundles.Add(new BabelBundle("~/bundles/reactApp").Include(
                 "~/Scripts/views/Modals.jsx",
-                "~/Scripts/views/buttons.jsx"
+                "~/Scripts/views/buttons.jsx",
+                "~/Scripts/views/MainPage.jsx",
+                "~/Scripts/views/ProfilePage.jsx"
                 ));
         }
     }

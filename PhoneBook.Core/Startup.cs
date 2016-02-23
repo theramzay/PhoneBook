@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -36,19 +37,23 @@ namespace PhoneBook.Core
             //app.UseOAuthAuthorizationServer(new MyOAuthOptions());
             //app.UseJwtBearerAuthentication(new MyJwtOptions());
 
-            // Configure the application for OAuth based flow
+            // Configure & enable the application for OAuth based flow
             PublicClientId = "self";
-            OAuthOptions = new OAuthAuthorizationServerOptions
-            {
-                TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
-            };
-            // Enable the application to use bearer tokens to authenticate users
-            app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseOAuthBearerTokens(
+                OAuthOptions = new OAuthAuthorizationServerOptions
+                {
+                    TokenEndpointPath = new PathString("/Token"),
+                    Provider = new ApplicationOAuthProvider(PublicClientId),
+                    AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                    // In production mode set AllowInsecureHttp = false
+                    AllowInsecureHttp = true
+                });
+
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalBearer);
+            app.UseGoogleAuthentication(
+                clientId: "746837581939-gimncv6el35gvkhchcqghq92h38j35c7.apps.googleusercontent.com",
+                clientSecret: "zikgTnP-l2K4PVAmH4wtiij9");
 
             //app.UseWebApi(httpConfiguration);
             //ConfigureAuth(app);
