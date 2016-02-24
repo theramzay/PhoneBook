@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace TestsApiMvcReactJS.Models
+namespace PhoneBook.Core.Models
 {
     // Models returned by AccountController actions.
 
