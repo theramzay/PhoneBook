@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PhoneBook.Core.Models;
 using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Core.Controllers
 {
-    [RequireHttps]
-    [System.Web.Http.RoutePrefix("api/PhoneBook")]
+    [RoutePrefix("api/PhoneBook")]
     public class PhoneBookController : ApiController
     {
         private readonly IMainUserManager _mainUserManager;
@@ -18,17 +17,18 @@ namespace PhoneBook.Core.Controllers
             _mainUserManager = mainUserManager;
         }
 
-        [System.Web.Http.Route("Create")]
-        [System.Web.Http.HttpPost]
+        [Route("Create")]
+        [HttpPost]
         public async Task<IHttpActionResult> Create(AccountRegistrationModel newUser)
         {
             if (!ModelState.IsValid) return BadRequest("Something frong with registration!");
-            var response = await _mainUserManager.CreateAsync(new User {Email = newUser.Email,Password = newUser.Password});
+            var response =
+                await _mainUserManager.CreateAsync(new User {Email = newUser.Email, Password = newUser.Password});
             return Ok(new {Msg = response.Errors, IsOk = response.Succeeded});
         }
 
-        [System.Web.Http.Route("AddClaim")]
-        [System.Web.Http.HttpPost]
+        [Route("AddClaim")]
+        [HttpPost]
         public async Task<IHttpActionResult> AddClaim(ClaimAddModel c)
         {
             if (!ModelState.IsValid) return BadRequest("Something frong with adding claim to user!");
@@ -36,26 +36,26 @@ namespace PhoneBook.Core.Controllers
             return Ok(new {Msg = response.Errors, IsOk = response.Succeeded});
         }
 
-        [System.Web.Http.Route("All")]
-        [System.Web.Http.HttpGet]
+        [Route("All")]
+        [HttpGet]
         public async Task<IHttpActionResult> AllUsers()
         {
             var response = await _mainUserManager.ShowAsync();
             return Ok(response);
         }
 
-        [System.Web.Http.Route("ClaimTest")]
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Authorize(Roles = "user")]
+        [Route("ClaimTest")]
+        [HttpGet]
+        [Authorize(Roles = "user")]
         //[ClaimAuth(Role = "user")]
         public IHttpActionResult ClaimTest()
         {
             return Ok(new {Message = "Hello!", lol = "yep"});
         }
 
-        [System.Web.Http.Route("ClaimTestModer")]
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Authorize(Roles = "Moder")]
+        [Route("ClaimTestModer")]
+        [HttpGet]
+        [Authorize(Roles = "Moder")]
         //[ClaimAuth(Role = "user")]
         public IHttpActionResult ClaimTestModer()
         {

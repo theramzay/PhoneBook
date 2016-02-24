@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -14,13 +15,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using PhoneBook.Core;
+using PhoneBook.Core.Models;
 using PhoneBook.Core.Util;
 using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
-using TestsApiMvcReactJS.Models;
 
-namespace TestsApiMvcReactJS.Controllers
+namespace PhoneBook.Core.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -111,6 +111,9 @@ namespace TestsApiMvcReactJS.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        //public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -126,7 +129,7 @@ namespace TestsApiMvcReactJS.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(result);
         }
 
         // POST api/Account/SetPassword
