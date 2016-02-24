@@ -102,11 +102,11 @@ namespace PhoneBook.Domain.Infrastructure
             return await _applicationUserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, claimName));
         }
 
-        public async Task<IdentityResult> ChangePasswordAsync(string email, string currentPassword, string newPassword)
+        public async Task<IdentityResult> ChangePasswordAsync(string id, string currentPassword, string newPassword)
         {
             return await 
                 _applicationUserManager.ChangePasswordAsync(
-                    _applicationUserManager.FindByEmailAsync(email).Id.ToString(), currentPassword, newPassword);
+                    _applicationUserManager.FindById(id).Id, currentPassword, newPassword);
         }
     }
 }
