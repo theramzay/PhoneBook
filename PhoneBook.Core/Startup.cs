@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.Http;
+using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
