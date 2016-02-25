@@ -310,7 +310,6 @@
     <Compile Include="Util\ApplicationOAuthProvider.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\ClaimAuth.cs" />
-    <Compile Include="Util\RequireHttpsAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

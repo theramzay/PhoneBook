@@ -95,7 +95,6 @@ var AuthUser = React.createClass({
             $("#whoLog").text(data.userName);
             $('#authBtn').css('visibility', 'hidden');
             $('#regBtn').css('visibility', 'hidden');
-            $('#logOutBtn').css('visibility', 'visible');
             $("#hello").css('visibility', 'visible');
             $('#authorizationModal').modal('hide');
             // сохраняем в хранилище sessionStorage токен доступа
