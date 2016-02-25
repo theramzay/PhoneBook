@@ -37,7 +37,7 @@
             <div>
     <ul className="nav navbar-nav">
         <li>
-            <a href="#Home" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span> Home</a>
+            <a href="#Home" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span></a>
         </li>
         <li>
             <a href="/Help">Api</a>
