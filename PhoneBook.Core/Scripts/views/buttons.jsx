@@ -7,10 +7,8 @@
             $("#whoLog").text(sessionStorage.getItem('userName'));
             $('#authBtn').css('visibility', 'hidden');
             $('#regBtn').css('visibility', 'hidden');
-            $('#logOutBtn').css('visibility', 'visible');
             $("#hello").css('visibility', 'visible');
         } else {
-            $('#logOutBtn').css('visibility', 'hidden');
             $("#hello").css('visibility', 'hidden');
         }
     },
