@@ -42,9 +42,17 @@
                     <li><a href="/Help">Api</a></li>
                     <li><a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal">Register</a></li>
                     <li><a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal">Log in</a></li>
-                    <li><a href="#" id="logOutBtn" onClick={this.logOut}>Log Out</a></li>
-                    <li><a id="hello" href="#" onClick={this.profile}>Hello, <span id="whoLog"></span></a></li>
+                    <li className="dropdown">
+                <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span> <span className="caret"></span></a>
+                <ul className="dropdown-menu">
+                  <li><a href="#" onClick={this.profile}>Settings</a></li>
+                  <li role="separator" className="divider"></li>
+                  <li className="dropdown-header">Bye</li>
+                  <li><a href="#" onClick={this.logOut}>Log Out</a></li>
                 </ul>
+                    </li>
+                </ul>
+
 </div>
     );
 }
