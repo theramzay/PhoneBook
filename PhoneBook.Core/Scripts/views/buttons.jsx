@@ -40,8 +40,8 @@
                 <ul className="nav navbar-nav">
                     <li><a href="#" onClick={this.MainPage}>Home</a></li>
                     <li><a href="/Help">Api</a></li>
-                    <li><a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal">Registration</a></li>
-                    <li><a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal">Authorization</a></li>
+                    <li><a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal">Register</a></li>
+                    <li><a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal">Log in</a></li>
                     <li><a href="#" id="logOutBtn" onClick={this.logOut}>Log Out</a></li>
                     <li><a id="hello" href="#" onClick={this.profile}>Hello, <span id="whoLog"></span></a></li>
                 </ul>
