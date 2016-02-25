@@ -37,7 +37,7 @@
             <div>
     <ul className="nav navbar-nav">
         <li>
-            <a href="#" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span> Home</a>
+            <a href="#Home" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span> Home</a>
         </li>
         <li>
             <a href="/Help">Api</a>
@@ -54,12 +54,12 @@
             <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span> <span className="caret"></span></a>
             <ul className="dropdown-menu">
                 <li>
-                    <a href="#" onClick={this.profile}><span className="glyphicon glyphicon-cog"></span> Settings</a>
+                    <a href="#Settings" onClick={this.profile}><span className="glyphicon glyphicon-cog"></span> Settings</a>
                 </li>
                 <li role="separator" className="divider"></li>
                 <li className="dropdown-header">Bye</li>
                 <li>
-                    <a href="#" onClick={this.logOut}><span className="glyphicon glyphicon-off"></span> Log Out</a>
+                    <a href="#LogOut" onClick={this.logOut}><span className="glyphicon glyphicon-off"></span> Log Out</a>
                 </li>
             </ul>
                 </li>
