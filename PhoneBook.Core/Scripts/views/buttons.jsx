@@ -5,20 +5,20 @@
     componentDidMount: function() {
         if (sessionStorage.getItem("userName") != null) {
             $("#whoLog").text(sessionStorage.getItem("userName"));
-            $("#authBtn").css("visibility", "hidden");
-            $("#regBtn").css("visibility", "hidden");
-            $("#hello").css("visibility", "visible");
+            $("#authBtn").addClass('hidden');
+            $("#regBtn").addClass('hidden');
+            $("#hello").removeClass('hidden');
         } else {
-            $("#hello").css("visibility", "hidden");
+            $("#hello").addClass('hidden');
         }
     },
     logOut: function() {
         sessionStorage.removeItem("tokenKey");
         sessionStorage.removeItem("userName");
-        $("#logOutBtn").css("visibility", "hidden");
-        $("#hello").css("visibility", "hidden");
-        $("#authBtn").css("visibility", "visible");
-        $("#regBtn").css("visibility", "visible");
+        $("#logOutBtn").addClass('hidden');
+        $("#hello").addClass('hidden');
+        $("#authBtn").removeClass('hidden');
+        $("#regBtn").removeClass('hidden');
     },
     profile: function() {
         ReactDOM.render(

@@ -3,10 +3,8 @@
         return {};
     },
     submit: function(e) {
-        var self;
-
         e.preventDefault();
-        self = this;
+        var self = this;
 
         console.log(this.state);
 
@@ -24,7 +22,7 @@
             })
             .done(function(data) {
                 self.clearForm();
-                $('#registrationModal').modal('hide')
+                $('#registrationModal').modal('hide');
             })
             .fail(function(jqXhr) {
                 console.log("failed to register");
@@ -93,9 +91,9 @@ var AuthUser = React.createClass({
         }).success(function(data) {
             console.log(data);
             $("#whoLog").text(data.userName);
-            $('#authBtn').css('visibility', 'hidden');
-            $('#regBtn').css('visibility', 'hidden');
-            $("#hello").css('visibility', 'visible');
+            $('#authBtn').addClass('hidden');
+            $('#regBtn').addClass('hidden');
+            $("#hello").removeClass('hidden');
             $('#authorizationModal').modal('hide');
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
