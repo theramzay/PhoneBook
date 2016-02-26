@@ -16,8 +16,15 @@ textarea {
     max-width: 280px;
 }
 
+.jumbotron {
+    box-shadow: 0 0 10px #000000;
+}
+
 #whoLog {
     color: cyan;
+    -moz-transition: color 1s;
+    -o-transition: color 1s;
+    -webkit-transition: color 1s;
     transition: color 1s;
 }
 
@@ -55,9 +62,9 @@ div.btnbg {
     position:fixed;
     left:0;
     top:0;
-    box-shadow: 0px 0px 15px #ccc;
+    box-shadow: 0 0 15px #ccc;
 }
 div.btnbg:hover{
-    text-shadow: 0px 0px 3px #ccc;
-    box-shadow: 0px 0px 20px #ccc;
+    text-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 20px #ccc;
 }

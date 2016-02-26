@@ -80,8 +80,10 @@ var Info = React.createClass({
         return (
           <div>
               Yours email is - {this.state.Email} <br/>
-              Other content under hard development =)
-              <a onClick={this.ChangePassword} href="#">Change password</a>
+              Other content under hard development =) <br/>
+              <ul>
+                  <li><a onClick={this.ChangePassword} href="#">Change password</a></li>
+              </ul>
               <div id="pass"></div>
           </div>
         );
