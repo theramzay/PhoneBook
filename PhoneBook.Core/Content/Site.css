@@ -19,9 +19,9 @@ textarea {
 .jumbotron {
     box-shadow: 0 0 10px #000000;
 }
-a {
+/*a {
     color: white !important;
-}
+}*/
 
 #whoLog {
     color: cyan;
