@@ -57,7 +57,14 @@ var Info = React.createClass({
             url: this.props.url
         }).success(function (data) {
             self.setState({
-                Email: data.Email
+                FirstName: data.FirstName,
+                MiddleName: data.MiddleName,
+                LastName: data.LastName,
+                PositionInCompany: data.PositionInCompany,
+                PhonePrivate: data.PhonePrivate,
+                PhoneWork: data.PhoneWork,
+                Notes: data.Notes,
+                Boss: data.Boss
             });
         }).fail(function () {
             alert("Error");
@@ -78,11 +85,18 @@ var Info = React.createClass({
     },
     render: function() {
         return (
-          <div>
-              Yours email is - {this.state.Email} <br/>
+          <div> Info about you: <br/>
+              Yours First Name is - {this.state.FirstName} <br/>
+              Yours Middle Name is - {this.state.MiddleName} <br />
+              Yours Last Name is - {this.state.LastName} <br />
+              Yours Position in company is - {this.state.PositionInCompany} <br />
+              Yours Private phone is - {this.state.PhonePrivate} <br />
+              Yours Work phone is - {this.state.PhoneWork} <br />
+              Yours Note is - {this.state.Notes} <br />
+              Yours Boss is - {this.state.Boss} <br />
               Other content under hard development =) <br/>
               <ul>
-                  <li><a onClick={this.ChangePassword} href="#">Change password</a></li>
+                  <li><a onClick={this.ChangePassword} href="#ChangePassword">Change password</a></li>
               </ul>
               <div id="pass"></div>
           </div>
