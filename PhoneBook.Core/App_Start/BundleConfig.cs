@@ -18,13 +18,14 @@ namespace PhoneBook.Core
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.min.js",
+                "~/Scripts/Parallax.js",
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/bootstrap-theme.min.css",
                 "~/Content/site.css"));
-            bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
             bundles.Add(new ScriptBundle("~/bundles/reactJS").Include(
                 "~/Scripts/react/react-0.14.0.min.js",
                 "~/Scripts/react/react-dom-0.14.0.min.js"));

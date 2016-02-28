@@ -19,6 +19,9 @@ textarea {
 .jumbotron {
     box-shadow: 0 0 10px #000000;
 }
+/*a {
+    color: white !important;
+}*/
 
 #whoLog {
     color: cyan;
@@ -28,12 +31,27 @@ textarea {
     transition: color 1s;
 }
 
+.navbar {
+    box-shadow: -10px 10px 30px 20px rgba(0, 0, 0,0.6);
+}
+
+.splash {
+    box-shadow: inset 0 -15px 15px 3px rgba(0,0,0,6);
+    /*color: white;*/
+    background: url('splash.jpg') center 0 repeat fixed; min-height: 4000px;
+    position: relative;
+    margin: 0 auto;
+    /*height: 600px;*/
+    text-shadow: 0 2px 3px #ffffff;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.7);
+}
+
 #whoLog:hover {
     color: greenyellow;
 }
 
 
-/* sakura*/
+/* sakura
 
 div.splashText {
     color: rgb(245, 197, 198);
@@ -67,4 +85,4 @@ div.btnbg {
 div.btnbg:hover{
     text-shadow: 0 0 3px #ccc;
     box-shadow: 0 0 20px #ccc;
-}
+}*/
