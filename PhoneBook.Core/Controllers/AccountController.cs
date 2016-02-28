@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -64,6 +65,21 @@ namespace PhoneBook.Core.Controllers
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin?.LoginProvider
             };
+        }
+
+        // GET api/Account/AllUserInfo
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("AllUserInfo")]
+        public async Task<PersonalUserInfoViewModer> GetAllUserInfo()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var viewUser = new PersonalUserInfoViewModer
+            {
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName
+            };
+            return viewUser;
         }
 
         // POST api/Account/Logout
