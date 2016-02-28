@@ -22,7 +22,7 @@
     },
     profile: function() {
         ReactDOM.render(
-            <Info url="api/Account/UserInfo"/>,
+            <Info url="api/Account/AllUserInfo"/>,
             document.getElementById("content")
         );
     },
