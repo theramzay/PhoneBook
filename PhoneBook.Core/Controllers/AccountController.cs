@@ -77,7 +77,13 @@ namespace PhoneBook.Core.Controllers
             {
                 FirstName = user.FirstName,
                 MiddleName = user.MiddleName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                PositionInCompany = user.PositionInCompany,
+                PhonePrivate = user.PhonePrivate,
+                PhoneWork = user.PhoneWork,
+                Notes = user.Notes,
+                Boss = user.Boss
+
             };
             return viewUser;
         }
