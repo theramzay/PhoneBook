@@ -26,7 +26,8 @@ namespace PhoneBook.Domain.Infrastructure
                 Email = u.Email,
                 Password = u.Password,
                 Id = u.Id,
-                HolidayTime = DateTime.Now,
+                HolidayTimeStart = DateTime.Now,
+                HolidayTimeEnd = DateTime.Now + new TimeSpan(10,0,0,0),
                 BusinessTrip = false,
                 EmailConfirmed = u.EmailConfirmed,
                 UserName = u.Email
@@ -43,6 +44,11 @@ namespace PhoneBook.Domain.Infrastructure
                 return result;
             }
             return result;
+        }
+
+        public async Task<IdentityResult> UpdateAsync(User u)
+        {
+            return await _applicationUserManager.UpdateAsync(u);
         }
 
         public async Task<User> FindAsync(string email,string password)
