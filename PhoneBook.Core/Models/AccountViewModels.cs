@@ -45,7 +45,8 @@ namespace PhoneBook.Core.Models
         public string PhonePrivate { get; set; }
         public string PhoneWork { get; set; }
         public string Notes { get; set; }
-        public DateTime HolidayTime { get; set; }
+        public DateTime HolidayTimeStart { get; set; }
+        public DateTime HolidayTimeEnd { get; set; }
         public bool BusinessTrip { get; set; }
         public string Boss { get; set; } 
         public string NotesForBoss { get; set; }
