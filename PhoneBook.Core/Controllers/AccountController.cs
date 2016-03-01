@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Autofac;
 using Autofac.Integration.Owin;
 using Microsoft.AspNet.Identity;
@@ -86,6 +87,31 @@ namespace PhoneBook.Core.Controllers
 
             };
             return viewUser;
+        }
+
+        // POST api/Account/UpdateAllUserInfo
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("UpdateAllUserInfo")]
+        public async Task<IHttpActionResult> UpdateAllUserInfo(PersonalUserInfoViewModer updatedUser)
+        {
+            if (!ModelState.IsValid) return BadRequest("Wrong model");
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if(updatedUser.FirstName != null)
+                user.FirstName = updatedUser.FirstName;
+            if (updatedUser.MiddleName != null)
+                user.MiddleName = updatedUser.MiddleName;
+            if (updatedUser.LastName != null)
+                user.LastName = updatedUser.LastName;
+            if (updatedUser.PositionInCompany != null)
+                user.PositionInCompany = updatedUser.PositionInCompany;
+            if (updatedUser.PhonePrivate != null)
+                user.PhonePrivate = updatedUser.PhonePrivate;
+            if (updatedUser.PhoneWork != null)
+                user.PhoneWork = updatedUser.PhoneWork;
+            if (updatedUser.Notes != null)
+                user.Notes = updatedUser.Notes;
+            var response = await UserManager.UpdateAsync(user);
+            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
         }
 
         // POST api/Account/Logout
