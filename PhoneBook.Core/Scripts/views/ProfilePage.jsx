@@ -141,7 +141,7 @@ var Info = React.createClass({
     ChangePassword: function() {
         ReactDOM.render(
             <ChangePassword url="api/Account/ChangePassword"/>,
-            document.getElementById("settingsContext")
+            document.getElementById("Settings")
         );
     },
     EditInfo: function() {
@@ -154,7 +154,7 @@ var Info = React.createClass({
                       PhoneWork={this.state.PhoneWork} 
                       Notes={this.state.Notes} 
                       url="api/Account/UpdateAllUserInfo"/>,
-            document.getElementById("settingsContext")
+            document.getElementById("Settings")
         );
     },
     render: function() {
@@ -178,7 +178,7 @@ var Info = React.createClass({
             <a onClick={this.EditInfo} href="#ChangePassword">Change info</a>
         </li>
     </ul>
-    <div id="settingsContext"></div>
+    <div id="Settings"></div>
 </div>
         );
     }
