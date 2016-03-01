@@ -20,5 +20,6 @@ namespace PhoneBook.Domain.Abstract
         Task<IdentityResult> RemovePasswordAsync(string userId);
         Task<IdentityResult> RemoveLoginAsync(string userId, UserLoginInfo userInfo);
         Task<User> FindAsync(UserLoginInfo userLoginInfo);
+        Task<IdentityResult> UpdateAsync(User u);
     }
 }
