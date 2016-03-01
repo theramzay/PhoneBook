@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201602152255369_cleanupUserModel.Designer.cs">
       <DependentUpon>201602152255369_cleanupUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603011952012_updateHolidayProp.cs" />
+    <Compile Include="Migrations\201603011952012_updateHolidayProp.Designer.cs">
+      <DependentUpon>201603011952012_updateHolidayProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -140,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602152255369_cleanupUserModel.resx">
       <DependentUpon>201602152255369_cleanupUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011952012_updateHolidayProp.resx">
+      <DependentUpon>201603011952012_updateHolidayProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
