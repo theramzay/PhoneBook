@@ -132,30 +132,51 @@ var Info = React.createClass({
         });
     },
     getInitialState: function() {
-        return { data: [] };
+        return {
+            data: [],
+            cP: false,
+            cI: false
+        };
     },
     componentDidMount: function() {
         this.loadFromServer();
         console.log(this.props.url);
     },
-    ChangePassword: function() {
-        ReactDOM.render(
-            <ChangePassword url="api/Account/ChangePassword"/>,
-            document.getElementById("Settings")
+    ChangePassword: function () {
+        if (this.state.c) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
+            console.log(this.state.c);
+            this.state.c = false;
+        } else {
+            ReactDOM.render(
+       <ChangePassword url="api/Account/ChangePassword"/>,
+       document.getElementById("Settings")
         );
+            console.log(this.state.c);
+            this.state.c = true;
+        }
     },
-    EditInfo: function() {
-        ReactDOM.render(
-            <EditInfo FirstName={this.state.FirstName}
-                      MiddleName={this.state.MiddleName} 
-                      LastName={this.state.LastName} 
-                      PositionInCompany={this.state.PositionInCompany} 
-                      PhonePrivate={this.state.PhonePrivate} 
-                      PhoneWork={this.state.PhoneWork} 
-                      Notes={this.state.Notes} 
-                      url="api/Account/UpdateAllUserInfo"/>,
-            document.getElementById("Settings")
+    EditInfo: function () {
+        if (this.state.c) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
+            console.log(this.state.c);
+            this.state.c = false;
+        } else {
+            ReactDOM.render(
+    <EditInfo FirstName={this.state.FirstName}
+        MiddleName={this.state.MiddleName} 
+        LastName={this.state.LastName} 
+        PositionInCompany={this.state.PositionInCompany} 
+        PhonePrivate={this.state.PhonePrivate} 
+        PhoneWork={this.state.PhoneWork} 
+        Notes={this.state.Notes} 
+        url="api/Account/UpdateAllUserInfo"/>,
+document.getElementById("Settings")
         );
+            console.log(this.state.c);
+            this.state.c = true;
+        }
+
     },
     render: function() {
         return (
