@@ -13,7 +13,6 @@ using PhoneBook.Domain.Infrastructure;
 
 namespace PhoneBook.Core.Util
 {
-
     public class AutofacConfig
     {
         public static void Configure(IAppBuilder app)
@@ -36,6 +35,7 @@ namespace PhoneBook.Core.Util
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
             builder.RegisterType<DBcon>().As<IRepository>().InstancePerRequest();
+
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -45,6 +45,7 @@ namespace PhoneBook.Core.Util
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
         }
+
         public static void Configure()
         {
             //Autofac configuration
@@ -65,6 +66,7 @@ namespace PhoneBook.Core.Util
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
             builder.RegisterType<DBcon>().As<IRepository>().InstancePerRequest();
+
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
