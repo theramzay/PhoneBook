@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -83,7 +87,9 @@ namespace PhoneBook.Core.Controllers
                 PhonePrivate = user.PhonePrivate,
                 PhoneWork = user.PhoneWork,
                 Notes = user.Notes,
-                Boss = user.Boss
+                Boss = user.Boss,
+                PathToPhoto = user.PathToPhoto,
+                PathToTmbOfPhoto = user.PathToTmbOfPhoto
 
             };
             return viewUser;
@@ -110,6 +116,33 @@ namespace PhoneBook.Core.Controllers
                 user.PhoneWork = updatedUser.PhoneWork;
             if (updatedUser.Notes != null)
                 user.Notes = updatedUser.Notes;
+            var response = await UserManager.UpdateAsync(user);
+            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
+        }
+
+        [Route("Upload")]
+        // POST api/Account/Upload
+        [MimeMultipart]
+        public async Task<IHttpActionResult> Upload()
+        {
+            var uploadPath = HttpContext.Current.Server.MapPath("~/Content/ProfileImages");
+
+            var multipartFormDataStreamProvider = new UploadMultipartFormProvider(uploadPath);
+ 
+            // Read the MIME multipart asynchronously 
+            await Request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
+ 
+            var localFileName = multipartFormDataStreamProvider
+                .FileData.Select(multiPartData => multiPartData.LocalFileName).FirstOrDefault();
+            var fileName = Path.GetFileName(localFileName);
+            var tmbPath = $"{uploadPath}/tmbs/{fileName}";
+            ImagesHelper.ToTmb(localFileName,tmbPath);
+
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+            user.PathToPhoto = $"/Content/ProfileImages/{fileName}";
+            user.PathToTmbOfPhoto = $"/Content/ProfileImages/tmbs/{fileName}";
+
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
         }
