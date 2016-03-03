@@ -103,6 +103,56 @@ var EditInfo = React.createClass({
     }
 });
 
+var ImageUpload = React.createClass({
+    getInitialState: function () {
+        return {};
+    },
+    SendToServer: function (es) {
+        es.preventDefault();
+        var tokenKey = "tokenInfo";
+        var token = sessionStorage.getItem(tokenKey);
+
+        var files = $("#fileUploader").get(0).files;
+        if (files.length > 0) {
+            var data = new FormData();
+            for (i = 0; i < files.length; i++) {
+                data.append("file" + i, files[i]);
+            };
+            //console.log(data);
+            $.ajax({
+                headers: {
+                    'Authorization': "bearer " + token
+                },
+                processData: false,
+                contentType: false,
+                type: "POST",
+                url: this.props.url,
+                data: data
+            }).success(function (messages) {
+                for (i = 0; i < messages.length; i++) {
+                    console.log(messages[i]);
+                }
+            }).fail(function (messages) {
+                alert(messages);
+            });
+        }
+    },
+    componentDidMount: function () {
+        console.log(this.props.url);
+    },
+    render: function() {
+        return (
+            <div>
+    <form onSubmit={this.SendToServer}>
+    <label htmlFor="FirstNameEdit">Enter First Name</label>
+        <input id="fileUploader" type="file"/>
+        <button className="btn btn-success" type="submit">Upload</button>
+    </form>
+</div>
+        );
+}
+});
+
 
 var Info = React.createClass({
     loadFromServer: function() {
@@ -125,7 +175,9 @@ var Info = React.createClass({
                 PhonePrivate: data.PhonePrivate,
                 PhoneWork: data.PhoneWork,
                 Notes: data.Notes,
-                Boss: data.Boss
+                Boss: data.Boss,
+                PathToPhoto: data.PathToPhoto,
+                PathToTmbOfPhoto: data.PathToTmbOfPhoto
             });
         }).fail(function() {
             alert("Error");
@@ -134,32 +186,40 @@ var Info = React.createClass({
     getInitialState: function() {
         return {
             data: [],
-            cP: false,
-            cI: false
+            c: false
         };
     },
     componentDidMount: function() {
         this.loadFromServer();
         console.log(this.props.url);
     },
+    UploadImage: function() {
+        if (this.state.c) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
+            this.state.c = false;
+        } else {
+            ReactDOM.render(
+       <ImageUpload url="api/Account/Upload"/>,
+       document.getElementById("Settings")
+);
+            this.state.c = true;
+        }
+    },
     ChangePassword: function () {
         if (this.state.c) {
             React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(this.state.c);
             this.state.c = false;
         } else {
             ReactDOM.render(
        <ChangePassword url="api/Account/ChangePassword"/>,
        document.getElementById("Settings")
         );
-            console.log(this.state.c);
             this.state.c = true;
         }
     },
     EditInfo: function () {
         if (this.state.c) {
             React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(this.state.c);
             this.state.c = false;
         } else {
             ReactDOM.render(
@@ -173,7 +233,6 @@ var Info = React.createClass({
         url="api/Account/UpdateAllUserInfo"/>,
 document.getElementById("Settings")
         );
-            console.log(this.state.c);
             this.state.c = true;
         }
 
@@ -182,6 +241,7 @@ document.getElementById("Settings")
         return (
             <div>
     Info about you: <br/>
+                <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" /> <br/>
     Yours First Name is - {this.state.FirstName} <br/>
     Yours Middle Name is - {this.state.MiddleName} <br/>
     Yours Last Name is - {this.state.LastName} <br/>
@@ -198,6 +258,9 @@ document.getElementById("Settings")
         <li>
             <a onClick={this.EditInfo} href="#ChangePassword">Change info</a>
         </li>
+                <li>
+            <a onClick={this.UploadImage} href="#UploadImage">Upload Image</a>
+                </li>
     </ul>
     <div id="Settings"></div>
 </div>
