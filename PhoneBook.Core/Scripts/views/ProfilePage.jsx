@@ -140,12 +140,25 @@ var ImageUpload = React.createClass({
     componentDidMount: function () {
         console.log(this.props.url);
     },
+    previewImg: function () {
+        var input = document.getElementById("fileUploader");
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+},
     render: function() {
         return (
             <div>
     <form onSubmit={this.SendToServer}>
     <label htmlFor="FirstNameEdit">Enter First Name</label>
-        <input id="fileUploader" type="file"/>
+        <input id="fileUploader" onChange={this.previewImg} type="file"/>
+        <img id="image_upload_preview" alt="your image" style={{height: 150, width: 'auto'}} />
         <button className="btn btn-success" type="submit">Upload</button>
     </form>
 </div>
