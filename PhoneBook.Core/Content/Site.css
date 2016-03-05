@@ -16,12 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+
 .jumbotron {
     box-shadow: 0 0 10px #000000;
 }
-/*a {
-    color: white !important;
-}*/
 
 #whoLog {
     color: cyan;
@@ -49,40 +47,3 @@ textarea {
 #whoLog:hover {
     color: greenyellow;
 }
-
-
-/* sakura
-
-div.splashText {
-    color: rgb(245, 197, 198);
-}
-
-#tstbtnPlumb {
-    background: plum!important;
-    border-color: palevioletred!important;
-}
-
-#tstbtnPlumb:hover {
-    background: rgb(139, 101, 139)!important;
-    border-color: rgb(133, 68, 89)!important;
-}
-
-div.splashWebGlPart {
-    width: auto;
-    height: 80px;
-}
-
-canvas {
-    padding:0;
-    margin:0;
-}
-div.btnbg {
-    position:fixed;
-    left:0;
-    top:0;
-    box-shadow: 0 0 15px #ccc;
-}
-div.btnbg:hover{
-    text-shadow: 0 0 3px #ccc;
-    box-shadow: 0 0 20px #ccc;
-}*/
