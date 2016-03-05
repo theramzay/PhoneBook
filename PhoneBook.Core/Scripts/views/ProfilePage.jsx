@@ -106,61 +106,27 @@ var EditInfo = React.createClass({
 var ImageUpload = React.createClass({
     getInitialState: function () {
         return {};
-    },
-    SendToServer: function (es) {
-        es.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
 
-        var files = $("#fileUploader").get(0).files;
-        if (files.length > 0) {
-            var data = new FormData();
-            for (i = 0; i < files.length; i++) {
-                data.append("file" + i, files[i]);
-            };
-            //console.log(data);
-            $.ajax({
-                headers: {
-                    'Authorization': "bearer " + token
-                },
-                processData: false,
-                contentType: false,
-                type: "POST",
-                url: this.props.url,
-                data: data
-            }).success(function (messages) {
-                for (i = 0; i < messages.length; i++) {
-                    console.log(messages[i]);
-                }
-            }).fail(function (messages) {
-                alert(messages);
-            });
-        }
     },
     componentDidMount: function () {
-        console.log(this.props.url);
-    },
-    previewImg: function () {
-        var input = document.getElementById("fileUploader");
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#image_upload_preview').attr('src', e.target.result);
+        var url = this.props.url;
+        var tokenKey = "tokenInfo";
+        var token = sessionStorage.getItem(tokenKey);
+        $("#dropForm").dropzone({
+            url: url, headers: {
+                'Authorization': "bearer " + token
             }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-},
-    render: function() {
+        });
+    },
+    render: function () {
         return (
             <div>
-    <form onSubmit={this.SendToServer}>
-    <label htmlFor="FirstNameEdit">Enter First Name</label>
-        <input id="fileUploader" onChange={this.previewImg} type="file"/>
-        <img id="image_upload_preview" alt="your image" style={{height: 150, width: 'auto'}} />
-        <button className="btn btn-success" type="submit">Upload</button>
-    </form>
+<form id="dropForm" onSubmit={this.SendToServer} className="dropzone">
+  <div className="fallback">
+    <input name="file" type="file" multiple={true} />
+  </div>
+</form>
+
 </div>
         );
 }

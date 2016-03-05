@@ -9,7 +9,8 @@ namespace PhoneBook.Core
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/dropzone/dropzone.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -24,16 +25,20 @@ namespace PhoneBook.Core
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/bootstrap-theme.min.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Scripts/dropzone/basic.min.css",
+                "~/Scripts/dropzone/dropzone.min.css"));
             //bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
             bundles.Add(new ScriptBundle("~/bundles/reactJS").Include(
                 "~/Scripts/react/react-0.14.0.min.js",
                 "~/Scripts/react/react-dom-0.14.0.min.js"));
+
             bundles.Add(new BabelBundle("~/bundles/reactApp").Include(
                 "~/Scripts/views/Modals.jsx",
                 "~/Scripts/views/buttons.jsx",
                 "~/Scripts/views/MainPage.jsx",
-                "~/Scripts/views/ProfilePage.jsx"
+                "~/Scripts/views/ProfilePage.jsx",
+                "~/Scripts/views/reactdropzone.jsx"
                 ));
         }
     }
