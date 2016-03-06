@@ -396,6 +396,7 @@
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Scripts\views\ProfilePage.jsx" />
     <Content Include="Scripts\views\MainPage.jsx" />
+    <Content Include="Scripts\views\SearchPage.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">

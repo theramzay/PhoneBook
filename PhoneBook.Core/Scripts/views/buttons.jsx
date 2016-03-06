@@ -32,6 +32,12 @@
             document.getElementById("content")
         );
     },
+    SearchPage: function () {
+        ReactDOM.render(
+      <SearchPage url="api/Account/SearchUsers" searchData={$("#searchBox").val() }/>,
+    document.getElementById("content")
+          );
+    },
     render: function() {
         return (
             <div>
@@ -42,6 +48,7 @@
         <li>
             <a href="/Help">Api</a>
         </li>
+        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control" onChange={this.SearchPage} /></li>
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>

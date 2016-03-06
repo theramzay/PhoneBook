@@ -38,7 +38,7 @@ namespace PhoneBook.Core
                 "~/Scripts/views/buttons.jsx",
                 "~/Scripts/views/MainPage.jsx",
                 "~/Scripts/views/ProfilePage.jsx",
-                "~/Scripts/views/reactdropzone.jsx"
+                "~/Scripts/views/SearchPage.jsx"
                 ));
         }
     }

@@ -95,6 +95,31 @@ namespace PhoneBook.Core.Controllers
             return viewUser;
         }
 
+        // GET api/Account/SearchUsers
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("SearchUsers")]
+        [HttpGet]
+        [AllowAnonymous]
+        public IQueryable SearchUsers(string searchData)
+        {
+            var users = UserManager.FindByFirstName(searchData);
+            var viewsUser = users.Select(user=> new
+            {
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                PositionInCompany = user.PositionInCompany,
+                PhonePrivate = user.PhonePrivate,
+                PhoneWork = user.PhoneWork,
+                Notes = user.Notes,
+                Boss = user.Boss,
+                PathToPhoto = user.PathToPhoto,
+                PathToTmbOfPhoto = user.PathToTmbOfPhoto
+            });
+
+            return viewsUser;
+        }
+
         // POST api/Account/UpdateAllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UpdateAllUserInfo")]
