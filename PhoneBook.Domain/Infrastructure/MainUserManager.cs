@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -65,6 +66,11 @@ namespace PhoneBook.Domain.Infrastructure
         public async Task<User> FindAsync(UserLoginInfo userLoginInfo)
         {
             return await _applicationUserManager.FindAsync(userLoginInfo);
+        }
+
+        public IQueryable<User> FindByFirstName(string firstName)
+        {
+            return _applicationUserManager.Users.Where(u => u.FirstName.Contains(firstName)).Select(u=> u);
         }
 
         public async Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType)
