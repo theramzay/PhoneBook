@@ -45,10 +45,7 @@
         <li>
             <a href="#Home" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span></a>
         </li>
-        <li>
-            <a href="/Help">Api</a>
-        </li>
-        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control" onChange={this.SearchPage} /></li>
+        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control search-form" onChange={this.SearchPage} /></li>
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>
