@@ -23,8 +23,6 @@ namespace PhoneBook.Core
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.min.css",
-                "~/Content/bootstrap-theme.min.css",
                 "~/Content/site.css",
                 "~/Scripts/dropzone/basic.min.css",
                 "~/Scripts/dropzone/dropzone.min.css"));
@@ -40,6 +38,21 @@ namespace PhoneBook.Core
                 "~/Scripts/views/ProfilePage.jsx",
                 "~/Scripts/views/SearchPage.jsx"
                 ));
+
+            bundles.Add(new StyleBundle("~/Creative/css").Include(
+                "~/Content/creative/bootstrap.min.css",
+                "~/Content/creative/animate.min.css",
+                "~/Content/creative/creative.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/Creative/js").Include(
+    "~/Scripts/Parallax.js",
+    "~/Content/creative/bootstrap.min.js",
+    "~/Content/creative/jquery.easing.min.js",
+    "~/Content/creative/jquery.fittext.js",
+    "~/Content/creative/wow.min.js",
+    "~/Content/creative/creative.js"
+    ));
         }
     }
 }
