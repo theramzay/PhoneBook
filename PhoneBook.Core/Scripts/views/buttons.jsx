@@ -43,30 +43,28 @@
             <div>
     <ul className="nav navbar-nav">
         <li>
-            <a href="#Home" onClick={this.MainPage}><span className="glyphicon glyphicon-home"></span></a>
+            <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-home"></i></a>
         </li>
-        <li>
-            <a href="/Help">Api</a>
-        </li>
-        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control" onChange={this.SearchPage} /></li>
+        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control search-form" onChange={this.SearchPage} /></li>
+        <li><a href="#splash" className="page-scroll"><i className="fa fa-plane"></i> To the heaven!</a></li>
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>
-            <a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal"><span className="glyphicon glyphicon-user"></span> Register</a>
+            <a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>
         </li>
         <li>
-            <a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal"><span className="glyphicon glyphicon-log-in"></span> Log in</a>
+            <a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
         </li>
                 <li className="dropdown">
             <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span> <span className="caret"></span></a>
             <ul className="dropdown-menu">
                 <li>
-                    <a href="#Settings" onClick={this.profile}><span className="glyphicon glyphicon-cog"></span> Settings</a>
+                    <a href="#Settings" className="page-scroll" onClick={this.profile}><i className="fa fa-cogs"></i> Settings</a>
                 </li>
                 <li role="separator" className="divider"></li>
                 <li className="dropdown-header">Bye</li>
                 <li>
-                    <a href="#LogOut" onClick={this.logOut}><span className="glyphicon glyphicon-off"></span> Log Out</a>
+                    <a href="#LogOut" onClick={this.logOut}><i className="fa fa-sign-out"></i> Log Out</a>
                 </li>
             </ul>
                 </li>
