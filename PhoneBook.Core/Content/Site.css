@@ -23,7 +23,7 @@ textarea { max-width: 280px; }
     -moz-transition: color 1s;
     -o-transition: color 1s;
     -webkit-transition: color 1s;
-    color: cyan;
+    color: slateblue;
     transition: color 1s;
 }
 
