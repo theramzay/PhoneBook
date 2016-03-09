@@ -18,7 +18,6 @@ namespace PhoneBook.Core
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.min.js",
                 "~/Scripts/Parallax.js",
                 "~/Scripts/respond.js"));
 
