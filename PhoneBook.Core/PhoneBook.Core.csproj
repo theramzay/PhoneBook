@@ -332,7 +332,6 @@
     <Content Include="Content\creative\creative.js" />
     <Content Include="Content\creative\jquery.easing.min.js" />
     <Content Include="Content\creative\jquery.fittext.js" />
-    <Content Include="Content\creative\jquery.js" />
     <Content Include="Content\creative\wow.min.js" />
     <Content Include="Content\creative\splash.jpg" />
     <Content Include="favicon.ico" />
@@ -376,8 +375,6 @@
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
