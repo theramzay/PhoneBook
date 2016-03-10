@@ -24,8 +24,13 @@ namespace PhoneBook.Core
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
                 "~/Scripts/dropzone/basic.min.css",
-                "~/Scripts/dropzone/dropzone.min.css"));
-            //bundles.Add(new ScriptBundle("~/bundles/sakura").Include("~/Scripts/Sakura.js"));
+                "~/Scripts/dropzone/dropzone.min.css",
+                "~/Content/creative/bootstrap.min.css",
+                "~/Content/creative/animate.min.css",
+                "~/Content/creative/creative.css"
+                ).Include(
+                "~/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
             bundles.Add(new ScriptBundle("~/bundles/reactJS").Include(
                 "~/Scripts/react/react-0.14.0.min.js",
                 "~/Scripts/react/react-dom-0.14.0.min.js"));
@@ -38,11 +43,12 @@ namespace PhoneBook.Core
                 "~/Scripts/views/SearchPage.jsx"
                 ));
 
-            bundles.Add(new StyleBundle("~/Creative/css").Include(
-                "~/Content/creative/bootstrap.min.css",
-                "~/Content/creative/animate.min.css",
-                "~/Content/creative/creative.css"
-                ));
+            //bundles.Add(new StyleBundle("~/Creative/css").Include(
+            //    "~/Content/creative/bootstrap.min.css",
+            //    "~/Content/creative/animate.min.css",
+            //    "~/Content/creative/creative.css"
+            //    ).Include(
+            //    "~/font-awesome/css/font-awesome.min.css",new CssRewriteUrlTransform()));
 
             bundles.Add(new ScriptBundle("~/Creative/js").Include(
     "~/Scripts/Parallax.js",
