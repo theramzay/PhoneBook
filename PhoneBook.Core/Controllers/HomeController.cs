@@ -6,7 +6,7 @@ namespace PhoneBook.Core.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Phone Book";
 
             return View();
         }
