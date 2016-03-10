@@ -19,6 +19,10 @@
         $("#hello").addClass('hidden');
         $("#authBtn").removeClass('hidden');
         $("#regBtn").removeClass('hidden');
+        ReactDOM.render(
+            <MainPage/>,
+            document.getElementById("content")
+        );
     },
     profile: function() {
         ReactDOM.render(
