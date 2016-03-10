@@ -1,6 +1,10 @@
 ﻿var AddUser = React.createClass({
     getInitialState: function() {
-        return {};
+        return {
+            Email: "",
+            Password: "",
+            ConfirmPassword: ""
+        };
     },
     submit: function(e) {
         e.preventDefault();
@@ -20,11 +24,11 @@
                 url: this.props.url,
                 data: data
             })
-            .done(function(data) {
+            .done(function() {
                 self.clearForm();
-                $('#registrationModal').modal('hide');
+                $("#registrationModal").modal("hide");
             })
-            .fail(function(jqXhr) {
+            .fail(function() {
                 console.log("failed to register");
             });
 
@@ -46,9 +50,19 @@
         </div>
         <div className="modal-body">
             <form onSubmit={this.submit}>
-                <input placeholder="Email" required={true} className="form-control" id="Email" type="email" name="Email" label="Email:"/>
-                <input placeholder="Password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="Password" type="password" name="Password" label="Password:"/>
-                <input placeholder="Confirm password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:" />
+                <label>Enter email</label><br />
+                <input placeholder="Email" required={true}
+                        className="form-control" id="Email"
+                        type="email" name="Email" label="Email:"/>
+                <label>Enter password</label><br />
+                <input placeholder="Password"
+                        required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                        className="form-control" id="Password" type="password" name="Password" label="Password:"/>
+                <label>Re-enter password</label><br />
+                <input placeholder="Confirm password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control"
+                        id="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:"/>
                 <button className="btn btn-success" type="submit">Submit</button>
             </form>
         </div>
@@ -64,7 +78,10 @@
 
 var AuthUser = React.createClass({
     getInitialState: function() {
-        return {};
+        return {
+            Email: "",
+            Password: ""
+        };
     },
     submitAuth: function(e) {
         var self;
@@ -91,10 +108,10 @@ var AuthUser = React.createClass({
         }).success(function(data) {
             console.log(data);
             $("#whoLog").text(data.userName);
-            $('#authBtn').addClass('hidden');
-            $('#regBtn').addClass('hidden');
-            $("#hello").removeClass('hidden');
-            $('#authorizationModal').modal('hide');
+            $("#authBtn").addClass("hidden");
+            $("#regBtn").addClass("hidden");
+            $("#hello").removeClass("hidden");
+            $("#authorizationModal").modal("hide");
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
             sessionStorage.setItem(userNameKey, data.userName);
@@ -120,11 +137,14 @@ var AuthUser = React.createClass({
         </div>
         <div className="modal-body">
             <form onSubmit={this.submitAuth}>
-                <h3>Вход на сайт</h3>
-                <label>Введите email</label><br/>
-                <input placeholder="email" required={true} className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
-                <label>Введите пароль</label><br/>
-                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
+                <label>Enter email</label><br/>
+                <input placeholder="email" required={true}
+                        className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
+                <label>Enter password</label><br/>
+                <input placeholder="password" required={true}
+                        title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                        className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
                 <button className="btn btn-success" type="submit">Submit</button>
             </form>
         </div>
@@ -147,4 +167,3 @@ ReactDOM.render(
     <AuthUser url="/Token"/>,
     document.getElementById("authorizationModal")
 );
-
