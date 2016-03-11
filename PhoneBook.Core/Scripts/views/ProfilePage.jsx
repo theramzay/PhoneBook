@@ -222,45 +222,54 @@ document.getElementById("Settings")
                 <section id="profileMenu" className="bg-primary">
                     <div className="container">
                         <div className="row"> 
-                            <div className="col-lg-3 col-md-6 text-center">
-                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <h3 className="section-heading">Info about you:</h3>
+                            <div className="col-lg-8 col-lg-offset-2 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary text-faded" />
+                                <h2 className="section-heading">Hello in Your settings!</h2>
+                                <hr className="light"/>
+                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                                <section id="profileMenu">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-3 col-lg-offset-1 col-md-6 text-center">
                                 <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" />
                              </div>
                              <div className="col-lg-3 col-md-6 text-center">
                                 <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <h3>Your are:</h3>
-                                <p className="text-faded">Yours First Name is - {this.state.FirstName}</p>
-                                <p className="text-faded">Yours Middle Name is - {this.state.MiddleName}</p>
-                                <p className="text-faded">Yours Last Name is - {this.state.LastName}</p>
-                                <p className="text-faded">Yours Position in company is - {this.state.PositionInCompany}</p>
-                                <hr className="light"/>
+                                <p className="text-muted">Yours First Name is - {this.state.FirstName}</p>
+                                <p className="text-muted">Yours Middle Name is - {this.state.MiddleName}</p>
+                                <p className="text-muted">Yours Last Name is - {this.state.LastName}</p>
+                                <p className="text-muted">Yours Position in company is - {this.state.PositionInCompany}</p>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <h3>Your are:</h3>
-                                <p className="text-faded">Yours Private phone is - {this.state.PhonePrivate}</p>
-                                <p className="text-faded">Yours Work phone is - {this.state.PhoneWork}</p>
-                                <p className="text-faded">Yours Note is - {this.state.Notes}</p>
-                                <p className="text-faded">Yours Boss is - {this.state.Boss}</p>
+                                <p className="text-muted">Yours Private phone is - {this.state.PhonePrivate}</p>
+                                <p className="text-muted">Yours Work phone is - {this.state.PhoneWork}</p>
+                                <p className="text-muted">Yours Note is - {this.state.Notes}</p>
+                                <p className="text-muted">Yours Boss is - {this.state.Boss}</p>
                             </div>
+                        </div>
+                        <hr/>
+                    </div>
+                </section>
+
+                <section id="profileMenu">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-8 col-lg-offset-2 text-center">
+                                <ul>
+                                    <li><a onClick={this.ChangePassword} href="#ChangePassword">Change password</a></li>
+                                    <li><a onClick={this.EditInfo} href="#ChangePassword">Change info</a></li>
+                                    <li><a onClick={this.UploadImage} href="#UploadImage">Upload Image</a></li>
+                                </ul>
+                             </div>
+                             <div className="col-lg-8 col-lg-offset-2 text-center"><div id="Settings"></div></div>
                         </div>
                     </div>
                 </section>
-                Other content under hard development =) <br/>
-                    <hr/>
-    <ul>
-        <li>
-            <a onClick={this.ChangePassword} href="#ChangePassword">Change password</a>
-        </li>
-        <li>
-            <a onClick={this.EditInfo} href="#ChangePassword">Change info</a>
-        </li>
-                <li>
-            <a onClick={this.UploadImage} href="#UploadImage">Upload Image</a>
-                </li>
-    </ul>
-    <div id="Settings"></div>
 </div>
         );
     }
