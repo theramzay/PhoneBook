@@ -219,17 +219,36 @@ document.getElementById("Settings")
     render: function() {
         return (
             <div>
-    Info about you: <br/>
-                <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" /> <br/>
-    Yours First Name is - {this.state.FirstName} <br/>
-    Yours Middle Name is - {this.state.MiddleName} <br/>
-    Yours Last Name is - {this.state.LastName} <br/>
-    Yours Position in company is - {this.state.PositionInCompany} <br/>
-    Yours Private phone is - {this.state.PhonePrivate} <br/>
-    Yours Work phone is - {this.state.PhoneWork} <br/>
-    Yours Note is - {this.state.Notes} <br/>
-    Yours Boss is - {this.state.Boss} <br/>
-    Other content under hard development =) <br/>
+                <section id="profileMenu" className="bg-primary">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <h3 className="section-heading">Info about you:</h3>
+                                <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" />
+                             </div>
+                             <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <h3>Your are:</h3>
+                                <p className="text-faded">Yours First Name is - {this.state.FirstName}</p>
+                                <p className="text-faded">Yours Middle Name is - {this.state.MiddleName}</p>
+                                <p className="text-faded">Yours Last Name is - {this.state.LastName}</p>
+                                <p className="text-faded">Yours Position in company is - {this.state.PositionInCompany}</p>
+                                <hr className="light"/>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <h3>Your are:</h3>
+                                <p className="text-faded">Yours Private phone is - {this.state.PhonePrivate}</p>
+                                <p className="text-faded">Yours Work phone is - {this.state.PhoneWork}</p>
+                                <p className="text-faded">Yours Note is - {this.state.Notes}</p>
+                                <p className="text-faded">Yours Boss is - {this.state.Boss}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                Other content under hard development =) <br/>
+                    <hr/>
     <ul>
         <li>
             <a onClick={this.ChangePassword} href="#ChangePassword">Change password</a>
