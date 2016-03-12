@@ -19,7 +19,8 @@
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function(data) {
+        }).success(function (data) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
             console.log(data);
         }).fail(function(ee) {
             alert(ee);
@@ -66,7 +67,8 @@ var EditInfo = React.createClass({
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function(data) {
+        }).success(function (data) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
             console.log(data);
         }).fail(function(ee) {
             alert(ee);
@@ -116,6 +118,8 @@ var ImageUpload = React.createClass({
             url: url, headers: {
                 'Authorization': "bearer " + token
             }
+        }).on("success",()=> {
+            React.unmountComponentAtNode(document.getElementById('Settings')); //TODO: Make this WORK!
         });
     },
     render: function () {
@@ -219,7 +223,7 @@ document.getElementById("Settings")
     render: function() {
         return (
             <div>
-                <section id="profileMenu" className="bg-primary">
+                <section id="profileMenuHeader" className="bg-primary">
                     <div className="container">
                         <div className="row"> 
                             <div className="col-lg-8 col-lg-offset-2 text-center">
@@ -231,7 +235,7 @@ document.getElementById("Settings")
                     </div>
                 </section>
 
-                                <section id="profileMenu">
+                                <section id="profileMenuInfo">
                     <div className="container">
                         <div className="row"> 
                             <div className="col-lg-3 col-lg-offset-1 col-md-6 text-center">
@@ -256,20 +260,25 @@ document.getElementById("Settings")
                     </div>
                 </section>
 
-                <section id="profileMenu">
+                <aside id="profileMenuEditions" className="bg-dark">
                     <div className="container">
-                        <div className="row"> 
+                        <div className="row">
                             <div className="col-lg-8 col-lg-offset-2 text-center">
-                                <ul>
+                                <i className="fa fa-4x fa-diamond wow tada text-faded" />
+                                <h2 className="section-heading">Here Your can change somethig!</h2>
+                                <hr className="light" />
+                        <ul>
                                     <li><a onClick={this.ChangePassword} href="#ChangePassword">Change password</a></li>
                                     <li><a onClick={this.EditInfo} href="#ChangePassword">Change info</a></li>
                                     <li><a onClick={this.UploadImage} href="#UploadImage">Upload Image</a></li>
-                                </ul>
-                             </div>
-                             <div className="col-lg-8 col-lg-offset-2 text-center"><div id="Settings"></div></div>
+                        </ul>
+                            </div>
+                            </div>
+                        <div className="row">
+                            <div id="Settings" className="col-lg-8 col-lg-offset-4"></div>
                         </div>
-                    </div>
-                </section>
+                        </div>
+                </aside>
 </div>
         );
     }
