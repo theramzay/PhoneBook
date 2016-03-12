@@ -47,10 +47,10 @@
             <div>
     <ul className="nav navbar-nav">
         <li>
-            <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-home"></i></a>
+            <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-2x fa-home"></i></a>
         </li>
         <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control search-form" onChange={this.SearchPage} /></li>
-        <li><a href="#splash" className="page-scroll"><i className="fa fa-plane"></i> To the heaven!</a></li>
+        <li><a href="#splash" className="page-scroll"><i className="fa fa-2x fa-plane"></i> To the heaven!</a></li>
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>
@@ -60,7 +60,8 @@
             <a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
         </li>
                 <li className="dropdown">
-            <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span> <span className="caret"></span></a>
+            <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span>  <i className="fa fa-2x fa-bars"></i>
+</a>
             <ul className="dropdown-menu">
                 <li>
                     <a href="#Settings" className="page-scroll" onClick={this.profile}><i className="fa fa-cogs"></i> Settings</a>
