@@ -27,6 +27,12 @@ textarea { max-width: 280px; }
     transition: color 1s;
 }
 
+a#to-down {
+    color: white;
+    font-size: 200%;
+    padding: 70px;
+}
+
 .navbar { box-shadow: -10px 10px 30px 20px rgba(0, 0, 0, 0.6); }
 
 

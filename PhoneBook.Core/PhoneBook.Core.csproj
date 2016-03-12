@@ -328,8 +328,8 @@
     <Content Include="Content\creative\creative.js" />
     <Content Include="Content\creative\jquery.easing.min.js" />
     <Content Include="Content\creative\jquery.fittext.js" />
-    <Content Include="Content\creative\wow.min.js" />
     <Content Include="Content\creative\splash.jpg" />
+    <Content Include="Content\creative\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />

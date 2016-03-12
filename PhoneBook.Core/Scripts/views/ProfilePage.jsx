@@ -19,7 +19,8 @@
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function(data) {
+        }).success(function (data) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
             console.log(data);
         }).fail(function(ee) {
             alert(ee);
@@ -66,7 +67,8 @@ var EditInfo = React.createClass({
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function(data) {
+        }).success(function (data) {
+            React.unmountComponentAtNode(document.getElementById('Settings'));
             console.log(data);
         }).fail(function(ee) {
             alert(ee);
@@ -116,6 +118,8 @@ var ImageUpload = React.createClass({
             url: url, headers: {
                 'Authorization': "bearer " + token
             }
+        }).on("success",()=> {
+            React.unmountComponentAtNode(document.getElementById('Settings')); //TODO: Make this WORK!
         });
     },
     render: function () {
@@ -219,29 +223,62 @@ document.getElementById("Settings")
     render: function() {
         return (
             <div>
-    Info about you: <br/>
-                <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" /> <br/>
-    Yours First Name is - {this.state.FirstName} <br/>
-    Yours Middle Name is - {this.state.MiddleName} <br/>
-    Yours Last Name is - {this.state.LastName} <br/>
-    Yours Position in company is - {this.state.PositionInCompany} <br/>
-    Yours Private phone is - {this.state.PhonePrivate} <br/>
-    Yours Work phone is - {this.state.PhoneWork} <br/>
-    Yours Note is - {this.state.Notes} <br/>
-    Yours Boss is - {this.state.Boss} <br/>
-    Other content under hard development =) <br/>
-    <ul>
-        <li>
-            <a onClick={this.ChangePassword} href="#ChangePassword">Change password</a>
-        </li>
-        <li>
-            <a onClick={this.EditInfo} href="#ChangePassword">Change info</a>
-        </li>
-                <li>
-            <a onClick={this.UploadImage} href="#UploadImage">Upload Image</a>
-                </li>
-    </ul>
-    <div id="Settings"></div>
+                <section id="profileMenuHeader" className="bg-primary">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-8 col-lg-offset-2 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary text-faded" />
+                                <h2 className="section-heading">Hello in Your settings!</h2>
+                                <hr className="light"/>
+                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                                <section id="profileMenuInfo">
+                    <div className="container">
+                        <div className="row"> 
+                            <div className="col-lg-3 col-lg-offset-1 col-md-6 text-center">
+                                <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" />
+                             </div>
+                             <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <p className="text-muted">Yours First Name is - {this.state.FirstName}</p>
+                                <p className="text-muted">Yours Middle Name is - {this.state.MiddleName}</p>
+                                <p className="text-muted">Yours Last Name is - {this.state.LastName}</p>
+                                <p className="text-muted">Yours Position in company is - {this.state.PositionInCompany}</p>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <p className="text-muted">Yours Private phone is - {this.state.PhonePrivate}</p>
+                                <p className="text-muted">Yours Work phone is - {this.state.PhoneWork}</p>
+                                <p className="text-muted">Yours Note is - {this.state.Notes}</p>
+                                <p className="text-muted">Yours Boss is - {this.state.Boss}</p>
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
+                </section>
+
+                <aside id="profileMenuEditions" className="bg-dark">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-8 col-lg-offset-2 text-center">
+                                <i className="fa fa-4x fa-diamond wow tada text-faded" />
+                                <h2 className="section-heading">Here Your can change somethig!</h2>
+                                <hr className="light" />
+                        <ul>
+                                    <li><a onClick={this.ChangePassword} href="#ChangePassword">Change password</a></li>
+                                    <li><a onClick={this.EditInfo} href="#ChangePassword">Change info</a></li>
+                                    <li><a onClick={this.UploadImage} href="#UploadImage">Upload Image</a></li>
+                        </ul>
+                            </div>
+                            </div>
+                        <div className="row">
+                            <div id="Settings" className="col-lg-8 col-lg-offset-4"></div>
+                        </div>
+                        </div>
+                </aside>
 </div>
         );
     }
