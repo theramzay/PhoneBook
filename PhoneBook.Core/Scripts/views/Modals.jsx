@@ -11,27 +11,29 @@
         var self = this;
 
         console.log(this.state);
+        if ($("#Password").val() == $("#ConfirmPassword").val()) {
+            var data = {
+                Email: $("#Email").val(),
+                Password: $("#Password").val(),
+                ConfirmPassword: $("#ConfirmPassword").val()
+            };
 
-        var data = {
-            Email: $("#Email").val(),
-            Password: $("#Password").val(),
-            ConfirmPassword: $("#ConfirmPassword").val()
-        };
-
-        // Submit form via jQuery/AJAX
-        $.ajax({
+            // Submit form via jQuery/AJAX
+            $.ajax({
                 type: "POST",
                 url: this.props.url,
                 data: data
             })
-            .done(function() {
-                self.clearForm();
-                $("#registrationModal").modal("hide");
-            })
-            .fail(function() {
-                console.log("failed to register");
-            });
-
+                .done(function () {
+                    self.clearForm();
+                    $("#registrationModal").modal("hide");
+                })
+                .fail(function () {
+                    console.log("failed to register");
+                });
+        } else {
+            alert("Password are not equivalented");
+        }
     },
     clearForm: function() {
         this.setState({
