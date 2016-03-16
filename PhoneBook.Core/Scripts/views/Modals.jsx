@@ -119,6 +119,7 @@ var AuthUser = React.createClass({
         };
 
         // Submit form via jQuery/AJAX
+
         $.ajax({
             type: "POST",
             url: this.props.url,
@@ -133,12 +134,28 @@ var AuthUser = React.createClass({
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
             sessionStorage.setItem(userNameKey, data.userName);
-            sessionStorage.setItem(claimsKey, data.claims);
             console.log(data.access_token);
+            self.getClaims();
         }).fail(function(data) {
             alert("Error under login");
         });
 
+
+    },
+    getClaims: function () {
+        var tokenKey = "tokenInfo";
+        var claimsKey = "claims";
+        $.ajax({
+            headers: {
+                'Authorization': "bearer " + sessionStorage.getItem(tokenKey),
+                'Content-Type': "application/json"
+            },
+            type: "GET",
+            url: 'api/Account/AllUserInfo'
+        }).success(function(data) {
+            sessionStorage.setItem(claimsKey, data.Claims);
+            console.log(data.Claims);
+        }).fail(function() { console.log("fuck"); });
     },
     clearForm: function() {
         this.setState({
