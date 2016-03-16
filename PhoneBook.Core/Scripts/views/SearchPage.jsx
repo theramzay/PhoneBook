@@ -27,10 +27,12 @@
         this.loadFromServer();
         this.setState({ searchData: this.props.searchData, founded: [] });
     },
-    render: function() {
+    render: function () {
+        var claimsKey = "claims";
+        if(sessionStorage.getItem(claimsKey).contains("admin"))
         return (
             <div>
-    {this.state.founded.map(function(user) {
+    {this.state.founded.map(function (user) {
                 return (<div id="TableOfSerach">
         <div className="row jumbotron">
             <div className="col-sm-3">

@@ -110,6 +110,7 @@ var AuthUser = React.createClass({
 
         var tokenKey = "tokenInfo";
         var userNameKey = "userName";
+        var claimsKey = "claims";
 
         var data = {
             grant_type: "password",
@@ -132,6 +133,7 @@ var AuthUser = React.createClass({
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
             sessionStorage.setItem(userNameKey, data.userName);
+            sessionStorage.setItem(claimsKey, data.claims);
             console.log(data.access_token);
         }).fail(function(data) {
             alert("Error under login");
