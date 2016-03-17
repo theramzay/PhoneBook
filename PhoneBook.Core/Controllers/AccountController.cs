@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -89,8 +90,8 @@ namespace PhoneBook.Core.Controllers
                 Notes = user.Notes,
                 Boss = user.Boss,
                 PathToPhoto = user.PathToPhoto,
-                PathToTmbOfPhoto = user.PathToTmbOfPhoto
-
+                PathToTmbOfPhoto = user.PathToTmbOfPhoto,
+                Claims = user.Claims
             };
             return viewUser;
         }

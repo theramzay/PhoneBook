@@ -11,27 +11,29 @@
         var self = this;
 
         console.log(this.state);
+        if ($("#Password").val() == $("#ConfirmPassword").val()) {
+            var data = {
+                Email: $("#Email").val(),
+                Password: $("#Password").val(),
+                ConfirmPassword: $("#ConfirmPassword").val()
+            };
 
-        var data = {
-            Email: $("#Email").val(),
-            Password: $("#Password").val(),
-            ConfirmPassword: $("#ConfirmPassword").val()
-        };
-
-        // Submit form via jQuery/AJAX
-        $.ajax({
+            // Submit form via jQuery/AJAX
+            $.ajax({
                 type: "POST",
                 url: this.props.url,
                 data: data
             })
-            .done(function() {
-                self.clearForm();
-                $("#registrationModal").modal("hide");
-            })
-            .fail(function() {
-                console.log("failed to register");
-            });
-
+                .done(function () {
+                    self.clearForm();
+                    $("#registrationModal").modal("hide");
+                })
+                .fail(function () {
+                    console.log("failed to register");
+                });
+        } else {
+            alert("Password are not equivalented");
+        }
     },
     clearForm: function() {
         this.setState({
@@ -39,6 +41,16 @@
             Password: "",
             ConfirmPassword: ""
         });
+    },
+    checkFirst: function() {
+        var pass = $("#Password");
+        var repass = $("#ConfirmPassword");
+        pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : '');
+        if (pass.checkValidity()) repass.pattern = pass.value;
+    },
+    checkSecond: function () {
+        var repass = $("#ConfirmPassword");
+        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : '');
     },
     render: function() {
         return (
@@ -50,20 +62,25 @@
         </div>
         <div className="modal-body">
             <form onSubmit={this.submit}>
-                <label>Enter email</label><br />
+                <fieldset>
+                    <legend>Registration form</legend>
                 <input placeholder="Email" required={true}
-                        className="form-control" id="Email"
-                        type="email" name="Email" label="Email:"/>
+                       className="form-control" id="Email"
+                       type="email" name="Email" label="Email:" />
                 <label>Enter password</label><br />
                 <input placeholder="Password"
-                        required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-                        className="form-control" id="Password" type="password" name="Password" label="Password:"/>
+                       onChange={this.checkFirst}
+                       required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                       className="form-control" id="Password" type="password" name="Password" label="Password:" />
                 <label>Re-enter password</label><br />
-                <input placeholder="Confirm password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control"
-                        id="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:"/>
+                <input placeholder="Confirm password"
+                       onChange={this.checkSecond}
+                       required={true} title="Please enter the same Password as above"
+                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control"
+                       id="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:" />
                 <button className="btn btn-success" type="submit">Submit</button>
+                </fieldset>
             </form>
         </div>
         <div className="modal-footer">
@@ -93,6 +110,7 @@ var AuthUser = React.createClass({
 
         var tokenKey = "tokenInfo";
         var userNameKey = "userName";
+        var claimsKey = "claims";
 
         var data = {
             grant_type: "password",
@@ -101,6 +119,7 @@ var AuthUser = React.createClass({
         };
 
         // Submit form via jQuery/AJAX
+
         $.ajax({
             type: "POST",
             url: this.props.url,
@@ -113,13 +132,31 @@ var AuthUser = React.createClass({
             $("#hello").removeClass("hidden");
             $("#authorizationModal").modal("hide");
             // сохраняем в хранилище sessionStorage токен доступа
-            sessionStorage.setItem(tokenKey, data.access_token);
-            sessionStorage.setItem(userNameKey, data.userName);
+            $.cookie(tokenKey, data.access_token);
+            $.cookie(userNameKey, data.userName);
             console.log(data.access_token);
+            self.getClaims();
         }).fail(function(data) {
             alert("Error under login");
         });
 
+
+    },
+    getClaims: function () {
+        var tokenKey = "tokenInfo";
+        var claimsKey = "claims";
+        $.ajax({
+            headers: {
+                'Authorization': "bearer " + $.cookie(tokenKey),
+                'Content-Type': "application/json"
+            },
+            type: "GET",
+            url: 'api/Account/AllUserInfo'
+        }).success(function(data) {
+            var strOfCookies = data.Claims.reduce((x, y) => x + ";" +  y.ClaimValue, "");
+            $.cookie(claimsKey, strOfCookies);
+            console.log(data.Claims);
+        }).fail(function() { console.log("fuck"); });
     },
     clearForm: function() {
         this.setState({

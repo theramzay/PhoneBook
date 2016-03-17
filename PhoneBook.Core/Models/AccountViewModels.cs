@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PhoneBook.Core.Models
 {
@@ -50,6 +51,7 @@ namespace PhoneBook.Core.Models
         public bool BusinessTrip { get; set; }
         public string Boss { get; set; } 
         public string NotesForBoss { get; set; }
+        public ICollection<IdentityUserClaim> Claims { get; set; }
     }
 
     public class UserLoginInfoViewModel

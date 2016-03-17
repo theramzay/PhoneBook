@@ -3,8 +3,8 @@
         return {};
     },
     componentDidMount: function() {
-        if (sessionStorage.getItem("userName") != null) {
-            $("#whoLog").text(sessionStorage.getItem("userName"));
+        if ($.cookie("userName") !== "undefined") {
+            $("#whoLog").text($.cookie("userName"));
             $("#authBtn").addClass('hidden');
             $("#regBtn").addClass('hidden');
             $("#hello").removeClass('hidden');
@@ -13,8 +13,8 @@
         }
     },
     logOut: function() {
-        sessionStorage.removeItem("tokenKey");
-        sessionStorage.removeItem("userName");
+        $.cookie("tokenKey", "undefined");
+        $.cookie("userName", "undefined");
         $("#logOutBtn").addClass('hidden');
         $("#hello").addClass('hidden');
         $("#authBtn").removeClass('hidden');

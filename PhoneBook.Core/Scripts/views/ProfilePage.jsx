@@ -5,7 +5,7 @@
     SendToServer: function(es) {
         es.preventDefault();
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         var data = {
             OldPassword: $("#OldPassword").val(),
             NewPassword: $("#NewPassword").val(),
@@ -33,9 +33,18 @@
         return (
             <div>
     <form onSubmit={this.SendToServer}>
-        <input type="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" placeholder="Old Password" id="OldPassword" className="form-control"/>
-        <input type="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" placeholder="New Password" id="NewPassword" className="form-control"/>
-        <input type="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" placeholder="Confirm Password" id="ConfPassword" className="form-control"/>
+        <input type="password" required={true}
+                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                placeholder="Old Password" id="OldPassword" className="form-control"/>
+        <input type="password" required={true}
+                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                placeholder="New Password" id="NewPassword" className="form-control"/>
+        <input type="password" required={true}
+                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                placeholder="Confirm Password" id="ConfPassword" className="form-control"/>
         <button className="btn btn-success" type="submit">Submit</button>
     </form>
 </div>
@@ -50,7 +59,7 @@ var EditInfo = React.createClass({
     SendToServer: function(es) {
         es.preventDefault();
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         var data = {
             FirstName: $("#FirstNameEdit").val(),
             MiddleName: $("#MiddleNameEdit").val(),
@@ -82,22 +91,28 @@ var EditInfo = React.createClass({
             <div>
     <form onSubmit={this.SendToServer}>
         <label htmlFor="FirstNameEdit">Enter First Name</label>
-        <input type="text" placeholder={this.props.FirstName} id="FirstNameEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.FirstName}
+                id="FirstNameEdit" className="form-control"/>
 
         <label htmlFor="MiddleNameEdit">Enter Middle Name</label>
-        <input type="text" placeholder={this.props.MiddleName} id="MiddleNameEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.MiddleName}
+                id="MiddleNameEdit" className="form-control"/>
 
         <label htmlFor="LastNameEdit">Enter Last Name</label>
-        <input type="text" placeholder={this.props.LastName} id="LastNameEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.LastName}
+                id="LastNameEdit" className="form-control"/>
 
         <label htmlFor="PhonePrivateEdit">Enter your private phone</label>
-        <input type="text" placeholder={this.props.PhonePrivate} id="PhonePrivateEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.PhonePrivate}
+                id="PhonePrivateEdit" className="form-control"/>
 
         <label htmlFor="PhoneWorkEdit">Enter your work phone</label>
-        <input type="text" placeholder={this.props.PhoneWork} id="PhoneWorkEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.PhoneWork}
+                id="PhoneWorkEdit" className="form-control"/>
 
         <label htmlFor="NotesEdit">Enter your note</label>
-        <input type="text" placeholder={this.props.Notes} id="NotesEdit" className="form-control"/>
+        <input type="text" placeholder={this.props.Notes}
+                id="NotesEdit" className="form-control"/>
         <button className="btn btn-success" type="submit">Submit</button>
     </form>
 </div>
@@ -113,7 +128,7 @@ var ImageUpload = React.createClass({
     componentDidMount: function () {
         var url = this.props.url;
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         $("#dropForm").dropzone({
             url: url, headers: {
                 'Authorization': "bearer " + token
@@ -141,7 +156,7 @@ var Info = React.createClass({
     loadFromServer: function() {
         var self = this;
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         $.ajax({
             headers: {
                 'Authorization': "bearer " + token,

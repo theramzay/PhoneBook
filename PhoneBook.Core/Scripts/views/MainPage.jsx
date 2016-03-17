@@ -51,7 +51,7 @@
             </div>
             <div className="col-lg-3 col-md-6 text-center">
               <div className="service-box">
-                <i className="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s" />
+                <i className="fa fa-4x fa-heart wow bounceIn text-danger" data-wow-delay=".3s" />
                 <h3>Made with Love</h3>
                 <p className="text-muted">You have to make your work with love these days!</p>
               </div>
