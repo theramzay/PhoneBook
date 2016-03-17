@@ -5,7 +5,7 @@
     SendToServer: function(es) {
         es.preventDefault();
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         var data = {
             OldPassword: $("#OldPassword").val(),
             NewPassword: $("#NewPassword").val(),
@@ -59,7 +59,7 @@ var EditInfo = React.createClass({
     SendToServer: function(es) {
         es.preventDefault();
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         var data = {
             FirstName: $("#FirstNameEdit").val(),
             MiddleName: $("#MiddleNameEdit").val(),
@@ -128,7 +128,7 @@ var ImageUpload = React.createClass({
     componentDidMount: function () {
         var url = this.props.url;
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         $("#dropForm").dropzone({
             url: url, headers: {
                 'Authorization': "bearer " + token
@@ -156,7 +156,7 @@ var Info = React.createClass({
     loadFromServer: function() {
         var self = this;
         var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
+        var token = $.cookie(tokenKey);
         $.ajax({
             headers: {
                 'Authorization': "bearer " + token,
