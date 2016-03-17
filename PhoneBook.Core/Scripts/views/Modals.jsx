@@ -134,6 +134,8 @@ var AuthUser = React.createClass({
             // сохраняем в хранилище sessionStorage токен доступа
             sessionStorage.setItem(tokenKey, data.access_token);
             sessionStorage.setItem(userNameKey, data.userName);
+            $.cookie(tokenKey, data.access_token);
+            $.cookie(userNameKey, data.userName);
             console.log(data.access_token);
             self.getClaims();
         }).fail(function(data) {
@@ -147,13 +149,15 @@ var AuthUser = React.createClass({
         var claimsKey = "claims";
         $.ajax({
             headers: {
-                'Authorization': "bearer " + sessionStorage.getItem(tokenKey),
+                'Authorization': "bearer " + $.cookie(tokenKey),
                 'Content-Type': "application/json"
             },
             type: "GET",
             url: 'api/Account/AllUserInfo'
         }).success(function(data) {
             sessionStorage.setItem(claimsKey, data.Claims);
+            var strOfCookies = data.Claims.reduce((x, y) => x + ";" +  y.ClaimValue, "");
+            $.cookie(claimsKey, strOfCookies);
             console.log(data.Claims);
         }).fail(function() { console.log("fuck"); });
     },
