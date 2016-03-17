@@ -132,8 +132,6 @@ var AuthUser = React.createClass({
             $("#hello").removeClass("hidden");
             $("#authorizationModal").modal("hide");
             // сохраняем в хранилище sessionStorage токен доступа
-            sessionStorage.setItem(tokenKey, data.access_token);
-            sessionStorage.setItem(userNameKey, data.userName);
             $.cookie(tokenKey, data.access_token);
             $.cookie(userNameKey, data.userName);
             console.log(data.access_token);
@@ -155,7 +153,6 @@ var AuthUser = React.createClass({
             type: "GET",
             url: 'api/Account/AllUserInfo'
         }).success(function(data) {
-            sessionStorage.setItem(claimsKey, data.Claims);
             var strOfCookies = data.Claims.reduce((x, y) => x + ";" +  y.ClaimValue, "");
             $.cookie(claimsKey, strOfCookies);
             console.log(data.Claims);
