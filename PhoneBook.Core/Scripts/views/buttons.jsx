@@ -3,7 +3,7 @@
         return {};
     },
     componentDidMount: function() {
-        if ($.cookie("userName") !== "undefined") {
+        if (typeof $.cookie("userName") !== "undefined" && $.cookie("userName") !== "undefined") {
             $("#whoLog").text($.cookie("userName"));
             $("#authBtn").addClass('hidden');
             $("#regBtn").addClass('hidden');
@@ -15,6 +15,7 @@
     logOut: function() {
         $.cookie("tokenKey", "undefined");
         $.cookie("userName", "undefined");
+        $.cookie("claims", "undefined");
         $("#logOutBtn").addClass('hidden');
         $("#hello").addClass('hidden');
         $("#authBtn").removeClass('hidden');
