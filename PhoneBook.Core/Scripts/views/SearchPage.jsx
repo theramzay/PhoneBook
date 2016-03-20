@@ -23,8 +23,8 @@
         };
 
     },
-    SendToServer: function (es) {
-        es.preventDefault();
+    SendInfoToServer: function (e) {
+        e.defaultPrevented();
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
         var data = {
@@ -33,15 +33,16 @@
             LastName: $("#LastNameEdit").val(),
             PhonePrivate: $("#PhonePrivateEdit").val(),
             PhoneWork: $("#PhoneWorkEdit").val(),
-            Notes: $("#NotesEdit").val()
+            Notes: $("#NotesEdit").val(),
+            NotesForBoss: $("#NotesForBossEdit").val()
         };
-        //console.log(data);
+        console.log(data);
         $.ajax({
             headers: {
                 'Authorization': "bearer " + token
             },
             type: "POST",
-            url: this.props.url,
+            url: "api/Account/UpdateAllUserInfoByAdmin",
             data: data
         }).success(function (data) {
             React.unmountComponentAtNode(document.getElementById('Settings'));
@@ -67,7 +68,7 @@
         <img style={{ verticalAlign: "middle" }} src={user.PathToTmbOfPhoto} alt="user photo"/>
             </div>
             <div className="col-sm-4">
-                    <form onSubmit={this.SendToServer}>
+                    <form onSubmit={this.SendInfoToServer}>
         <label htmlFor="FirstNameEdit">Enter First Name</label>
         <input type="text" placeholder={user.FirstName}
                id="FirstNameEdit" className="form-control" />
@@ -91,6 +92,9 @@
         <label htmlFor="NotesEdit">Enter your note</label>
         <input type="text" placeholder={user.Notes}
                id="NotesEdit" className="form-control" />
+        <label htmlFor="NotesEdit">Enter boss note</label>
+        <input type="text" placeholder={user.NotesForBoss}
+               id="NotesForBossEdit" className="form-control" />
         <button className="btn btn-success" type="submit">Submit</button>
                     </form>
             </div>
