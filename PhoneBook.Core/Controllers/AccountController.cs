@@ -107,6 +107,7 @@ namespace PhoneBook.Core.Controllers
             var users = UserManager.FindByFirstName(searchData);
             var viewsUser = users.Select(user=> new
             {
+                Email = user.Email,
                 FirstName = user.FirstName,
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
@@ -129,7 +130,9 @@ namespace PhoneBook.Core.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if(updatedUser.FirstName != null)
+            if (updatedUser.Email != null)
+                user.Email = updatedUser.Email;
+            if (updatedUser.FirstName != null)
                 user.FirstName = updatedUser.FirstName;
             if (updatedUser.MiddleName != null)
                 user.MiddleName = updatedUser.MiddleName;
@@ -159,7 +162,9 @@ namespace PhoneBook.Core.Controllers
             var d = updatedUser;
             var dbg = "dbg";
             if (!ModelState.IsValid) return BadRequest("Wrong model");
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId()); // TODO: change to search by email of serched user
+            var user = await UserManager.FindByEmailAsync(updatedUser.Email); // TODO: change to search by email of serched user
+            if (updatedUser.Email != null)
+                user.Email = updatedUser.Email;
             if (updatedUser.FirstName != null)
                 user.FirstName = updatedUser.FirstName;
             if (updatedUser.MiddleName != null)
