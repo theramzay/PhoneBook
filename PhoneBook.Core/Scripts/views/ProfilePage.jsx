@@ -175,7 +175,9 @@ var Info = React.createClass({
                 Notes: data.Notes,
                 Boss: data.Boss,
                 PathToPhoto: data.PathToPhoto,
-                PathToTmbOfPhoto: data.PathToTmbOfPhoto
+                PathToTmbOfPhoto: data.PathToTmbOfPhoto,
+                HolidayTimeStart: data.HolidayTimeStart,
+                HolidayTimeEnd: data.HolidayTimeEnd
             });
         }).fail(function() {
             alert("Error");
@@ -269,6 +271,11 @@ document.getElementById("Settings")
                                 <p className="text-muted">Yours Work phone is - {this.state.PhoneWork}</p>
                                 <p className="text-muted">Yours Note is - {this.state.Notes}</p>
                                 <p className="text-muted">Yours Boss is - {this.state.Boss}</p>
+                            </div>
+                            <div className="col-lg-3 col-md-6 text-center">
+                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <p className="text-muted">Yours holidays starts at - {this.state.HolidayTimeStart}</p>
+                                <p className="text-muted">Yours holidays ends at - {this.state.HolidayTimeEnd}</p>
                             </div>
                         </div>
                         <hr/>
