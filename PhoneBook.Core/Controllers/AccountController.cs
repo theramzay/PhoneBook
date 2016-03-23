@@ -90,6 +90,8 @@ namespace PhoneBook.Core.Controllers
                 Notes = user.Notes,
                 Boss = user.Boss,
                 NotesForBoss = user.NotesForBoss,
+                HolidayTimeStart = user.HolidayTimeStart,
+                HolidayTimeEnd = user.HolidayTimeEnd,
                 PathToPhoto = user.PathToPhoto,
                 PathToTmbOfPhoto = user.PathToTmbOfPhoto,
                 Claims = user.Claims
@@ -180,7 +182,7 @@ namespace PhoneBook.Core.Controllers
             if (updatedUser.Notes != null)
                 user.Notes = updatedUser.Notes;
             if (updatedUser.NotesForBoss != null)
-                user.Notes = updatedUser.NotesForBoss;
+                user.NotesForBoss = updatedUser.NotesForBoss;
 
             if (updatedUser.HolidayTimeStart != null)
                 user.HolidayTimeStart = updatedUser.HolidayTimeStart;
