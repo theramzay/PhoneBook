@@ -16,6 +16,7 @@ namespace PhoneBook.Domain.Abstract
         Task<User> FindAsync(string name, string password);
         Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType);
         Task<User> FindByIdAsync(string userId);
+        Task<User> FindByEmailAsync(string email);
         Task<IdentityResult> AddPasswordAsync(string userId, string newPassword);
         Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo userInfo);
         Task<IdentityResult> RemovePasswordAsync(string userId);

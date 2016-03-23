@@ -330,6 +330,7 @@
     <Content Include="Content\creative\jquery.fittext.js" />
     <Content Include="Content\creative\splash.jpg" />
     <Content Include="Content\creative\wow.min.js" />
+    <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
@@ -366,7 +367,6 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
@@ -375,9 +375,11 @@
     <Content Include="Scripts\dropzone\dropzone.js" />
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.full.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Parallax.js" />
     <Content Include="Scripts\react\react-0.14.0.min.js" />
@@ -408,6 +410,7 @@
     <Content Include="Scripts\views\ProfilePage.jsx" />
     <Content Include="Scripts\views\MainPage.jsx" />
     <Content Include="Scripts\views\SearchPage.jsx" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
@@ -418,7 +421,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

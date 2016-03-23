@@ -114,6 +114,11 @@ namespace PhoneBook.Domain.Infrastructure
             return await _applicationUserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, claimName));
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _applicationUserManager.FindByEmailAsync(email);
+        }
+
         public async Task<IdentityResult> ChangePasswordAsync(string id, string currentPassword, string newPassword)
         {
             return await 

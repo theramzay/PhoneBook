@@ -89,6 +89,7 @@ namespace PhoneBook.Core.Controllers
                 PhoneWork = user.PhoneWork,
                 Notes = user.Notes,
                 Boss = user.Boss,
+                NotesForBoss = user.NotesForBoss,
                 PathToPhoto = user.PathToPhoto,
                 PathToTmbOfPhoto = user.PathToTmbOfPhoto,
                 Claims = user.Claims
@@ -106,6 +107,7 @@ namespace PhoneBook.Core.Controllers
             var users = UserManager.FindByFirstName(searchData);
             var viewsUser = users.Select(user=> new
             {
+                Email = user.Email,
                 FirstName = user.FirstName,
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
@@ -128,7 +130,9 @@ namespace PhoneBook.Core.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if(updatedUser.FirstName != null)
+            if (updatedUser.Email != null)
+                user.Email = updatedUser.Email;
+            if (updatedUser.FirstName != null)
                 user.FirstName = updatedUser.FirstName;
             if (updatedUser.MiddleName != null)
                 user.MiddleName = updatedUser.MiddleName;
@@ -142,6 +146,48 @@ namespace PhoneBook.Core.Controllers
                 user.PhoneWork = updatedUser.PhoneWork;
             if (updatedUser.Notes != null)
                 user.Notes = updatedUser.Notes;
+            if (updatedUser.NotesForBoss != null)
+                user.Notes = updatedUser.NotesForBoss;
+            var response = await UserManager.UpdateAsync(user);
+            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
+        }
+
+
+
+        // POST api/Account/UpdateAllUserInfoByAdmin
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("UpdateAllUserInfoByAdmin")]
+        public async Task<IHttpActionResult> UpdateAllUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
+        {
+            var d = updatedUser;
+            var dbg = "dbg";
+            if (!ModelState.IsValid) return BadRequest("Wrong model");
+            var user = await UserManager.FindByEmailAsync(updatedUser.Email); 
+            if (updatedUser.Email != null)
+                user.Email = updatedUser.Email;
+            if (updatedUser.FirstName != null)
+                user.FirstName = updatedUser.FirstName;
+            if (updatedUser.MiddleName != null)
+                user.MiddleName = updatedUser.MiddleName;
+            if (updatedUser.LastName != null)
+                user.LastName = updatedUser.LastName;
+            if (updatedUser.PositionInCompany != null)
+                user.PositionInCompany = updatedUser.PositionInCompany;
+            if (updatedUser.PhonePrivate != null)
+                user.PhonePrivate = updatedUser.PhonePrivate;
+            if (updatedUser.PhoneWork != null)
+                user.PhoneWork = updatedUser.PhoneWork;
+            if (updatedUser.Notes != null)
+                user.Notes = updatedUser.Notes;
+            if (updatedUser.NotesForBoss != null)
+                user.Notes = updatedUser.NotesForBoss;
+
+            if (updatedUser.HolidayTimeStart != null)
+                user.HolidayTimeStart = updatedUser.HolidayTimeStart;
+
+            if (updatedUser.HolidayTimeEnd != null)
+                user.HolidayTimeEnd = updatedUser.HolidayTimeEnd;
+
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
         }
