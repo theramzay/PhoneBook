@@ -162,7 +162,7 @@ namespace PhoneBook.Core.Controllers
             var d = updatedUser;
             var dbg = "dbg";
             if (!ModelState.IsValid) return BadRequest("Wrong model");
-            var user = await UserManager.FindByEmailAsync(updatedUser.Email); // TODO: change to search by email of serched user
+            var user = await UserManager.FindByEmailAsync(updatedUser.Email); 
             if (updatedUser.Email != null)
                 user.Email = updatedUser.Email;
             if (updatedUser.FirstName != null)
@@ -181,6 +181,13 @@ namespace PhoneBook.Core.Controllers
                 user.Notes = updatedUser.Notes;
             if (updatedUser.NotesForBoss != null)
                 user.Notes = updatedUser.NotesForBoss;
+
+            if (updatedUser.HolidayTimeStart != null)
+                user.HolidayTimeStart = updatedUser.HolidayTimeStart;
+
+            if (updatedUser.HolidayTimeEnd != null)
+                user.HolidayTimeEnd = updatedUser.HolidayTimeEnd;
+
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
         }
