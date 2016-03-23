@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Spatial;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Autofac;
 using Autofac.Integration.Owin;
 using Microsoft.AspNet.Identity;
@@ -107,19 +100,19 @@ namespace PhoneBook.Core.Controllers
         public IQueryable SearchUsers(string searchData)
         {
             var users = UserManager.FindByFirstName(searchData);
-            var viewsUser = users.Select(user=> new
+            var viewsUser = users.Select(user => new
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                MiddleName = user.MiddleName,
-                LastName = user.LastName,
-                PositionInCompany = user.PositionInCompany,
-                PhonePrivate = user.PhonePrivate,
-                PhoneWork = user.PhoneWork,
-                Notes = user.Notes,
-                Boss = user.Boss,
-                PathToPhoto = user.PathToPhoto,
-                PathToTmbOfPhoto = user.PathToTmbOfPhoto
+                user.Email,
+                user.FirstName,
+                user.MiddleName,
+                user.LastName,
+                user.PositionInCompany,
+                user.PhonePrivate,
+                user.PhoneWork,
+                user.Notes,
+                user.Boss,
+                user.PathToPhoto,
+                user.PathToTmbOfPhoto
             });
 
             return viewsUser;
@@ -151,9 +144,10 @@ namespace PhoneBook.Core.Controllers
             if (updatedUser.NotesForBoss != null)
                 user.Notes = updatedUser.NotesForBoss;
             var response = await UserManager.UpdateAsync(user);
-            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
+            return response.Succeeded
+                ? Ok(new {Msg = response.Errors, IsOk = response.Succeeded})
+                : GetErrorResult(response);
         }
-
 
 
         // POST api/Account/UpdateAllUserInfoByAdmin
@@ -161,10 +155,8 @@ namespace PhoneBook.Core.Controllers
         [Route("UpdateAllUserInfoByAdmin")]
         public async Task<IHttpActionResult> UpdateAllUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
         {
-            var d = updatedUser;
-            var dbg = "dbg";
             if (!ModelState.IsValid) return BadRequest("Wrong model");
-            var user = await UserManager.FindByEmailAsync(updatedUser.Email); 
+            var user = await UserManager.FindByEmailAsync(updatedUser.Email);
             if (updatedUser.Email != null)
                 user.Email = updatedUser.Email;
             if (updatedUser.FirstName != null)
@@ -191,7 +183,9 @@ namespace PhoneBook.Core.Controllers
                 user.HolidayTimeEnd = updatedUser.HolidayTimeEnd;
 
             var response = await UserManager.UpdateAsync(user);
-            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
+            return response.Succeeded
+                ? Ok(new {Msg = response.Errors, IsOk = response.Succeeded})
+                : GetErrorResult(response);
         }
 
         [Route("Upload")]
@@ -202,15 +196,15 @@ namespace PhoneBook.Core.Controllers
             var uploadPath = HttpContext.Current.Server.MapPath("~/Content/ProfileImages");
 
             var multipartFormDataStreamProvider = new UploadMultipartFormProvider(uploadPath);
- 
+
             // Read the MIME multipart asynchronously 
             await Request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
- 
+
             var localFileName = multipartFormDataStreamProvider
                 .FileData.Select(multiPartData => multiPartData.LocalFileName).FirstOrDefault();
             var fileName = Path.GetFileName(localFileName);
             var tmbPath = $"{uploadPath}/tmbs/{fileName}";
-            ImagesHelper.ToTmb(localFileName,tmbPath);
+            ImagesHelper.ToTmb(localFileName, tmbPath);
 
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
@@ -218,7 +212,9 @@ namespace PhoneBook.Core.Controllers
             user.PathToTmbOfPhoto = $"/Content/ProfileImages/tmbs/{fileName}";
 
             var response = await UserManager.UpdateAsync(user);
-            return response.Succeeded ? Ok(new { Msg = response.Errors, IsOk = response.Succeeded }) : GetErrorResult(response);
+            return response.Succeeded
+                ? Ok(new {Msg = response.Errors, IsOk = response.Succeeded})
+                : GetErrorResult(response);
         }
 
         // POST api/Account/Logout
