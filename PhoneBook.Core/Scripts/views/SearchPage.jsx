@@ -1,4 +1,11 @@
 ﻿var SearchPage = React.createClass({
+    getInitialState: function () {
+        return {
+            searchData: this.props.searchData,
+            founded: []
+        };
+
+    },
     loadFromServer: function() {
         var self = this;
         var tokenKey = "tokenInfo";
@@ -9,32 +16,28 @@
                 'Content-Type': "application/json"
             },
             type: "GET",
-            url: this.props.url + "?searchData=" + this.props.searchData
-        }).success(function(data) {
+            url: this.props.url + "?searchData=" + this.state.searchData
+        }).success(function (data) {
             self.setState({
                 founded: data
             });
         });
     },
-    getInitialState: function() {
-        return {
-            searchData: this.props.searchData,
-            founded: []
-        };
-
-    },
     SendInfoToServer: function (e) {
-        e.defaultPrevented();
+        //e.defaultPrevented();
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
         var data = {
+            Email: $("#EmailEdit").val(),
             FirstName: $("#FirstNameEdit").val(),
             MiddleName: $("#MiddleNameEdit").val(),
             LastName: $("#LastNameEdit").val(),
             PhonePrivate: $("#PhonePrivateEdit").val(),
             PhoneWork: $("#PhoneWorkEdit").val(),
             Notes: $("#NotesEdit").val(),
-            NotesForBoss: $("#NotesForBossEdit").val()
+            NotesForBoss: $("#NotesForBossEdit").val(),
+            HolidayTimeStart: $("#HolidayTimeStartEdit").val(),
+            HolidayTimeEnd: $("#HolidayTimeEndEdit").val()
         };
         console.log(data);
         $.ajax({
@@ -42,7 +45,7 @@
                 'Authorization': "bearer " + token
             },
             type: "POST",
-            url: "api/Account/UpdateAllUserInfoByAdmin",
+            url: '/api/Account/UpdateAllUserInfoByAdmin',
             data: data
         }).success(function (data) {
             React.unmountComponentAtNode(document.getElementById('Settings'));
@@ -51,11 +54,22 @@
             alert(ee);
         });
     },
-    componentWillReceiveProps: function() {
+    componentWillReceiveProps: function (newProp) {
+        this.setState({ searchData: newProp.searchData });
+    },
+    componentDidUpdate: function (prevProps, prevState) {
+        if (prevState.searchData !== this.state.searchData) {
+            this.loadFromServer();
+        }
+    },
+    componentDidMount: function () {
         this.loadFromServer();
-        this.setState({ searchData: this.props.searchData, founded: [] });
+    },
+    dataPickerInit: function() {
+        $('.datetimepicker').datetimepicker({ value: '2015/04/15 05:03', step: 10 });
     },
     render: function () {
+        var self = this;
         var claimsKey = "claims";
         if (typeof $.cookie(claimsKey) === "undefined") $.cookie(claimsKey, "notauth");
         if ($.cookie(claimsKey).indexOf("Admin") !== -1) {
@@ -68,7 +82,10 @@
         <img style={{ verticalAlign: "middle" }} src={user.PathToTmbOfPhoto} alt="user photo"/>
             </div>
             <div className="col-sm-4">
-                    <form onSubmit={this.SendInfoToServer}>
+                    <form onSubmit={self.SendInfoToServer}>
+        <label htmlFor="EmailEdit">Enter Email</label>
+        <input type="text" placeholder={user.Email}
+               id="EmailEdit" className="form-control" value={user.Email} />
         <label htmlFor="FirstNameEdit">Enter First Name</label>
         <input type="text" placeholder={user.FirstName}
                id="FirstNameEdit" className="form-control" />
@@ -95,6 +112,14 @@
         <label htmlFor="NotesEdit">Enter boss note</label>
         <input type="text" placeholder={user.NotesForBoss}
                id="NotesForBossEdit" className="form-control" />
+
+       <input type="date" placeholder={user.HolidayTimeStart}
+              id="HolidayTimeStartEdit" className="form-control" />
+        <input type="date" value={user.HolidayTimeEnd}
+               id="HolidayTimeEndEdit" className="form-control" />
+
+<input className="datetimepicker" onClick={self.dataPickerInit} />
+
         <button className="btn btn-success" type="submit">Submit</button>
                     </form>
             </div>
