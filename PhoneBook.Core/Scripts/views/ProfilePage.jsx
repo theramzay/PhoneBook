@@ -264,6 +264,7 @@ document.getElementById("Settings")
                                 <p className="text-muted">Yours Middle Name is - {this.state.MiddleName}</p>
                                 <p className="text-muted">Yours Last Name is - {this.state.LastName}</p>
                                 <p className="text-muted">Yours Position in company is - {this.state.PositionInCompany}</p>
+                                 <p className="text-muted">Yours holidays starts at - {this.state.HolidayTimeStart}</p>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
@@ -271,10 +272,6 @@ document.getElementById("Settings")
                                 <p className="text-muted">Yours Work phone is - {this.state.PhoneWork}</p>
                                 <p className="text-muted">Yours Note is - {this.state.Notes}</p>
                                 <p className="text-muted">Yours Boss is - {this.state.Boss}</p>
-                            </div>
-                            <div className="col-lg-3 col-md-6 text-center">
-                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <p className="text-muted">Yours holidays starts at - {this.state.HolidayTimeStart}</p>
                                 <p className="text-muted">Yours holidays ends at - {this.state.HolidayTimeEnd}</p>
                             </div>
                         </div>
