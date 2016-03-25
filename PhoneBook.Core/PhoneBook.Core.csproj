@@ -386,7 +386,6 @@
     <Content Include="Scripts\react\react-dom-0.14.0.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Sakura.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
