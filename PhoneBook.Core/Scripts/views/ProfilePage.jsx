@@ -19,9 +19,8 @@
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function (data) {
+        }).success(function () {
             React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(data);
         }).fail(function(ee) {
             alert(ee);
         });
@@ -76,9 +75,12 @@ var EditInfo = React.createClass({
             type: "POST",
             url: this.props.url,
             data: data
-        }).success(function (data) {
+        }).success(function () {
             React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(data);
+            ReactDOM.render(
+            <Info changed={true} url="api/Account/AllUserInfo"/>,
+            document.getElementById("content")
+        );
         }).fail(function(ee) {
             alert(ee);
         });
@@ -135,6 +137,10 @@ var ImageUpload = React.createClass({
             }
         }).on("success",()=> {
             React.unmountComponentAtNode(document.getElementById('Settings')); //TODO: Make this WORK!
+            ReactDOM.render(
+<Info changed={true} url="api/Account/AllUserInfo"/>,
+            document.getElementById("content")
+        );
         });
     },
     render: function () {
@@ -179,6 +185,7 @@ var Info = React.createClass({
                 HolidayTimeStart: data.HolidayTimeStart,
                 HolidayTimeEnd: data.HolidayTimeEnd
             });
+            this.props.changed = false;
         }).fail(function() {
             alert("Error");
         });
@@ -192,6 +199,11 @@ var Info = React.createClass({
     componentDidMount: function() {
         this.loadFromServer();
         console.log(this.props.url);
+    },
+    componentDidUpdate: function () {
+        if (this.props.changed) {
+            this.loadFromServer();
+        }
     },
     UploadImage: function() {
         if (this.state.c) {
