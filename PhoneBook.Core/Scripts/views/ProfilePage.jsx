@@ -260,19 +260,19 @@ document.getElementById("Settings")
                              </div>
                              <div className="col-lg-3 col-md-6 text-center">
                                 <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <p className="text-muted">Yours First Name is - {this.state.FirstName}</p>
-                                <p className="text-muted">Yours Middle Name is - {this.state.MiddleName}</p>
-                                <p className="text-muted">Yours Last Name is - {this.state.LastName}</p>
-                                <p className="text-muted">Yours Position in company is - {this.state.PositionInCompany}</p>
-                                 <p className="text-muted">Yours holidays starts at - {this.state.HolidayTimeStart}</p>
+                                <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours First Name is - {this.state.FirstName}</p>
+                                <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Middle Name is - {this.state.MiddleName}</p>
+                                <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Last Name is - {this.state.LastName}</p>
+                                <p className="text-muted"><i className="fa fa-eye wow bounceIn text-primary" /> Yours Position in company is - {this.state.PositionInCompany}</p>
+                                 <p className="text-muted"><i className="fa fa-calendar-check-o wow bounceIn text-primary" /> Yours holidays starts at - {this.state.HolidayTimeStart}</p>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
                                 <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
-                                <p className="text-muted">Yours Private phone is - {this.state.PhonePrivate}</p>
-                                <p className="text-muted">Yours Work phone is - {this.state.PhoneWork}</p>
-                                <p className="text-muted">Yours Note is - {this.state.Notes}</p>
-                                <p className="text-muted">Yours Boss is - {this.state.Boss}</p>
-                                <p className="text-muted">Yours holidays ends at - {this.state.HolidayTimeEnd}</p>
+                                <p className="text-muted"><i className="fa fa-mobile wow bounceIn text-primary" /> Yours Private phone is - {this.state.PhonePrivate}</p>
+                                <p className="text-muted"><i className="fa fa-phone wow bounceIn text-primary" /> Yours Work phone is - {this.state.PhoneWork}</p>
+                                <p className="text-muted"><i className="fa fa-sticky-note-o wow bounceIn text-primary" /> Yours Note is - {this.state.Notes}</p>
+                                <p className="text-muted"><i className="fa fa-male wow bounceIn text-primary" /> Yours Boss is - {this.state.Boss}</p>
+                                <p className="text-muted"><i className="fa fa-calendar-times-o wow bounceIn text-primary" /> Yours holidays ends at - {this.state.HolidayTimeEnd}</p>
                             </div>
                         </div>
                         <hr/>
