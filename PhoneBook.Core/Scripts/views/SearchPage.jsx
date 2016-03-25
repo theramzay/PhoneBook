@@ -65,8 +65,10 @@
     componentDidMount: function () {
         this.loadFromServer();
     },
-    dataPickerInit: function() {
-        $('.datetimepicker').datetimepicker({ value: '2015/04/15 05:03', step: 10 });
+    dataPickerInit: function () {
+        $('.datetimepicker').datetimepicker({
+            dateFormat: 'yy-mm-dd'
+        });
     },
     render: function () {
         var self = this;
@@ -112,13 +114,10 @@
         <label htmlFor="NotesEdit">Enter boss note</label>
         <input type="text" placeholder={user.NotesForBoss}
                id="NotesForBossEdit" className="form-control" />
-
-       <input type="date" placeholder={user.HolidayTimeStart}
-              id="HolidayTimeStartEdit" className="form-control" />
-        <input type="date" value={user.HolidayTimeEnd}
-               id="HolidayTimeEndEdit" className="form-control" />
-
-<input className="datetimepicker" onClick={self.dataPickerInit} />
+        <label htmlFor="HolidayTimeStartEdit">Enter Holiday start time</label>
+        <input className="datetimepicker form-control" onClick={self.dataPickerInit} id="HolidayTimeStartEdit" />
+        <label htmlFor="HolidayTimeEndEdit">Enter Holiday end time</label>
+        <input className="datetimepicker form-control" onClick={self.dataPickerInit} id="HolidayTimeEndEdit" />
 
         <button className="btn btn-success" type="submit">Submit</button>
                     </form>
