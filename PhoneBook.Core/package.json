@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-
+    "webpack": "1.12.14"
   },
   "name": "ASP.NET",
   "private": true,
