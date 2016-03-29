@@ -1,4 +1,4 @@
-﻿var MainPage = React.createClass({
+﻿module.exports = React.createClass({
   render: function() {
     return (
       <div>
@@ -63,8 +63,3 @@
     );
   }
 });
-
-ReactDOM.render(
-  <MainPage />,
-  document.getElementById('content')
-);
