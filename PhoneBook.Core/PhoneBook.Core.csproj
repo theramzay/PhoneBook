@@ -367,6 +367,8 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="package.json" />
+    <Content Include="webpack.config.js" />
+    <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
@@ -404,13 +406,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\views\Modals.jsx" />
     <Content Include="Scripts\views\buttons.jsx" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Scripts\views\ProfilePage.jsx" />
     <Content Include="Scripts\views\MainPage.jsx" />
     <Content Include="Scripts\views\SearchPage.jsx" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Scripts\views\App.jsx" />
+    <Content Include="Scripts\views\Info.jsx" />
+    <Content Include="Scripts\views\EditInfo.jsx" />
+    <Content Include="Scripts\views\ImageUpload.jsx" />
+    <Content Include="Scripts\views\ChangePassword.jsx" />
+    <Content Include="Scripts\views\AddUser.jsx" />
+    <Content Include="Scripts\views\AuthUser.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
