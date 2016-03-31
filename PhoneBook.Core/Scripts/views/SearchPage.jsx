@@ -1,8 +1,12 @@
-﻿var SearchPage = React.createClass({
+﻿var DatePicker = require('react-datepicker');
+var moment = require('moment');
+module.exports = React.createClass({
     getInitialState: function () {
         return {
             searchData: this.props.searchData,
-            founded: []
+            founded: [],
+            firstSelectedDate: moment(),
+            secondSelectedDate: moment()
         };
 
     },
@@ -36,10 +40,11 @@
             PhoneWork: $("#PhoneWorkEdit").val(),
             Notes: $("#NotesEdit").val(),
             NotesForBoss: $("#NotesForBossEdit").val(),
-            HolidayTimeStart: $("#HolidayTimeStartEdit").val(),
-            HolidayTimeEnd: $("#HolidayTimeEndEdit").val()
+            HolidayTimeStart: this.state.firstSelectedDate,
+            HolidayTimeEnd: this.state.secondSelectedDate
         };
         console.log(data);
+
         $.ajax({
             headers: {
                 'Authorization': "bearer " + token
@@ -48,10 +53,9 @@
             url: '/api/Account/UpdateAllUserInfoByAdmin',
             data: data
         }).success(function (data) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
             console.log(data);
         }).fail(function (ee) {
-            alert(ee);
+            console.log(ee);
         });
     },
     componentWillReceiveProps: function (newProp) {
@@ -65,9 +69,14 @@
     componentDidMount: function () {
         this.loadFromServer();
     },
-    dataPickerInit: function () {
-        $('.datetimepicker').datetimepicker({
-            dateFormat: 'yy-mm-dd'
+    handleFirstDatePick: function (date) {
+        this.setState({
+            firstSelectedDate: date
+        });
+    },
+    handleSecondDatePick: function (date) {
+        this.setState({
+            secondSelectedDate: date
         });
     },
     render: function () {
@@ -115,9 +124,9 @@
         <input type="text" placeholder={user.NotesForBoss}
                id="NotesForBossEdit" className="form-control" />
         <label htmlFor="HolidayTimeStartEdit">Enter Holiday start time</label>
-        <input className="datetimepicker form-control" onClick={self.dataPickerInit} id="HolidayTimeStartEdit" />
+        <DatePicker selected={self.state.firstSelectedDate} onChange={self.handleFirstDatePick} />
         <label htmlFor="HolidayTimeEndEdit">Enter Holiday end time</label>
-        <input className="datetimepicker form-control" onClick={self.dataPickerInit} id="HolidayTimeEndEdit" />
+        <DatePicker selected={self.state.secondSelectedDate} onChange={self.handleSecondDatePick} />
 
         <button className="btn btn-success" type="submit">Submit</button>
                     </form>

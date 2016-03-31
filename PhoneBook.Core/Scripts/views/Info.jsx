@@ -1,158 +1,14 @@
-﻿var ChangePassword = React.createClass({
-    getInitialState: function() {
-        return {};
-    },
-    SendToServer: function(es) {
-        es.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
-        var data = {
-            OldPassword: $("#OldPassword").val(),
-            NewPassword: $("#NewPassword").val(),
-            ConfirmPassword: $("#ConfPassword").val()
-        };
-        //console.log(data);
-        $.ajax({
-            headers: {
-                'Authorization': "bearer " + token
-            },
-            type: "POST",
-            url: this.props.url,
-            data: data
-        }).success(function (data) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(data);
-        }).fail(function(ee) {
-            alert(ee);
-        });
-    },
-    componentDidMount: function() {
-        console.log(this.props.url);
-    },
-    render: function() {
-        return (
-            <div>
-    <form onSubmit={this.SendToServer}>
-        <input type="password" required={true}
-                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-                placeholder="Old Password" id="OldPassword" className="form-control"/>
-        <input type="password" required={true}
-                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-                placeholder="New Password" id="NewPassword" className="form-control"/>
-        <input type="password" required={true}
-                title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-                placeholder="Confirm Password" id="ConfPassword" className="form-control"/>
-        <button className="btn btn-success" type="submit">Submit</button>
-    </form>
-</div>
-        );
-    }
-});
+﻿var ImageUpload = require('./ImageUpload');
+var ChangePassword = require('./ChangePassword');
 
-var EditInfo = React.createClass({
-    getInitialState: function() {
-        return {};
-    },
-    SendToServer: function(es) {
-        es.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
-        var data = {
-            FirstName: $("#FirstNameEdit").val(),
-            MiddleName: $("#MiddleNameEdit").val(),
-            LastName: $("#LastNameEdit").val(),
-            PhonePrivate: $("#PhonePrivateEdit").val(),
-            PhoneWork: $("#PhoneWorkEdit").val(),
-            Notes: $("#NotesEdit").val()
-        };
-        //console.log(data);
-        $.ajax({
-            headers: {
-                'Authorization': "bearer " + token
-            },
-            type: "POST",
-            url: this.props.url,
-            data: data
-        }).success(function (data) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
-            console.log(data);
-        }).fail(function(ee) {
-            alert(ee);
-        });
-    },
-    componentDidMount: function() {
-        console.log(this.props.url);
-    },
-    render: function() {
-        return (
-            <div>
-    <form onSubmit={this.SendToServer}>
-        <label htmlFor="FirstNameEdit">Enter First Name</label>
-        <input type="text" placeholder={this.props.FirstName}
-                id="FirstNameEdit" className="form-control"/>
 
-        <label htmlFor="MiddleNameEdit">Enter Middle Name</label>
-        <input type="text" placeholder={this.props.MiddleName}
-                id="MiddleNameEdit" className="form-control"/>
-
-        <label htmlFor="LastNameEdit">Enter Last Name</label>
-        <input type="text" placeholder={this.props.LastName}
-                id="LastNameEdit" className="form-control"/>
-
-        <label htmlFor="PhonePrivateEdit">Enter your private phone</label>
-        <input type="text" placeholder={this.props.PhonePrivate}
-                id="PhonePrivateEdit" className="form-control"/>
-
-        <label htmlFor="PhoneWorkEdit">Enter your work phone</label>
-        <input type="text" placeholder={this.props.PhoneWork}
-                id="PhoneWorkEdit" className="form-control"/>
-
-        <label htmlFor="NotesEdit">Enter your note</label>
-        <input type="text" placeholder={this.props.Notes}
-                id="NotesEdit" className="form-control"/>
-        <button className="btn btn-success" type="submit">Submit</button>
-    </form>
-</div>
-        );
-    }
-});
-
-var ImageUpload = React.createClass({
+module.exports = React.createClass({
     getInitialState: function () {
-        return {};
-
+        return {
+            data: [],
+            c: false
+    };
     },
-    componentDidMount: function () {
-        var url = this.props.url;
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
-        $("#dropForm").dropzone({
-            url: url, headers: {
-                'Authorization': "bearer " + token
-            }
-        }).on("success",()=> {
-            React.unmountComponentAtNode(document.getElementById('Settings')); //TODO: Make this WORK!
-        });
-    },
-    render: function () {
-        return (
-            <div>
-<form id="dropForm" onSubmit={this.SendToServer} className="dropzone">
-  <div className="fallback">
-    <input name="file" type="file" multiple={true} />
-  </div>
-</form>
-
-</div>
-        );
-}
-});
-
-
-var Info = React.createClass({
     loadFromServer: function() {
         var self = this;
         var tokenKey = "tokenInfo";
@@ -179,23 +35,23 @@ var Info = React.createClass({
                 HolidayTimeStart: data.HolidayTimeStart,
                 HolidayTimeEnd: data.HolidayTimeEnd
             });
+            self.setProps({ changed: false }); //TODO: do it with State
         }).fail(function() {
             alert("Error");
         });
     },
-    getInitialState: function() {
-        return {
-            data: [],
-            c: false
-        };
-    },
-    componentDidMount: function() {
+    componentDidMount: function () {
         this.loadFromServer();
         console.log(this.props.url);
     },
+    componentDidUpdate: function (prevProps, prevState) {
+        if (this.props.changed) {
+            this.loadFromServer();
+        }
+    },
     UploadImage: function() {
         if (this.state.c) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
+            ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
             this.state.c = false;
         } else {
             ReactDOM.render(
@@ -207,7 +63,7 @@ var Info = React.createClass({
     },
     ChangePassword: function () {
         if (this.state.c) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
+            ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
             this.state.c = false;
         } else {
             ReactDOM.render(
@@ -219,7 +75,7 @@ var Info = React.createClass({
     },
     EditInfo: function () {
         if (this.state.c) {
-            React.unmountComponentAtNode(document.getElementById('Settings'));
+            ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
             this.state.c = false;
         } else {
             ReactDOM.render(
@@ -233,10 +89,10 @@ var Info = React.createClass({
         url="api/Account/UpdateAllUserInfo"/>,
 document.getElementById("Settings")
         );
-            this.state.c = true;
-        }
+        this.state.c = true;
+    }
 
-    },
+},
     render: function() {
         return (
             <div>
@@ -302,3 +158,6 @@ document.getElementById("Settings")
         );
     }
 });
+
+//Solving circular dependencies http://stackoverflow.com/questions/30378226/circular-imports-with-webpack-returning-empty-object 
+var EditInfo = require('./EditInfo');

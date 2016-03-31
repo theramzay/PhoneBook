@@ -28,3 +28,4 @@ obj/
 _ReSharper*/
 packages/
 [Tt]est[Rr]esult*
+PhoneBook.Core/node_modules/*
