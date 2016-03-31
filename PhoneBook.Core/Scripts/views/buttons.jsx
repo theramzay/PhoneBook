@@ -1,4 +1,10 @@
-﻿var UserButtons = React.createClass({
+﻿require('jquery.cookie');
+var Info = require('./Info');
+var MainPage = require('./MainPage');
+var Buttons = require('./buttons');
+var SearchPage = require('./SearchPage');
+
+module.exports = React.createClass({
     getInitialState: function() {
         return {};
     },
@@ -25,9 +31,9 @@
             document.getElementById("content")
         );
     },
-    profile: function() {
+    profile: function () {
         ReactDOM.render(
-            <Info url="api/Account/AllUserInfo"/>,
+            <Info changed={true} url="api/Account/AllUserInfo"/>,
             document.getElementById("content")
         );
     },
@@ -80,8 +86,3 @@
         );
     }
 });
-
-ReactDOM.render(
-    <UserButtons/>,
-    document.getElementById("logins")
-);
