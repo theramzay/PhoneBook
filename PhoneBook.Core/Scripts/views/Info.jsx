@@ -1,5 +1,4 @@
-﻿var ImageUpload = require('./ImageUpload');
-var ChangePassword = require('./ChangePassword');
+﻿var ChangePassword = require('./ChangePassword');
 
 
 module.exports = React.createClass({
@@ -161,3 +160,4 @@ document.getElementById("Settings")
 
 //Solving circular dependencies http://stackoverflow.com/questions/30378226/circular-imports-with-webpack-returning-empty-object 
 var EditInfo = require('./EditInfo');
+var ImageUpload = require('./ImageUpload');
