@@ -1,5 +1,8 @@
 ﻿var DatePicker = require('react-datepicker');
 var moment = require('moment');
+
+require('react-datepicker/dist/react-datepicker.css');
+
 module.exports = React.createClass({
     getInitialState: function () {
         return {
