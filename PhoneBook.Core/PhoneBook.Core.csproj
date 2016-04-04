@@ -317,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="b9558d2ad00e69ac99cfe09f81ca5de9.jpg" />
     <Content Include="Content\creative\animate.min.css" />
     <Content Include="Content\creative\bootstrap.css" />
     <Content Include="Content\creative\bootstrap.js" />
@@ -367,6 +368,7 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="package.json" />
+    <Content Include="Scripts\bundle.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
@@ -413,6 +415,7 @@
     <Content Include="Scripts\views\ChangePassword.jsx" />
     <Content Include="Scripts\views\AddUser.jsx" />
     <Content Include="Scripts\views\AuthUser.jsx" />
+    <Content Include="Scripts\bundle.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
