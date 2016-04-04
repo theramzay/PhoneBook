@@ -17,12 +17,9 @@
     @*@Scripts.RenderFormat(@"<script src=""{0}"" async></script>", "~/bundles/jquery")*@
     @*@Scripts.RenderFormat(@"<script src=""{0}"" async></script>", "~/bundles/modernizr")*@
 
-    @*@Scripts.Render("~/bundles/jquery")*@
     <script src="~/Content/creative/wow.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*@Styles.Render("~/Creative/css")*@
-    @Scripts.Render("~/bundles/reactJS")
 </head>
 <body id="page-top">
     <!-- Modal -->
@@ -63,10 +60,7 @@
     @RenderBody()
     <hr/>
 </div>
-    @*@Scripts.Render("~/Creative/js")*@
-    @*@Scripts.Render("~/bundles/reactApp")*@
     <script src="~/Scripts/bundle.js"></script>
-    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

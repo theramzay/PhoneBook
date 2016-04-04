@@ -11,9 +11,12 @@ module.exports = {
     entry: {
         application: [
             //'./Scripts/jquery.cookie-1.4.1.min.js',
-            './Scripts/jquery.datetimepicker.full.min.js',
+            './Content/site.css',
             './Scripts/Parallax.js',
             './Content/creative/bootstrap.min.js',
+            './Content/creative/bootstrap.min.css',
+            './Content/creative/animate.min.css',
+            './Content/creative/creative.css',
             //'./Content/creative/jquery.easing.min.js',
             './Content/creative/jquery.fittext.js',
             './Content/creative/creative.js',
@@ -32,8 +35,10 @@ module.exports = {
               include: APP_DIR,
               loader: 'babel'
           },
-          { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style!css" },
-      { test: /\.useable\.css$/, loader: "style/useable!css" }
+          { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.png$/, loader: "url-loader?limit=100000" },
+      { test: /\.jpg$/, loader: "file-loader" },
+      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' }
         ]
     },
     plugins: [

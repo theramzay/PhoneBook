@@ -378,11 +378,7 @@
     <Content Include="Scripts\dropzone\dropzone.js" />
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\jquery-2.2.1.js" />
-    <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
-    <Content Include="Scripts\jquery.datetimepicker.full.min.js" />
-    <Content Include="Scripts\jquery.datetimepicker.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Parallax.js" />
     <Content Include="Scripts\react\react-0.14.0.min.js" />
@@ -410,7 +406,6 @@
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Scripts\views\MainPage.jsx" />
     <Content Include="Scripts\views\SearchPage.jsx" />
-    <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Scripts\views\App.jsx" />
     <Content Include="Scripts\views\Info.jsx" />
     <Content Include="Scripts\views\EditInfo.jsx" />
