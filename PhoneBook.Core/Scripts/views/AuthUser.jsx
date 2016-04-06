@@ -47,7 +47,7 @@
 
 
     },
-    getClaims: function () {
+    getClaims: function() {
         var tokenKey = "tokenInfo";
         var claimsKey = "claims";
         $.ajax({
@@ -56,9 +56,9 @@
                 'Content-Type': "application/json"
             },
             type: "GET",
-            url: 'api/Account/AllUserInfo'
+            url: "api/Account/AllUserInfo"
         }).success(function(data) {
-            var strOfCookies = data.Claims.reduce((x, y) => x + ";" +  y.ClaimValue, "");
+            var strOfCookies = data.Claims.reduce((x, y) => x + ";" + y.ClaimValue, "");
             $.cookie(claimsKey, strOfCookies);
             console.log(data.Claims);
         }).fail(function() { console.log("fuck"); });
@@ -80,20 +80,16 @@
         <div className="modal-body">
             <form onSubmit={this.submitAuth}>
                 <label>Enter email</label><br/>
-                <input placeholder="email" required={true}
-        className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
-<label>Enter password</label><br/>
-<input placeholder="password" required={true}
-        title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-        className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
-<button className="btn btn-success" type="submit">Submit</button>
-</form>
-</div>
-<div className="modal-footer">
-    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-</div>
+                <input placeholder="email" required={true} className="form-control" id="EmailAuth" type="email" name="EmailAuth" label="Email:"/><br/><br/>
+                <label>Enter password</label><br/>
+                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" id="PasswordAuth" type="password" name="PasswordAuth" label="Password:"/><br/><br/>
+                <button className="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+        <div className="modal-footer">
+            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
 </div>
         );
     }
