@@ -1,4 +1,4 @@
-﻿///// <binding ProjectOpened='Watch - Development' />
+﻿/// <binding />
 "use strict";
 var WebpackNotifierPlugin = require('webpack-notifier');
 var path = require('path');
@@ -48,7 +48,9 @@ module.exports = {
       jQuery: "jquery",
       React: "react",
       ReactDOM: "react-dom"
-  })
+  }),
+  new webpack.optimize.UglifyJsPlugin(),
+  new webpack.optimize.DedupePlugin()
     ],
     resolve: {
         extensions: ['', '.js', '.jsx']
