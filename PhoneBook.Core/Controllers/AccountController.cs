@@ -110,6 +110,7 @@ namespace PhoneBook.Core.Controllers
                 user.PhonePrivate,
                 user.PhoneWork,
                 user.Notes,
+                user.NotesForBoss,
                 user.Boss,
                 user.PathToPhoto,
                 user.PathToTmbOfPhoto
@@ -155,7 +156,7 @@ namespace PhoneBook.Core.Controllers
         [Route("UpdateAllUserInfoByAdmin")]
         public async Task<IHttpActionResult> UpdateAllUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
         {
-            //if (!ModelState.IsValid) return BadRequest("Wrong model");
+            if (!ModelState.IsValid) return BadRequest("Wrong model");
             var user = await UserManager.FindByEmailAsync(updatedUser.Email);
             if (updatedUser.Email != null)
                 user.Email = updatedUser.Email;

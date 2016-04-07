@@ -1,8 +1,9 @@
-﻿/// <binding BeforeBuild='Run - Development' ProjectOpened='Watch - Development' />
+﻿/// <binding />
 "use strict";
 var WebpackNotifierPlugin = require('webpack-notifier');
 var path = require('path');
 var webpack = require("webpack");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 var APP_DIR = path.resolve(__dirname, 'Scripts');
@@ -20,9 +21,6 @@ module.exports = {
             //'./Content/creative/jquery.easing.min.js',
             './Content/creative/jquery.fittext.js',
             './Content/creative/creative.js',
-            //'./Scripts/modernizr-2.6.2.js',
-            //'./Scripts/respond.js',
-            './Scripts/dropzone/dropzone.js',
             './Scripts/views/App.jsx']
     },
     output: {
@@ -48,7 +46,10 @@ module.exports = {
       jQuery: "jquery",
       React: "react",
       ReactDOM: "react-dom"
-  })
+  }),
+  new webpack.optimize.UglifyJsPlugin(),
+  new webpack.optimize.DedupePlugin(),
+  new ExtractTextPlugin('bundle.css')
     ],
     resolve: {
         extensions: ['', '.js', '.jsx']

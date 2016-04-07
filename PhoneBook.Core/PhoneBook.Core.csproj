@@ -317,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="b9558d2ad00e69ac99cfe09f81ca5de9.jpg" />
     <Content Include="Content\creative\animate.min.css" />
     <Content Include="Content\creative\bootstrap.css" />
     <Content Include="Content\creative\bootstrap.js" />
@@ -332,12 +333,8 @@
     <Content Include="Content\creative\wow.min.js" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="favicon.ico" />
-    <Content Include="font-awesome\css\font-awesome.css" />
-    <Content Include="font-awesome\css\font-awesome.min.css" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="readme.txt" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -361,30 +358,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="package.json" />
+    <Content Include="Scripts\bundle.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
-    <Content Include="Scripts\dropzone\basic.css" />
-    <Content Include="Scripts\dropzone\basic.min.css" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
-    <Content Include="Scripts\dropzone\dropzone.css" />
-    <Content Include="Scripts\dropzone\dropzone.js" />
-    <Content Include="Scripts\dropzone\dropzone.min.css" />
-    <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Parallax.js" />
-    <Content Include="Scripts\react\react-0.14.0.min.js" />
-    <Content Include="Scripts\react\react-dom-0.14.0.min.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -413,6 +392,7 @@
     <Content Include="Scripts\views\ChangePassword.jsx" />
     <Content Include="Scripts\views\AddUser.jsx" />
     <Content Include="Scripts\views\AuthUser.jsx" />
+    <Content Include="Scripts\bundle.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
