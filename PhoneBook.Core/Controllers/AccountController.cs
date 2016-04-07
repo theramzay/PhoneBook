@@ -174,6 +174,8 @@ namespace PhoneBook.Core.Controllers
                 user.PhoneWork = updatedUser.PhoneWork;
             if (updatedUser.Notes != null)
                 user.Notes = updatedUser.Notes;
+            if (updatedUser.Boss != null)
+                user.Boss = updatedUser.Boss;
             if (updatedUser.NotesForBoss != null)
                 user.NotesForBoss = updatedUser.NotesForBoss;
 
@@ -453,6 +455,17 @@ namespace PhoneBook.Core.Controllers
                 }),
                 State = state
             }).ToList();
+        }
+
+        // POST api/Account/AddClaim
+        [Route("AddClaim")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> AddClaim(ClaimAddModel c)
+        {
+            if (!ModelState.IsValid) return BadRequest("Something frong with adding claim to user!");
+            var response = await UserManager.AddClaimToUserAsync(c.Email, c.NameOfClaim);
+            return Ok(new { Msg = response.Errors, IsOk = response.Succeeded });
         }
 
         // POST api/Account/Register
