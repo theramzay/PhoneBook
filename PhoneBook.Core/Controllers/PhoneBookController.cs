@@ -32,7 +32,7 @@ namespace PhoneBook.Core.Controllers
         public async Task<IHttpActionResult> AddClaim(ClaimAddModel c)
         {
             if (!ModelState.IsValid) return BadRequest("Something frong with adding claim to user!");
-            var response = await _mainUserManager.AddClaimToUserAsync(c.Email, c.Name);
+            var response = await _mainUserManager.AddClaimToUserAsync(c.Email, c.NameOfClaim);
             return Ok(new {Msg = response.Errors, IsOk = response.Succeeded});
         }
 
