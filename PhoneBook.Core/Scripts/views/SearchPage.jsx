@@ -50,10 +50,8 @@ module.exports = React.createClass({
     },
     sendInfoToServer: function(e) {
         e.preventDefault();
-        console.log(e.target);
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
-        console.log("Email in log", this.refs.frm);
 
         //var data = {
         //    Email: this.refs.EmailEdit.value,
