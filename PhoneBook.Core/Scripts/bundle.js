@@ -35560,7 +35560,7 @@
   \**************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React, $) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(React, $) {"use strict";
 	
 	var DatePicker = __webpack_require__(/*! react-datepicker */ 190);
 	var moment = __webpack_require__(/*! moment */ 291);
@@ -35568,14 +35568,15 @@
 	__webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ 390);
 	
 	module.exports = React.createClass({
-	    displayName: 'exports',
+	    displayName: "exports",
 	
 	    getInitialState: function getInitialState() {
 	        return {
 	            searchData: this.props.searchData,
 	            founded: [],
 	            firstSelectedDate: moment(),
-	            secondSelectedDate: moment()
+	            secondSelectedDate: moment(),
+	            startDate: moment()
 	        };
 	    },
 	    loadFromServer: function loadFromServer() {
@@ -35595,22 +35596,27 @@
 	            });
 	        });
 	    },
-	    SendInfoToServer: function SendInfoToServer(e) {
+	    sendInfoToServer: function sendInfoToServer(e) {
 	        //e.defaultPrevented();
 	        var tokenKey = "tokenInfo";
 	        var token = $.cookie(tokenKey);
+	
 	        var data = {
-	            Email: $("#EmailEdit").val(),
-	            FirstName: $("#FirstNameEdit").val(),
-	            MiddleName: $("#MiddleNameEdit").val(),
-	            LastName: $("#LastNameEdit").val(),
-	            PhonePrivate: $("#PhonePrivateEdit").val(),
-	            PhoneWork: $("#PhoneWorkEdit").val(),
-	            Notes: $("#NotesEdit").val(),
-	            NotesForBoss: $("#NotesForBossEdit").val(),
-	            HolidayTimeStart: this.state.firstSelectedDate,
-	            HolidayTimeEnd: this.state.secondSelectedDate
+	            Email: this.refs.EmailEdit.value,
+	            FirstName: this.refs.FirstNameEdit.value,
+	            LastName: this.refs.LastNameEdit.value,
+	            MiddleName: this.refs.MiddleNameEdit.value,
+	            PhonePrivate: this.refs.PhonePrivateEdit.value,
+	            PhoneWork: this.refs.PhoneWorkEdit.value,
+	            Notes: this.refs.NotesEdit.value,
+	            NotesForBoss: this.refs.NotesForBossEdit.value,
+	            HolidayTimeStart: this.state.firstSelectedDate.toJSON(),
+	            HolidayTimeEnd: this.state.secondSelectedDate.toJSON()
 	        };
+	        //["Email", "FirstName", "LastName", "MiddleName", "PhonePrivate", "PhoneWork", "Notes", "NotesForBoss"]
+	        //    .forEach(function(l) {
+	        //        //data[l] = $("#" + l + "Edit").val();
+	        //    });
 	        console.log(data);
 	
 	        $.ajax({
@@ -35618,12 +35624,12 @@
 	                'Authorization': "bearer " + token
 	            },
 	            type: "POST",
-	            url: '/api/Account/UpdateAllUserInfoByAdmin',
+	            url: "/api/Account/UpdateAllUserInfoByAdmin",
 	            data: data
-	        }).success(function (data) {
-	            console.log(data);
-	        }).fail(function (ee) {
-	            console.log(ee);
+	        }).success(function () {
+	            console.log('ok');
+	        }).fail(function (error) {
+	            console.log('error: ', error.msg);
 	        });
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(newProp) {
@@ -35653,98 +35659,90 @@
 	        if (typeof $.cookie(claimsKey) === "undefined") $.cookie(claimsKey, "notauth");
 	        if ($.cookie(claimsKey).indexOf("Admin") !== -1) {
 	            return React.createElement(
-	                'div',
+	                "div",
 	                null,
 	                this.state.founded.map(function (user) {
 	                    return React.createElement(
-	                        'div',
-	                        { id: 'TableOfSerach' },
+	                        "div",
+	                        { id: "TableOfSerach" },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'row jumbotron' },
+	                            "div",
+	                            { className: "row jumbotron" },
 	                            React.createElement(
-	                                'div',
-	                                { className: 'col-sm-3' },
-	                                React.createElement('img', { style: { verticalAlign: "middle" }, src: user.PathToTmbOfPhoto, alt: 'user photo' })
+	                                "div",
+	                                { className: "col-sm-3" },
+	                                React.createElement("img", { style: { verticalAlign: "middle" }, src: user.PathToTmbOfPhoto, alt: "user photo" })
 	                            ),
 	                            React.createElement(
-	                                'div',
-	                                { className: 'col-sm-4' },
+	                                "div",
+	                                { className: "col-sm-4" },
 	                                React.createElement(
-	                                    'form',
-	                                    { onSubmit: self.SendInfoToServer },
+	                                    "form",
+	                                    { onSubmit: self.sendInfoToServer },
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'EmailEdit' },
-	                                        'Enter Email'
+	                                        "label",
+	                                        { htmlFor: "EmailEdit" },
+	                                        "Enter Email"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.Email,
-	                                        id: 'EmailEdit', className: 'form-control', value: user.Email }),
+	                                    React.createElement("input", { type: "text", placeholder: user.Email, ref: "EmailEdit", className: "form-control", value: user.Email }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'FirstNameEdit' },
-	                                        'Enter First Name'
+	                                        "label",
+	                                        { htmlFor: "FirstNameEdit" },
+	                                        "Enter First Name"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.FirstName,
-	                                        id: 'FirstNameEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.FirstName, ref: "FirstNameEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'MiddleNameEdit' },
-	                                        'Enter Middle Name'
+	                                        "label",
+	                                        { htmlFor: "MiddleNameEdit" },
+	                                        "Enter Middle Name"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.MiddleName,
-	                                        id: 'MiddleNameEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.MiddleName, ref: "MiddleNameEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'LastNameEdit' },
-	                                        'Enter Last Name'
+	                                        "label",
+	                                        { htmlFor: "LastNameEdit" },
+	                                        "Enter Last Name"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.LastName,
-	                                        id: 'LastNameEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.LastName, ref: "LastNameEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'PhonePrivateEdit' },
-	                                        'Enter your private phone'
+	                                        "label",
+	                                        { htmlFor: "PhonePrivateEdit" },
+	                                        "Enter your private phone"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.PhonePrivate,
-	                                        id: 'PhonePrivateEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.PhonePrivate, ref: "PhonePrivateEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'PhoneWorkEdit' },
-	                                        'Enter your work phone'
+	                                        "label",
+	                                        { htmlFor: "PhoneWorkEdit" },
+	                                        "Enter your work phone"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.PhoneWork,
-	                                        id: 'PhoneWorkEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.PhoneWork, ref: "PhoneWorkEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'NotesEdit' },
-	                                        'Enter your note'
+	                                        "label",
+	                                        { htmlFor: "NotesEdit" },
+	                                        "Enter your note"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.Notes,
-	                                        id: 'NotesEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.Notes, ref: "NotesEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'NotesEdit' },
-	                                        'Enter boss note'
+	                                        "label",
+	                                        { htmlFor: "NotesForBossEdit" },
+	                                        "Enter boss note"
 	                                    ),
-	                                    React.createElement('input', { type: 'text', placeholder: user.NotesForBoss,
-	                                        id: 'NotesForBossEdit', className: 'form-control' }),
+	                                    React.createElement("input", { type: "text", placeholder: user.NotesForBoss, ref: "NotesForBossEdit", className: "form-control" }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'HolidayTimeStartEdit' },
-	                                        'Enter Holiday start time'
+	                                        "label",
+	                                        { htmlFor: "HolidayTimeStartEdit" },
+	                                        "Enter Holiday start time"
 	                                    ),
-	                                    React.createElement(DatePicker, { selected: self.state.firstSelectedDate, onChange: self.handleFirstDatePick }),
+	                                    React.createElement(DatePicker, { startDate: self.state.startDate, dateFormat: "MM/DD/YYYY", selected: self.state.firstSelectedDate, onChange: self.handleFirstDatePick }),
 	                                    React.createElement(
-	                                        'label',
-	                                        { htmlFor: 'HolidayTimeEndEdit' },
-	                                        'Enter Holiday end time'
+	                                        "label",
+	                                        { htmlFor: "HolidayTimeEndEdit" },
+	                                        "Enter Holiday end time"
 	                                    ),
-	                                    React.createElement(DatePicker, { selected: self.state.secondSelectedDate, onChange: self.handleSecondDatePick }),
+	                                    React.createElement(DatePicker, { startDate: self.state.startDate, dateFormat: "MM/DD/YYYY", selected: self.state.secondSelectedDate, onChange: self.handleSecondDatePick }),
 	                                    React.createElement(
-	                                        'button',
-	                                        { className: 'btn btn-success', type: 'submit' },
-	                                        'Submit'
+	                                        "button",
+	                                        { className: "btn btn-success", type: "submit" },
+	                                        "Submit"
 	                                    )
 	                                )
 	                            )
@@ -35754,52 +35752,52 @@
 	            );
 	        } else {
 	            return React.createElement(
-	                'div',
+	                "div",
 	                null,
 	                this.state.founded.map(function (user) {
 	                    return React.createElement(
-	                        'div',
-	                        { id: 'TableOfSerach' },
+	                        "div",
+	                        { id: "TableOfSerach" },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'row jumbotron' },
+	                            "div",
+	                            { className: "row jumbotron" },
 	                            React.createElement(
-	                                'div',
-	                                { className: 'col-sm-3' },
-	                                React.createElement('img', { style: { verticalAlign: "middle" }, src: user.PathToTmbOfPhoto, alt: 'user photo' })
+	                                "div",
+	                                { className: "col-sm-3" },
+	                                React.createElement("img", { style: { verticalAlign: "middle" }, src: user.PathToTmbOfPhoto, alt: "user photo" })
 	                            ),
 	                            React.createElement(
-	                                'div',
-	                                { className: 'col-sm-4' },
+	                                "div",
+	                                { className: "col-sm-4" },
 	                                React.createElement(
-	                                    'h3',
+	                                    "h3",
 	                                    null,
-	                                    'First Name: ',
+	                                    "First Name: ",
 	                                    user.FirstName,
-	                                    ' '
+	                                    " "
 	                                ),
 	                                React.createElement(
-	                                    'h3',
+	                                    "h3",
 	                                    null,
-	                                    'Middle Name: ',
+	                                    "Middle Name: ",
 	                                    user.MiddleName
 	                                ),
 	                                React.createElement(
-	                                    'h3',
+	                                    "h3",
 	                                    null,
-	                                    'Last Name: ',
+	                                    "Last Name: ",
 	                                    user.LastName
 	                                ),
 	                                React.createElement(
-	                                    'h3',
+	                                    "h3",
 	                                    null,
-	                                    'Notes: ',
+	                                    "Notes: ",
 	                                    user.Notes
 	                                ),
 	                                React.createElement(
-	                                    'h3',
+	                                    "h3",
 	                                    null,
-	                                    'Work Phone: ',
+	                                    "Work Phone: ",
 	                                    user.PhoneWork
 	                                )
 	                            )
@@ -62839,12 +62837,12 @@
 	    checkFirst: function checkFirst() {
 	        var pass = $("#Password");
 	        var repass = $("#ConfirmPassword");
-	        pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : '');
+	        pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : "");
 	        if (pass.checkValidity()) repass.pattern = pass.value;
 	    },
 	    checkSecond: function checkSecond() {
 	        var repass = $("#ConfirmPassword");
-	        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : '');
+	        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : "");
 	    },
 	    render: function render() {
 	        return React.createElement(
@@ -62996,7 +62994,7 @@
 	                'Content-Type': "application/json"
 	            },
 	            type: "GET",
-	            url: 'api/Account/AllUserInfo'
+	            url: "api/Account/AllUserInfo"
 	        }).success(function (data) {
 	            var strOfCookies = data.Claims.reduce(function (x, y) {
 	                return x + ";" + y.ClaimValue;
@@ -63046,8 +63044,7 @@
 	                            "Enter email"
 	                        ),
 	                        React.createElement("br", null),
-	                        React.createElement("input", { placeholder: "email", required: true,
-	                            className: "form-control", id: "EmailAuth", type: "email", name: "EmailAuth", label: "Email:" }),
+	                        React.createElement("input", { placeholder: "email", required: true, className: "form-control", id: "EmailAuth", type: "email", name: "EmailAuth", label: "Email:" }),
 	                        React.createElement("br", null),
 	                        React.createElement("br", null),
 	                        React.createElement(
@@ -63056,10 +63053,7 @@
 	                            "Enter password"
 	                        ),
 	                        React.createElement("br", null),
-	                        React.createElement("input", { placeholder: "password", required: true,
-	                            title: "Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols",
-	                            pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$",
-	                            className: "form-control", id: "PasswordAuth", type: "password", name: "PasswordAuth", label: "Password:" }),
+	                        React.createElement("input", { placeholder: "password", required: true, title: "Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$", className: "form-control", id: "PasswordAuth", type: "password", name: "PasswordAuth", label: "Password:" }),
 	                        React.createElement("br", null),
 	                        React.createElement("br", null),
 	                        React.createElement(
