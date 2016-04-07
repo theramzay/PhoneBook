@@ -8,6 +8,7 @@ module.exports = React.createClass({
         return {
             searchData: this.props.searchData,
             founded: [],
+            Users: [],
             firstSelectedDate: moment(),
             secondSelectedDate: moment(),
             startDate: moment()
@@ -29,12 +30,29 @@ module.exports = React.createClass({
             self.setState({
                 founded: data
             });
+
+            $.ajax({
+                headers: {
+                    'Authorization': "bearer " + token
+                },
+                type: "GET",
+                url: '/api/PhoneBook/All'
+            }).success((data) => {
+                console.log(data);
+                self.setState({ Users: data });
+            }).fail(function (error) {
+                console.log("error: ", error.responseText);
+                alert(error.responseText);
+            });
+
+
         });
     },
     sendInfoToServer: function(e) {
-        //e.defaultPrevented();
+        e.preventDefault();
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
+        console.log("Email in log", this.refs.frm);
 
         var data = {
             Email: this.refs.EmailEdit.value,
@@ -44,14 +62,12 @@ module.exports = React.createClass({
             PhonePrivate: this.refs.PhonePrivateEdit.value,
             PhoneWork: this.refs.PhoneWorkEdit.value,
             Notes: this.refs.NotesEdit.value,
+            Boss: this.refs.BossEdit.value,
             NotesForBoss: this.refs.NotesForBossEdit.value,
             HolidayTimeStart: this.state.firstSelectedDate.toJSON(),
             HolidayTimeEnd: this.state.secondSelectedDate.toJSON()
         };
-        //["Email", "FirstName", "LastName", "MiddleName", "PhonePrivate", "PhoneWork", "Notes", "NotesForBoss"]
-        //    .forEach(function(l) {
-        //        //data[l] = $("#" + l + "Edit").val();
-        //    });
+
         console.log(data);
 
         $.ajax({
@@ -102,7 +118,7 @@ module.exports = React.createClass({
                 <img style={{ verticalAlign: "middle" }} src={user.PathToTmbOfPhoto} alt="user photo"/>
             </div>
             <div className="col-sm-4">
-                <form onSubmit={self.sendInfoToServer}>
+                <form key={user.Email} ref="frm" onSubmit={self.sendInfoToServer}>
                     <label htmlFor="EmailEdit">Enter Email</label>
                     <input type="text" placeholder={user.Email} ref="EmailEdit" className="form-control" value={user.Email}/>
                     <label htmlFor="FirstNameEdit">Enter First Name</label>
@@ -122,6 +138,15 @@ module.exports = React.createClass({
 
                     <label htmlFor="NotesEdit">Enter your note</label>
                     <input type="text" placeholder={user.Notes} ref="NotesEdit" className="form-control"/>
+
+                    <label htmlFor="BossEdit">Choose who wil be boss</label>
+                    <select className="form-control" ref="BossEdit">
+                        {self.state.Users.map((u) => {
+                        return (
+                    <option value={u.FirstName + ' ' + u.LastName}>{u.FirstName + ' ' + u.LastName}</option>);
+                        })}
+                    </select>
+
                     <label htmlFor="NotesForBossEdit">Enter boss note</label>
                     <input type="text" placeholder={user.NotesForBoss} ref="NotesForBossEdit" className="form-control"/>
                     <label htmlFor="HolidayTimeStartEdit">Enter Holiday start time</label>
@@ -129,7 +154,7 @@ module.exports = React.createClass({
                     <label htmlFor="HolidayTimeEndEdit">Enter Holiday end time</label>
                     <DatePicker startDate={self.state.startDate} dateFormat="MM/DD/YYYY" selected={self.state.secondSelectedDate} onChange={self.handleSecondDatePick}/>
 
-                    <button className="btn btn-success" type="submit">Submit</button>
+                    <button key={user.Email} className="btn btn-success" type="submit">Submit</button>
                 </form>
             </div>
         </div>
