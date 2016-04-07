@@ -50,22 +50,37 @@ module.exports = React.createClass({
     },
     sendInfoToServer: function(e) {
         e.preventDefault();
+        console.log(e.target);
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
         console.log("Email in log", this.refs.frm);
 
+        //var data = {
+        //    Email: this.refs.EmailEdit.value,
+        //    FirstName: this.refs.FirstNameEdit.value,
+        //    LastName: this.refs.LastNameEdit.value,
+        //    MiddleName: this.refs.MiddleNameEdit.value,
+        //    PhonePrivate: this.refs.PhonePrivateEdit.value,
+        //    PhoneWork: this.refs.PhoneWorkEdit.value,
+        //    Notes: this.refs.NotesEdit.value,
+        //    Boss: this.refs.BossEdit.value,
+        //    NotesForBoss: this.refs.NotesForBossEdit.value,
+        //    HolidayTimeStart: this.state.firstSelectedDate.toJSON(),
+        //    HolidayTimeEnd: this.state.secondSelectedDate.toJSON()
+        //};
+
         var data = {
-            Email: this.refs.EmailEdit.value,
-            FirstName: this.refs.FirstNameEdit.value,
-            LastName: this.refs.LastNameEdit.value,
-            MiddleName: this.refs.MiddleNameEdit.value,
-            PhonePrivate: this.refs.PhonePrivateEdit.value,
-            PhoneWork: this.refs.PhoneWorkEdit.value,
-            Notes: this.refs.NotesEdit.value,
-            Boss: this.refs.BossEdit.value,
-            NotesForBoss: this.refs.NotesForBossEdit.value,
-            HolidayTimeStart: this.state.firstSelectedDate.toJSON(),
-            HolidayTimeEnd: this.state.secondSelectedDate.toJSON()
+            Email: e.target[0].value,
+            FirstName: e.target[1].value,
+            LastName: e.target[2].value,
+            MiddleName: e.target[3].value,
+            PhonePrivate: e.target[4].value,
+            PhoneWork: e.target[5].value,
+            Notes: e.target[6].value,
+            Boss: e.target[7].value,
+            NotesForBoss: e.target[8].value,
+            HolidayTimeStart: e.target[9].value,
+            HolidayTimeEnd: e.target[10].value
         };
 
         console.log(data);
@@ -118,7 +133,7 @@ module.exports = React.createClass({
                 <img style={{ verticalAlign: "middle" }} src={user.PathToTmbOfPhoto} alt="user photo"/>
             </div>
             <div className="col-sm-4">
-                <form key={user.Email} ref="frm" onSubmit={self.sendInfoToServer}>
+                <form key={user.Email} ref="frm" onSubmit={self.sendInfoToServer.bind(this)}>
                     <label htmlFor="EmailEdit">Enter Email</label>
                     <input type="text" placeholder={user.Email} ref="EmailEdit" className="form-control" value={user.Email}/>
                     <label htmlFor="FirstNameEdit">Enter First Name</label>
