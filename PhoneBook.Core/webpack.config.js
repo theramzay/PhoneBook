@@ -21,7 +21,6 @@ module.exports = {
             //'./Content/creative/jquery.easing.min.js',
             './Content/creative/jquery.fittext.js',
             './Content/creative/creative.js',
-            './Scripts/dropzone/dropzone.js',
             './Scripts/views/App.jsx']
     },
     output: {
