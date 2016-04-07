@@ -333,9 +333,6 @@
     <Content Include="Content\creative\wow.min.js" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="favicon.ico" />
-    <Content Include="font-awesome\css\font-awesome.css" />
-    <Content Include="font-awesome\css\font-awesome.min.css" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -361,27 +358,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="package.json" />
     <Content Include="Scripts\bundle.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
-    <Content Include="Scripts\dropzone\basic.css" />
-    <Content Include="Scripts\dropzone\basic.min.css" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
-    <Content Include="Scripts\dropzone\dropzone.css" />
-    <Content Include="Scripts\dropzone\dropzone.js" />
-    <Content Include="Scripts\dropzone\dropzone.min.css" />
-    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\Parallax.js" />
-    <Content Include="Scripts\react\react-0.14.0.min.js" />
-    <Content Include="Scripts\react\react-dom-0.14.0.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
