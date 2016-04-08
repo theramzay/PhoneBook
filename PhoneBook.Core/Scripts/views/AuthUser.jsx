@@ -5,7 +5,8 @@
             Password: ""
         };
     },
-    submitAuth: function() {
+    submitAuth: function (e) {
+        e.preventDefault();
 
         var data = {
             grant_type: "password",
@@ -13,13 +14,11 @@
             Password: this.refs.PasswordAuth.value
         };
 
-
         $.ajax({
             type: "POST",
             url: this.props.url,
             data: data
         }).success((data)=> {
-            console.log(data);
             $("#whoLog").text(data.userName);
             $("#authBtn").addClass("hidden");
             $("#regBtn").addClass("hidden");
@@ -28,8 +27,9 @@
             $.cookie("tokenInfo", data.access_token);
             $.cookie("userName", data.userName);
             this.getClaims();
-        }).fail(()=> {
+        }).fail((err)=> {
             alert("Error under login");
+            console.log("error", err);
         });
 
 

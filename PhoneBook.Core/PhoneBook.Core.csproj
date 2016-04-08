@@ -393,6 +393,7 @@
     <Content Include="Scripts\views\AddUser.jsx" />
     <Content Include="Scripts\views\AuthUser.jsx" />
     <Content Include="Scripts\bundle.js.map" />
+    <Content Include="Scripts\views\AddClaim.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
