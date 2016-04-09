@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ using System.Web;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
+using FluentEmail;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -465,7 +468,7 @@ namespace PhoneBook.Core.Controllers
         {
             if (!ModelState.IsValid) return BadRequest("Something frong with adding claim to user!");
             var response = await UserManager.AddClaimToUserAsync(c.Email, c.NameOfClaim);
-            return Ok(new { Msg = response.Errors, IsOk = response.Succeeded });
+            return Ok(new {Msg = response.Errors, IsOk = response.Succeeded});
         }
 
         // POST api/Account/Register
@@ -478,9 +481,37 @@ namespace PhoneBook.Core.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User {UserName = model.Email, Email = model.Email, Password = model.Password};
+            var user = new User
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                EmailConfirmed = false,
+                Password = model.Password
+            };
 
             var result = await UserManager.CreateAsync(user);
+
+            if (result.Succeeded)
+            {
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Timeout = 10000,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential("phonebooksender@gmail.com", "Qw12345678*")
+                };
+
+                var email = Email
+                    .From("phonebooksender@gmail.com")
+                    .To(user.Email)
+                    .Subject("Email confirmation")
+                    .Body(string.Format("Для завершения регистрации перейдите по ссылке:" +
+                                        "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
+                        $"http://phonebookalpha2-001-site1.gtempurl.com/#?token={user.Email}"))
+                    .UsingClient(client);
+                email.Send();
+            }
 
             return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
