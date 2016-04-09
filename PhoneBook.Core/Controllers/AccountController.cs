@@ -491,29 +491,38 @@ namespace PhoneBook.Core.Controllers
 
             var result = await UserManager.CreateAsync(user);
 
-            if (result.Succeeded)
+            if (!result.Succeeded) return GetErrorResult(result);
+            var client = new SmtpClient("smtp.gmail.com", 587)
             {
-                var client = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    EnableSsl = true,
-                    Timeout = 10000,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential("phonebooksender@gmail.com", "Qw12345678*")
-                };
+                EnableSsl = true,
+                Timeout = 10000,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("phonebooksender@gmail.com", "Qw12345678*")
+            };
 
-                var email = Email
-                    .From("phonebooksender@gmail.com")
-                    .To(user.Email)
-                    .Subject("Email confirmation")
-                    .Body(string.Format("Для завершения регистрации перейдите по ссылке:" +
-                                        "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
-                        $"http://phonebookalpha2-001-site1.gtempurl.com/#?token={user.Email}"))
-                    .UsingClient(client);
-                email.Send();
-            }
+            var email = Email
+                .From("phonebooksender@gmail.com")
+                .To(user.Email)
+                .Subject("Email confirmation")
+                .Body(string.Format("Для завершения регистрации перейдите по ссылке:" +
+                                    "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
+                    $"http://phonebookalpha2-001-site1.gtempurl.com/api/Account/ConfirmEmail?token={user.Email}"))
+                .UsingClient(client);
+            email.Send();
 
-            return !result.Succeeded ? GetErrorResult(result) : Ok();
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        public async Task<IHttpActionResult> ConfirmEmail(string token)
+        {
+            User user = await UserManager.FindByEmailAsync(token);
+            if (user == null) return BadRequest("Bad Token");
+            user.EmailConfirmed = true;
+            await UserManager.UpdateAsync(user);
+            return Ok();
         }
 
         // POST api/Account/RegisterExternal
