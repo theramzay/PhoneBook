@@ -1,11 +1,23 @@
 ﻿var MainPage = require('./MainPage.jsx');
 var Buttons = require('./buttons.jsx');
-
 var AddUser = require('./AddUser.jsx');
 var AuthUser = require('./AuthUser.jsx');
-var AuthUser = require('./AuthUser.jsx');
-var Info = require('./Info');
+
 require('font-awesome/css/font-awesome.css');
+
+//module.exports = React.createClass({
+//    render: function() {
+//        return (
+//            <div>
+//                <MainPage />
+//                <Buttons />
+//                <AddUser url="api/Account/Register" />
+//                <AuthUser url="/Token" />
+//                {this.props.children}
+//            </div>
+//            );
+//    }
+//});
 
 ReactDOM.render(
   <MainPage />,
