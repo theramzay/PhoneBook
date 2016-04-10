@@ -505,8 +505,8 @@ namespace PhoneBook.Core.Controllers
                 .From("phonebooksender@gmail.com")
                 .To(user.Email)
                 .Subject("Email confirmation")
-                .Body(string.Format("Для завершения регистрации перейдите по ссылке:" +
-                                    "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
+                .Body(string.Format("For complete the registration, please go to link:" +
+                                    "<a href=\"{0}\" title=\"Accept\">{0}</a>",
                     $"http://phonebookalpha2-001-site1.gtempurl.com/api/Account/ConfirmEmail?token={user.Email}"))
                 .UsingClient(client);
             email.Send();
