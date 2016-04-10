@@ -154,7 +154,6 @@ module.exports = React.createClass({
         return {
             searchData: this.props.searchData,
             founded: []
-            //Users: []
         };
 
     },
@@ -173,19 +172,6 @@ module.exports = React.createClass({
             self.setState({
                 founded: data
             });
-            //$.ajax({
-            //    headers: {
-            //        'Authorization': "bearer " + token
-            //    },
-            //    type: "GET",
-            //    url: "/api/PhoneBook/All"
-            //}).success((data) => {
-            //    console.log(data);
-            //    self.setState({ Users: data });
-            //}).fail(function(error) {
-            //    console.log("error: ", error.responseText);
-            //    alert(error.responseText);
-            //});
         });
     },
     componentWillReceiveProps: function(newProp) {
