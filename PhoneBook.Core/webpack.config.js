@@ -22,6 +22,7 @@ module.exports = {
             './Content/creative/jquery.fittext.js',
             './Content/creative/creative.js',
             './Scripts/views/App.jsx']
+            //'./Scripts/views/Router.jsx']
     },
     output: {
         filename: "./Scripts/bundle.js"
