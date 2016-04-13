@@ -59,6 +59,7 @@ namespace PhoneBook.Core
 
             //app.UseWebApi(httpConfiguration);
             //ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }
