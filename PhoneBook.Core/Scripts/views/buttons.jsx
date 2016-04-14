@@ -3,6 +3,9 @@ var Info = require('./Info');
 var MainPage = require('./MainPage');
 var Buttons = require('./buttons');
 var SearchPage = require('./SearchPage');
+var Chat = require('./Chat');
+
+
 
 module.exports = React.createClass({
     getInitialState: function() {
@@ -36,6 +39,13 @@ module.exports = React.createClass({
             <Info changed={true} url="api/Account/AllUserInfo"/>,
             document.getElementById("content")
         );
+
+    },
+    Chat: function() {
+        ReactDOM.render(
+    <Chat/>,
+    document.getElementById("content")
+);
     },
     MainPage: function() {
         ReactDOM.render(
@@ -72,6 +82,7 @@ module.exports = React.createClass({
             <ul className="dropdown-menu">
                 <li>
                     <a href="#Settings" className="page-scroll" onClick={this.profile}><i className="fa fa-cogs"></i> Settings</a>
+                    <a href="#Chat" className="page-scroll" onClick={this.Chat}><i className="fa fa-comment"></i> Chat</a>
                 </li>
                 <li role="separator" className="divider"></li>
                 <li className="dropdown-header">Bye</li>
