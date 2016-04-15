@@ -110,6 +110,14 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -304,6 +312,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChatHub.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -313,6 +322,7 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ChatUser.cs" />
     <Compile Include="Models\СlaimModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -368,6 +378,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="package.json" />
     <Content Include="Scripts\bundle.js" />
+    <Content Include="Scripts\hubs.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
@@ -403,6 +414,7 @@
     <Content Include="Scripts\bundle.js.map" />
     <Content Include="Scripts\views\AddClaim.jsx" />
     <Content Include="Scripts\views\Router.jsx" />
+    <Content Include="Scripts\views\Chat.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
