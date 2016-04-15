@@ -27,7 +27,6 @@
     "react-router": "2.0.1",
     "expose": "0.1.4",
     "imports": "1.0.0",
-
     "json": "9.0.3",
     "signalr-amd": "2.2.6"
   },
