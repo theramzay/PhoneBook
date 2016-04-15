@@ -23,8 +23,12 @@
     "file-loader": "0.8.5",
     "url-loader": "0.5.7",
     "font-awesome": "4.5.0",
-    "extract-text-webpack-plugin": "1.0.1"
-
+    "extract-text-webpack-plugin": "1.0.1",
+    "react-router": "2.0.1",
+    "expose": "0.1.4",
+    "imports": "1.0.0",
+    "json": "9.0.3",
+    "signalr-amd": "2.2.6"
   },
   "name": "ASP.NET",
   "private": true,

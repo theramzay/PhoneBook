@@ -4,10 +4,11 @@ module.exports = React.createClass({
     getInitialState: function () {
         return {
             data: [],
-            c: false
+            c: false,
+            isChanged: this.props.changed
     };
     },
-    loadFromServer: function() {
+    loadFromServer: function () {
         var self = this;
         var tokenKey = "tokenInfo";
         var token = $.cookie(tokenKey);
@@ -33,17 +34,24 @@ module.exports = React.createClass({
                 HolidayTimeStart: data.HolidayTimeStart,
                 HolidayTimeEnd: data.HolidayTimeEnd
             });
-            self.setProps({ changed: false }); //TODO: do it with State
         }).fail(function() {
             alert("Error");
         });
+        this.setState({
+            isChanged: false
+        });
+        
     },
     componentDidMount: function () {
+        this.setState({ isChanged: this.props.changed });
         this.loadFromServer();
         console.log(this.props.url);
     },
-    componentDidUpdate: function (prevProps, prevState) {
-        if (this.props.changed) {
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({ isChanged: nextProps.changed });
+    },
+    componentDidUpdate: function () {
+        if (this.state.isChanged) {
             this.loadFromServer();
         }
     },
