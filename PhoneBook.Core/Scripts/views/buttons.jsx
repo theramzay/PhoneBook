@@ -4,6 +4,7 @@ var MainPage = require('./MainPage');
 var Buttons = require('./buttons');
 var SearchPage = require('./SearchPage');
 var Chat = require('./Chat');
+var BigCalendar = require('./BigCalendar');
 
 
 
@@ -40,6 +41,11 @@ module.exports = React.createClass({
             document.getElementById("content")
         );
 
+    },
+    BigCalendar: function() {
+            ReactDOM.render(
+       <BigCalendar url="api/PhoneBook/All"/>,
+       document.getElementById("content"));
     },
     Chat: function() {
         ReactDOM.render(
@@ -83,6 +89,7 @@ module.exports = React.createClass({
                 <li>
                     <a href="#Settings" className="page-scroll" onClick={this.profile}><i className="fa fa-cogs"></i> Settings</a>
                     <a href="#Chat" className="page-scroll" onClick={this.Chat}><i className="fa fa-comment"></i> Chat</a>
+                    <a href="#Calendar" className="page-scroll" onClick={this.BigCalendar}><i className="fa fa-calendar-check-o" aria-hidden="true"></i> Calendar</a>
                 </li>
                 <li role="separator" className="divider"></li>
                 <li className="dropdown-header">Bye</li>
