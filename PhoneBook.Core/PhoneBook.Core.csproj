@@ -415,6 +415,7 @@
     <Content Include="Scripts\views\AddClaim.jsx" />
     <Content Include="Scripts\views\Router.jsx" />
     <Content Include="Scripts\views\Chat.jsx" />
+    <Content Include="Scripts\views\BigCalendar.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
