@@ -35,7 +35,7 @@ module.exports = React.createClass({
             <div style={{height: 1000}}>
             <BigCalendar
                 events={this.state.events}
-                defaultDate={new Date(2016, 1, 1)}
+                defaultDate={new Date()}
                 />
                 </div>
         );
