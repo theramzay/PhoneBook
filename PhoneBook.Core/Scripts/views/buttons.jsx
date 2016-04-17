@@ -10,26 +10,23 @@ var BigCalendar = require('./BigCalendar');
 
 module.exports = React.createClass({
     getInitialState: function() {
-        return {};
+        return {
+            isAuth: false
+        };
     },
     componentDidMount: function() {
         if (typeof $.cookie("userName") !== "undefined" && $.cookie("userName") !== "undefined") {
             $("#whoLog").text($.cookie("userName"));
-            $("#authBtn").addClass('hidden');
-            $("#regBtn").addClass('hidden');
-            $("#hello").removeClass('hidden');
+            this.setState({ isAuth: true });
         } else {
-            $("#hello").addClass('hidden');
+            this.setState({ isAuth: false });
         }
     },
     logOut: function() {
         $.cookie("tokenKey", "undefined");
         $.cookie("userName", "undefined");
         $.cookie("claims", "undefined");
-        $("#logOutBtn").addClass('hidden');
-        $("#hello").addClass('hidden');
-        $("#authBtn").removeClass('hidden');
-        $("#regBtn").removeClass('hidden');
+        this.setState({ isAuth: false });
         ReactDOM.render(
             <MainPage/>,
             document.getElementById("content")
@@ -77,13 +74,13 @@ module.exports = React.createClass({
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>
-            <a href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>
+            <a className={ this.state.isAuth ? 'hidden' : '' } href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>
         </li>
         <li>
-            <a href="#" id="authBtn" data-toggle="modal" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
+            <a href="#" id="authBtn" className={ this.state.isAuth ? 'hidden' : '' } data-toggle="modal" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
         </li>
                 <li className="dropdown">
-            <a id="hello" href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span>  <i className="fa fa-2x fa-bars"></i>
+            <a id="hello" href="#" className={`dropdown-toggle  ${this.state.isAuth ? '' : 'hidden'}`} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span>  <i className="fa fa-2x fa-bars"></i>
 </a>
             <ul className="dropdown-menu">
                 <li>
