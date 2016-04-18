@@ -410,7 +410,6 @@
     <Content Include="Scripts\views\ImageUpload.jsx" />
     <Content Include="Scripts\views\ChangePassword.jsx" />
     <Content Include="Scripts\views\AddUser.jsx" />
-    <Content Include="Scripts\views\AuthUser.jsx" />
     <Content Include="Scripts\bundle.js.map" />
     <Content Include="Scripts\views\AddClaim.jsx" />
     <Content Include="Scripts\views\Router.jsx" />
