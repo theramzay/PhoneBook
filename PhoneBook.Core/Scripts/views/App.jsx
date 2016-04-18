@@ -19,8 +19,3 @@ ReactDOM.render(
     <AddUser url="api/Account/Register"/>,
     document.getElementById("registrationModal")
 );
-
-ReactDOM.render(
-    <AuthUser url="/Token"/>,
-    document.getElementById("authorizationModal")
-);
