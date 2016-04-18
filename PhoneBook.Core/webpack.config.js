@@ -48,7 +48,8 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       React: "react",
-      ReactDOM: "react-dom"
+      ReactDOM: "react-dom",
+      Cookie: "react-cookie"
   }),
   new webpack.optimize.UglifyJsPlugin(),
   new webpack.optimize.DedupePlugin(),
