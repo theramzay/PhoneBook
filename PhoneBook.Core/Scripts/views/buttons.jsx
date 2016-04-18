@@ -11,22 +11,36 @@ var BigCalendar = require('./BigCalendar');
 module.exports = React.createClass({
     getInitialState: function() {
         return {
-            isAuth: false
+            Email: "",
+            Password: "",
+            isAuth: false,
+            userName: Cookie.load('userName')
         };
     },
-    componentDidMount: function() {
-        if (typeof $.cookie("userName") !== "undefined" && $.cookie("userName") !== "undefined") {
-            $("#whoLog").text($.cookie("userName"));
+    componentDidMount: function () {
+        
+        if (this.state.userName !== "") {
             this.setState({ isAuth: true });
         } else {
             this.setState({ isAuth: false });
         }
     },
+    componentDidUpdate: function (prevProps,prevState) {
+        if(prevState.isAuth !== this.state.isAuth){
+        if (this.state.userName !== "") {
+            this.setState({ isAuth: true });
+            console.log("Is auth? ", this.state.isAuth);
+        } else {
+            this.setState({ isAuth: false });
+            console.log("Is auth? ", this.state.isAuth);
+        }
+        }
+    },
     logOut: function() {
-        $.cookie("tokenKey", "undefined");
-        $.cookie("userName", "undefined");
-        $.cookie("claims", "undefined");
-        this.setState({ isAuth: false });
+        Cookie.save('userName', "");
+        Cookie.save('tokenKey', "");
+        Cookie.save('claims', "");
+        this.setState({ isAuth: false, userName: "" });
         ReactDOM.render(
             <MainPage/>,
             document.getElementById("content")
@@ -62,9 +76,81 @@ module.exports = React.createClass({
     document.getElementById("content")
           );
     },
+    // Auth
+    submitAuth: function (e) {
+        e.preventDefault();
+
+        var data = {
+            grant_type: "password",
+            username: this.refs.EmailAuth.value,
+            Password: this.refs.PasswordAuth.value
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Token",
+            data: data
+        }).success((data) => {
+            Cookie.save('userName', data.userName);
+            Cookie.save('tokenInfo', data.access_token);
+            this.getClaims();
+            this.setState({ isAuth: true, userName: data.userName });
+            $("#authorizationModal").modal("hide");
+        }).fail((err) => {
+            alert("Error under login");
+            console.log("error", err);
+        });
+
+
+    },
+    getClaims: function () {
+        $.ajax({
+            headers: {
+                'Authorization': "bearer " + Cookie.load('tokenInfo'),
+                'Content-Type': "application/json"
+            },
+            type: "GET",
+            url: "api/Account/AllUserInfo"
+        }).success((data) => {
+            var strOfCookies = data.Claims.reduce((x, y) => x + ";" + y.ClaimValue, "");
+            Cookie.save('claims', strOfCookies);
+        }).fail(() => { console.log("fuck"); });
+    },
+    clearForm: function () {
+        this.setState({
+            Email: "",
+            Password: ""
+        });
+    },
+    //
     render: function() {
         return (
             <div>
+    <div id="registrationModal" className="modal fade" role="dialog">
+
+    </div>
+    <div id="authorizationModal" className="modal fade" role="dialog">
+                <div className="modal-dialog">
+    <div className="modal-content">
+        <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal">&times;</button>
+            <h4 className="modal-title">Authorization</h4>
+        </div>
+        <div className="modal-body">
+            <form onSubmit={this.submitAuth}>
+                <label>Enter email</label><br />
+                <input placeholder="email" required={true} className="form-control" ref="EmailAuth" type="email" name="EmailAuth" label="Email:" /><br /><br />
+                <label>Enter password</label><br />
+                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" ref="PasswordAuth" type="password" name="PasswordAuth" label="Password:" /><br /><br />
+                <button className="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+        <div className="modal-footer">
+            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+                </div>
+    </div>
     <ul className="nav navbar-nav">
         <li>
             <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-2x fa-home"></i></a>
@@ -74,13 +160,13 @@ module.exports = React.createClass({
     </ul>
     <ul className="nav navbar-nav navbar-right">
         <li>
-            <a className={ this.state.isAuth ? 'hidden' : '' } href="#" id="regBtn" data-toggle="modal" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>
+            <a className={ this.state.isAuth ? 'hidden' : '' } href="#" id="regBtn" data-toggle="modal" data-backdrop="false" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>
         </li>
         <li>
-            <a href="#" id="authBtn" className={ this.state.isAuth ? 'hidden' : '' } data-toggle="modal" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
+            <a href="#" id="authBtn" className={ this.state.isAuth ? 'hidden' : '' } data-toggle="modal" data-backdrop="false" data-target="#authorizationModal"><i className="fa fa-sign-in"></i> Log in</a>
         </li>
                 <li className="dropdown">
-            <a id="hello" href="#" className={`dropdown-toggle  ${this.state.isAuth ? '' : 'hidden'}`} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog"></span>  <i className="fa fa-2x fa-bars"></i>
+            <a id="hello" href="#" className={`dropdown-toggle  ${this.state.isAuth ? '' : 'hidden'}`} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span id="whoLog" >{this.state.userName}</span>  <i className="fa fa-2x fa-bars"></i>
 </a>
             <ul className="dropdown-menu">
                 <li>
