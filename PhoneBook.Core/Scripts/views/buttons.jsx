@@ -19,7 +19,7 @@ module.exports = React.createClass({
     },
     componentDidMount: function () {
         
-        if (this.state.userName !== "") {
+        if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
             this.setState({ isAuth: true });
         } else {
             this.setState({ isAuth: false });
@@ -27,7 +27,7 @@ module.exports = React.createClass({
     },
     componentDidUpdate: function (prevProps,prevState) {
         if(prevState.isAuth !== this.state.isAuth){
-        if (this.state.userName !== "") {
+            if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
             this.setState({ isAuth: true });
             console.log("Is auth? ", this.state.isAuth);
         } else {
