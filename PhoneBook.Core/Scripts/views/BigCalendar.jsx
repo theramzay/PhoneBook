@@ -13,11 +13,9 @@ module.exports = React.createClass({
         };
     },
     componentDidMount: function () {
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token,
+                'Authorization': "bearer " + Cookie.load('tokenInfo'),
                 'Content-Type': "application/json"
             },
             type: "GET",

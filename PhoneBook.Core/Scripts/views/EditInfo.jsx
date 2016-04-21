@@ -7,8 +7,6 @@ module.exports = React.createClass({
     },
     SendToServer: function(es) {
         es.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
         var data = {
             FirstName: $("#FirstNameEdit").val(),
             MiddleName: $("#MiddleNameEdit").val(),
@@ -19,7 +17,7 @@ module.exports = React.createClass({
         };
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token
+                'Authorization': "bearer " + Cookie.load('tokenInfo')
             },
             type: "POST",
             url: this.props.url,

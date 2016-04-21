@@ -11,7 +11,7 @@ module.exports = React.createClass({
             djsConfig: {
                 addRemoveLinks: true,
                 headers: {
-                    'Authorization': "bearer " + $.cookie("tokenInfo")
+                    'Authorization': "bearer " + Cookie.load('tokenInfo')
                 }
             },
             eventHandlers: {

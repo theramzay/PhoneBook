@@ -11,7 +11,6 @@ var APP_DIR = path.resolve(__dirname, 'Scripts');
 module.exports = {
     entry: {
         application: [
-            //'./Scripts/jquery.cookie-1.4.1.min.js',
             './Content/site.css',
             './Scripts/Parallax.js',
             './Content/creative/bootstrap.min.js',

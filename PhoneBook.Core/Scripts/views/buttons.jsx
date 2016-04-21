@@ -1,5 +1,4 @@
-﻿require('jquery.cookie');
-var Info = require('./Info');
+﻿var Info = require('./Info');
 var MainPage = require('./MainPage');
 var Buttons = require('./buttons');
 var SearchPage = require('./SearchPage');

@@ -9,11 +9,9 @@ module.exports = React.createClass({
     };
     },
     getFromServer: function () {
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token
+                'Authorization': "bearer " + Cookie.load('tokenInfo')
             },
             type: "GET",
             url: '/api/PhoneBook/All'
@@ -29,8 +27,6 @@ module.exports = React.createClass({
         this.getFromServer();
     },
     sendToServer: function() {
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
         var data = {
             Email: this.refs.EmailOfUser.value,
             NameOfClaim: this.refs.NameOfClaim.value
@@ -38,7 +34,7 @@ module.exports = React.createClass({
         console.log(data);
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token
+                'Authorization': "bearer " + Cookie.load('tokenInfo')
             },
             type: "POST",
             url: this.props.url,

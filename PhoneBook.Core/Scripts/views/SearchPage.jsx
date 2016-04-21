@@ -7,7 +7,7 @@ var tempUsers = [];
 
 $.ajax({
     headers: {
-        'Authorization': "bearer " + $.cookie("tokenInfo")
+        'Authorization': "bearer " + Cookie.load('tokenInfo')
     },
     type: "GET",
     url: "/api/PhoneBook/All"
@@ -32,8 +32,6 @@ var AdminUserForm = React.createClass({
     },
     sendInfoToServer: function(e) {
         e.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
 
         var data = {
             Email: this.refs.EmailEdit.value,
@@ -51,7 +49,7 @@ var AdminUserForm = React.createClass({
 
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token
+                'Authorization': "bearer " + Cookie.load('tokenInfo')
             },
             type: "POST",
             url: "/api/Account/UpdateAllUserInfoByAdmin",
@@ -159,11 +157,9 @@ module.exports = React.createClass({
     },
     loadFromServer: function() {
         var self = this;
-        var tokenKey = "tokenInfo";
-        var token = sessionStorage.getItem(tokenKey);
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token,
+                'Authorization': "bearer " + Cookie.load('tokenInfo'),
                 'Content-Type': "application/json"
             },
             type: "GET",
@@ -186,10 +182,8 @@ module.exports = React.createClass({
         this.loadFromServer();
     },
     render: function() {
-        var self = this;
-        var claimsKey = "claims";
-        if (typeof $.cookie(claimsKey) === "undefined") $.cookie(claimsKey, "notauth");
-        if ($.cookie(claimsKey).indexOf("Admin") !== -1) {
+        if (typeof Cookie.load('claims') === "undefined") Cookie.save('claims', 'notauth');
+        if (Cookie.load('claims').indexOf("Admin") !== -1) {
             return (
                 <div>
                     {this.state.founded.map(function(user) {return (<AdminUserForm User={user} Users={tempUsers}/>);})}

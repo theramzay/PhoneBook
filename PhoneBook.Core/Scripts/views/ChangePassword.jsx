@@ -4,8 +4,6 @@
     },
     SendToServer: function(es) {
         es.preventDefault();
-        var tokenKey = "tokenInfo";
-        var token = $.cookie(tokenKey);
         var data = {
             OldPassword: $("#OldPassword").val(),
             NewPassword: $("#NewPassword").val(),
@@ -14,7 +12,7 @@
         //console.log(data);
         $.ajax({
             headers: {
-                'Authorization': "bearer " + token
+                'Authorization': "bearer " + Cookie.load('tokenInfo')
             },
             type: "POST",
             url: this.props.url,
