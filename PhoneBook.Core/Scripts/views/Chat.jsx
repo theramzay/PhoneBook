@@ -69,10 +69,10 @@ module.exports = React.createClass({
 
                 $('#chatForm').submit(()=> {
                     // Вызываем у хаба метод Send
-                    chat.server.send($.cookie("userName"), $('#message').val(), this.state.Color);
+                    chat.server.send(Cookie.load('userName'), $('#message').val(), this.state.Color);
                     $('#message').val('');
                 });
-                chat.server.connect($.cookie("userName"));
+                chat.server.connect(Cookie.load('userName'));
             });
 
         // Кодирование тегов
