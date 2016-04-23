@@ -31,6 +31,9 @@
     "react-big-calendar": "0.9.11",
     "react-cookie": "0.4.5"
   },
+  "scripts": {
+    "start": "webpack"
+  },
   "name": "ASP.NET",
   "private": true,
   "version": "1.0.0"
