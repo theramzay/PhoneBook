@@ -1,6 +1,4 @@
-﻿var Autocomplete = require('react-autocomplete');
-
-module.exports = React.createClass({
+﻿module.exports = React.createClass({
     getInitialState: function () {
         return {
             Email: '',
