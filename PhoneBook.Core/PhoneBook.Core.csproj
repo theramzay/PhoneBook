@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\JavaScriptEngineSwitcher.V8.1.4.1\build\JavaScriptEngineSwitcher.V8.props" Condition="Exists('..\packages\JavaScriptEngineSwitcher.V8.1.4.1\build\JavaScriptEngineSwitcher.V8.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -66,10 +65,6 @@
       <HintPath>..\packages\Autofac.WebApi2.Owin.3.3.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ClearScript, Version=5.4.4.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.4.1\lib\net40\ClearScript.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -80,18 +75,6 @@
     </Reference>
     <Reference Include="FluentEmail, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\fluent-email.1.5\lib\net40\FluentEmail.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.Core, Version=1.2.4.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.2.4\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.Msie, Version=1.4.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.4.0\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.V8, Version=1.4.1.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.4.1\lib\net40\JavaScriptEngineSwitcher.V8.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="JSPool, Version=0.3.0.0, Culture=neutral, PublicKeyToken=2fc7775f73072640, processorArchitecture=MSIL">
@@ -155,8 +138,8 @@
       <HintPath>..\packages\MsieJavaScriptEngine.1.6.0\lib\net40\MsieJavaScriptEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -169,18 +152,6 @@
     </Reference>
     <Reference Include="RazorEngine, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.2.0\lib\net40\RazorEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="React.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Core.2.2.1\lib\net40\React.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="React.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Web.2.2.1\lib\net40\React.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="React.Web.Mvc4, Version=2.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Web.Mvc4.2.2.1\lib\net40\React.Web.Mvc4.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -256,21 +227,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="VroomJs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Core.2.2.1\lib\net40\VroomJs.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -280,7 +239,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
@@ -336,22 +294,21 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="b9558d2ad00e69ac99cfe09f81ca5de9.jpg" />
-    <Content Include="Content\creative\animate.min.css" />
-    <Content Include="Content\creative\bootstrap.css" />
-    <Content Include="Content\creative\bootstrap.js" />
-    <Content Include="Content\creative\bootstrap.min.css" />
-    <Content Include="Content\creative\bootstrap.min.js" />
-    <Content Include="Content\creative\cbpAnimatedHeader.js" />
-    <Content Include="Content\creative\classie.js" />
-    <Content Include="Content\creative\creative.css" />
-    <Content Include="Content\creative\creative.js" />
-    <Content Include="Content\creative\jquery.easing.min.js" />
-    <Content Include="Content\creative\jquery.fittext.js" />
-    <Content Include="Content\creative\splash.jpg" />
-    <Content Include="Content\creative\wow.min.js" />
-    <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Assets\css\animate.min.css" />
+    <Content Include="Assets\css\bootstrap.css" />
+    <Content Include="Assets\js\bootstrap.js" />
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\cbpAnimatedHeader.js" />
+    <Content Include="Assets\js\classie.js" />
+    <Content Include="Assets\css\creative.css" />
+    <Content Include="Assets\js\creative.js" />
+    <Content Include="Assets\js\jquery.easing.min.js" />
+    <Content Include="Assets\js\jquery.fittext.js" />
+    <Content Include="Assets\css\splash.jpg" />
+    <Content Include="Assets\js\wow.min.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -372,17 +329,17 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="package.json" />
-    <Content Include="Scripts\bundle.js" />
-    <Content Include="Scripts\hubs.js" />
+    <Content Include="Assets\js\bundle.js" />
+    <Content Include="Assets\js\hubs.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
-    <Content Include="Scripts\Parallax.js" />
+    <Content Include="Assets\js\Parallax.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -393,27 +350,27 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Assets\css\Site.css" />
+    <Content Include="Assets\js\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\views\buttons.jsx" />
+    <Content Include="Assets\js\views\buttons.jsx" />
     <Content Include="Views\Shared\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Scripts\views\MainPage.jsx" />
-    <Content Include="Scripts\views\SearchPage.jsx" />
-    <Content Include="Scripts\views\App.jsx" />
-    <Content Include="Scripts\views\Info.jsx" />
-    <Content Include="Scripts\views\EditInfo.jsx" />
-    <Content Include="Scripts\views\ImageUpload.jsx" />
-    <Content Include="Scripts\views\ChangePassword.jsx" />
-    <Content Include="Scripts\bundle.js.map" />
-    <Content Include="Scripts\views\AddClaim.jsx" />
-    <Content Include="Scripts\views\Router.jsx" />
-    <Content Include="Scripts\views\Chat.jsx" />
-    <Content Include="Scripts\views\BigCalendar.jsx" />
+    <Content Include="Assets\js\views\MainPage.jsx" />
+    <Content Include="Assets\js\views\SearchPage.jsx" />
+    <Content Include="Assets\js\views\App.jsx" />
+    <Content Include="Assets\js\views\Info.jsx" />
+    <Content Include="Assets\js\views\EditInfo.jsx" />
+    <Content Include="Assets\js\views\ImageUpload.jsx" />
+    <Content Include="Assets\js\views\ChangePassword.jsx" />
+    <Content Include="Assets\js\bundle.js.map" />
+    <Content Include="Assets\js\views\AddClaim.jsx" />
+    <Content Include="Assets\js\views\Router.jsx" />
+    <Content Include="Assets\js\views\Chat.jsx" />
+    <Content Include="Assets\js\views\BigCalendar.jsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
@@ -459,7 +416,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\JavaScriptEngineSwitcher.V8.1.4.1\build\JavaScriptEngineSwitcher.V8.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JavaScriptEngineSwitcher.V8.1.4.1\build\JavaScriptEngineSwitcher.V8.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

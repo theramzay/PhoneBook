@@ -6,21 +6,21 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'Scripts');
+var APP_DIR = path.resolve(__dirname, 'Assets/js');
 
 module.exports = {
     entry: {
         application: [
-            './Content/site.css',
-            './Scripts/Parallax.js',
-            './Content/creative/bootstrap.min.js',
-            './Content/creative/bootstrap.min.css',
-            './Content/creative/animate.min.css',
-            './Content/creative/creative.css',
+            './Assets/css/site.css',
+            './Assets/js/Parallax.js',
+            './Assets/js/bootstrap.min.js',
+            './Assets/css/bootstrap.min.css',
+            './Assets/css/animate.min.css',
+            './Assets/css/creative.css',
             //'./Content/creative/jquery.easing.min.js',
-            './Content/creative/jquery.fittext.js',
-            './Content/creative/creative.js',
-            './Scripts/views/App.jsx']
+            './Assets/js/jquery.fittext.js',
+            './Assets/js/creative.js',
+            './Assets/js/views/App.jsx']
             //'./Scripts/views/Router.jsx']
     },
     output: {
