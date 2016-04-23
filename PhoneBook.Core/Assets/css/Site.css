@@ -1,0 +1,78 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-bottom: 20vh;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+input,
+select,
+textarea { max-width: 280px; }
+
+
+.jumbotron { box-shadow: 0 0 10px #000000; }
+
+#whoLog {
+    -moz-transition: color 1s;
+    -o-transition: color 1s;
+    -webkit-transition: color 1s;
+    color: slateblue;
+    transition: color 1s;
+}
+
+a#to-down {
+    color: white;
+    font-size: 200%;
+    padding: 70px;
+}
+
+.navbar { box-shadow: -10px 10px 30px 20px rgba(0, 0, 0, 0.6); }
+
+
+#searchBox {
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    background: transparent;
+    border-color: #080808;
+    border-radius: 100px;
+    color: slateblue;
+    transition: width 0.7s;
+    width: 40%;
+}
+
+#searchBox:hover {
+    border-color: #080808;
+    width: 100%;
+}
+
+
+
+#whoLog:hover { color: orangered; }
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+.footer {
+    background: #2E2E2E;
+    bottom: 0;
+    /*padding: 50px;*/
+    color: white;
+    /* Set the fixed height of the footer here */
+    height: 6vh;
+    position: absolute;
+    width: 100vw;
+}
