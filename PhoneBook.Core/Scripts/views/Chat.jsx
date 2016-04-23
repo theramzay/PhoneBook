@@ -10,20 +10,6 @@ module.exports = React.createClass({
     };
     },
     componentDidMount: function () {
-        //
-        //this.setState({
-        //    Chat: {
-        //        client: {
-        //            addMessage: {
-        //                function(name, message, color) {
-        //    var text = '<p class="jumbotron"><b>' + `<span style="color:${color};">` + htmlEncode(name) + '<span />' + '</b>: ' + htmlEncode(message) + '</p>';
-        //    $('#chatroom').append(text);
-        //                }
-        //            }
-        //        }
-        //    }
-        //});
-        //console.log(this.state.Chat.client);
         var chat = $.connection.chatHub;
         chat.client.addMessage = function (name, message, color) {
             // Добавление сообщений на веб-страницу
