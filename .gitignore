@@ -27,5 +27,6 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 packages/
+.vs/
 [Tt]est[Rr]esult*
 PhoneBook.Core/node_modules/*
