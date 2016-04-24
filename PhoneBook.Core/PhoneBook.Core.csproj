@@ -233,6 +233,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\imgs\ProfileImages\tmbs\" />
     <Folder Include="Content\ProfileImages\tmbs\" />
   </ItemGroup>
   <ItemGroup>
