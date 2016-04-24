@@ -199,7 +199,7 @@ namespace PhoneBook.Core.Controllers
         [MimeMultipart]
         public async Task<IHttpActionResult> Upload()
         {
-            var uploadPath = HttpContext.Current.Server.MapPath("~/Content/ProfileImages");
+            var uploadPath = HttpContext.Current.Server.MapPath("~/Assets/imgs/ProfileImages");
 
             var multipartFormDataStreamProvider = new UploadMultipartFormProvider(uploadPath);
 
@@ -214,8 +214,8 @@ namespace PhoneBook.Core.Controllers
 
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-            user.PathToPhoto = $"/Content/ProfileImages/{fileName}";
-            user.PathToTmbOfPhoto = $"/Content/ProfileImages/tmbs/{fileName}";
+            user.PathToPhoto = $"/Assets/imgs/ProfileImages/{fileName}";
+            user.PathToTmbOfPhoto = $"/Assets/imgs/ProfileImages/tmbs/{fileName}";
 
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded
