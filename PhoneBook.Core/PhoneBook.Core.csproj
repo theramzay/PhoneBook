@@ -234,7 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\imgs\ProfileImages\tmbs\" />
-    <Folder Include="Content\ProfileImages\tmbs\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

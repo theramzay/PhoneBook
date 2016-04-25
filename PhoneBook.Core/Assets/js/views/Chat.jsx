@@ -1,95 +1,80 @@
-﻿require('signalr-amd');
-var $ = require('jquery');
-require('../hubs.js');
+﻿require("signalr-amd");
+require("../hubs.js");
 
 module.exports = React.createClass({
-    getInitialState: function () {
+    getInitialState: function() {
+
         return {
-            Color: "",
-            Chat: $.connection.chatHub
-    };
+            Color: Cookie.load("color"),
+            userId: "",
+            userName: Cookie.load("userName"),
+            text: []
+        };
     },
-    componentDidMount: function () {
-        var chat = $.connection.chatHub;
-        chat.client.addMessage = function (name, message, color) {
-            // Добавление сообщений на веб-страницу
-            var text = '<p class="jumbotron"><b>' + `<span style="color:${color};">` + htmlEncode(name) + '<span />' + '</b>: ' + htmlEncode(message) + '</p>';
-            $('#chatroom').append(text);
+    componentDidMount: function() {
+        $.connection.chatHub.client.addMessage = (name, message, color) => {
+            var msg = `<p class="jumbotron"><b><span style=color:${color}>${this.htmlEncode(name)}<span /></b> ${this.htmlEncode(message)}</p>`;
+            $('#chatroom').append(msg);
         };
 
-            // Ссылка на автоматически-сгенерированный прокси хаба
-            
-            // Объявление функции, которая хаб вызывает при получении сообщений
+        /*Да, я знаю что .append() это совсем ужас, но я 9ть часов потратил что бы завести
+        это через реакт.стейт, ни никак, jQuery.signalR упорно запоминает this который
+        указывает уже на дохлый объект после первого же перемонтирования.
+        Т.Е this._reactInternalInstance == undefined внутри контекста
+        $.connection.chatHub.client.addMessage = (name, message, color) => {...};*/
 
+        //var self = this;
+        //function f(msg) {
+        //    console.log("f func", self);
+        //    self.setState({ text: self.state.text.concat(msg) });
+        //}
+        //$.connection.chatHub.client.addMessage = (name, message, color) => {
+        //    var msg = `<p class="jumbotron"><b><span style=color:${color}>${self.htmlEncode(name)}<span /></b> ${self.htmlEncode(message)}</p>`;
+        //    f(msg);
+        //};
+        $.connection.chatHub.client.onConnected = (id, userName, allUsers, color) => {
+            this.setState({ Color: color, userId: id, userName: userName });
+            Cookie.save("color", color);
+            $("#username").css("color", color);
 
-            // Функция, вызываемая при подключении нового пользователя
-            chat.client.onConnected =  (id, userName, allUsers,color) => {
-                // установка в скрытых полях имени и id текущего пользователя
-                $('#hdId').val(id);
-                $('#username').val(userName);
-                this.setState({ Color: color });
-                $('#header').html('<h3>Hello, ' + '<span id="username">' + userName + '<span/>' + '</h3>');
-                $('#username').css("color", color);
-
-                // Добавление всех пользователей
-                for (var i = 0; i < allUsers.length; i++) {
-
-                    AddUser(allUsers[i].ConnectionId, allUsers[i].Name);
-                }
+            for (let i = 0; i < allUsers.length; i++) {
+                this.AddUser(allUsers[i].ConnectionId, allUsers[i].Name);
             }
+        };
+        $.connection.chatHub.client.onNewUserConnected = (id, name, color) => { this.AddUser(id, name, color); };
+        $.connection.chatHub.client.onUserDisconnected = (id, userName) => { $(`#}${id}`).remove(); };
+        $.connection.hub.start().done(() => { $.connection.chatHub.server.connect(this.state.userName); });
 
-            // Добавляем нового пользователя
-            chat.client.onNewUserConnected =  (id, name,color) => {
-
-                AddUser(id, name,color);
-            }
-
-            // Удаляем пользователя
-            chat.client.onUserDisconnected = (id, userName) => {
-
-                $('#' + id).remove();
-            }
-
-            // Открываем соединение
-            $.connection.hub.start().done(()=> {
-
-                $('#chatForm').submit(()=> {
-                    // Вызываем у хаба метод Send
-                    chat.server.send(Cookie.load('userName'), $('#message').val(), this.state.Color);
-                    $('#message').val('');
-                });
-                chat.server.connect(Cookie.load('userName'));
-            });
-
-        // Кодирование тегов
-        function htmlEncode(value) {
-            var encodedValue = $('<div />').text(value).html();
-            return encodedValue;
-        }
-        //Добавление нового пользователя
-        function AddUser(id, name) {
-
-            var userId = $('#hdId').val();
-
-            if (userId != id) {
-                $("#chatusers").append('<p id="' + id + '"><b>' + name + '</b></p>');
-            }
-        }
         //
 
     },
+    htmlEncode: function(value) {
+        const encodedValue = $("<div />").text(value).html();
+        return encodedValue;
+    },
+    AddUser: function(id, name, color) {
+        if (this.state.userId != id) {
+            $("#chatusers").append(`<p id="${id}"><b>${name}</b></p>`);
+        }
+    },
+    sendMsg: function() {
+        $.connection.chatHub.server.send(Cookie.load("userName"), $("#message").val(), this.state.Color);
+        this.refs.message.value = "";
+    },
     render: function() {
         return (
-<div>
+            <div>
     <h2>Chat room</h2>
     <div className="main">
         <div id="chatBody">
-            <div id="header"></div>
-            <form id="chatForm">
-                <input placeholder="enter message" type="text" id="message" className="form-control" />
-                <input type="submit" id="sendmessage" value="Send" className="btn btn-success" />
+            <div id="header">
+                <h3>Hello, <span id="username" style={{ color: this.state.Color }}>{this.state.userName}</span></h3>
+            </div>
+            <form id="chatForm" onSubmit={this.sendMsg}>
+                <input placeholder="enter message" type="text" id="message" ref="message" className="form-control"/>
+                <input type="submit" id="sendmessage" value="Send" className="btn btn-success"/>
             </form>
-            <div id="chatroom"></div>
+            <div id="chatroom" dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
 
             <div id="chatusers">
                 <p>
