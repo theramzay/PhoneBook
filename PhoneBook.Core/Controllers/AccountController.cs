@@ -90,7 +90,8 @@ namespace PhoneBook.Core.Controllers
                 HolidayTimeEnd = user.HolidayTimeEnd,
                 PathToPhoto = user.PathToPhoto,
                 PathToTmbOfPhoto = user.PathToTmbOfPhoto,
-                Claims = user.Claims
+                Claims = user.Claims,
+                BusinessTrip = user.BusinessTrip
             };
             return viewUser;
         }
@@ -116,7 +117,8 @@ namespace PhoneBook.Core.Controllers
                 user.NotesForBoss,
                 user.Boss,
                 user.PathToPhoto,
-                user.PathToTmbOfPhoto
+                user.PathToTmbOfPhoto,
+                user.BusinessTrip
             });
 
             return viewsUser;
@@ -187,6 +189,9 @@ namespace PhoneBook.Core.Controllers
 
             if (updatedUser.HolidayTimeEnd != null)
                 user.HolidayTimeEnd = updatedUser.HolidayTimeEnd;
+
+            if (updatedUser.BusinessTrip != null)
+                user.BusinessTrip = updatedUser.BusinessTrip;
 
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded

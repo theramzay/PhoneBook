@@ -44,7 +44,8 @@ var AdminUserForm = React.createClass({
             Boss: this.refs.BossEdit.value,
             NotesForBoss: this.refs.NotesForBossEdit.value,
             HolidayTimeStart: this.state.firstSelectedDate.toJSON(),
-            HolidayTimeEnd: this.state.secondSelectedDate.toJSON()
+            HolidayTimeEnd: this.state.secondSelectedDate.toJSON(),
+            BusinessTrip: this.refs.BusinessTripEdit.value
         };
 
         $.ajax({
@@ -102,6 +103,12 @@ var AdminUserForm = React.createClass({
                 <label htmlFor="BossEdit">Choose who wil be boss</label>
                 <select className="form-control" ref="BossEdit">
                     {this.props.Users.map((u) => {return (<option value={u.FirstName + " " + u.LastName}>{u.FirstName + " " + u.LastName}</option>);})}
+                </select>
+
+                <label htmlFor="BusinessTripEdit">Send to business trip?</label>
+                <select className="form-control" ref="BusinessTripEdit">
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
                 </select>
 
                 <label htmlFor="NotesForBossEdit">Enter boss note</label>
@@ -178,21 +185,21 @@ module.exports = React.createClass({
             this.loadFromServer();
         }
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         this.loadFromServer();
+        if (typeof Cookie.load('claims') === "undefined") Cookie.save('claims', 'notauth');
     },
     render: function() {
-        if (typeof Cookie.load('claims') === "undefined") Cookie.save('claims', 'notauth');
         if (Cookie.load('claims').indexOf("Admin") !== -1) {
             return (
                 <div>
-                    {this.state.founded.map(function(user) {return (<AdminUserForm User={user} Users={tempUsers}/>);})}
+                    {this.state.founded.map(user => <AdminUserForm User={user} Users={tempUsers}/>)}
                 </div>
             );
         } else {
             return (
                 <div>
-                    {this.state.founded.map(function(user) {return (<UserForm User={user}/>);})}
+                    {this.state.founded.map(user => <UserForm User={user}/>)}
                 </div>
             );
         }

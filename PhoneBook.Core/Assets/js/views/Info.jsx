@@ -9,7 +9,6 @@ module.exports = React.createClass({
     };
     },
     loadFromServer: function () {
-        var self = this;
         $.ajax({
             headers: {
                 'Authorization': "bearer " + Cookie.load('tokenInfo'),
@@ -17,8 +16,8 @@ module.exports = React.createClass({
             },
             type: "GET",
             url: this.props.url
-        }).success(function(data) {
-            self.setState({
+        }).success((data) => {
+            this.setState({
                 FirstName: data.FirstName,
                 MiddleName: data.MiddleName,
                 LastName: data.LastName,
@@ -30,7 +29,8 @@ module.exports = React.createClass({
                 PathToPhoto: data.PathToPhoto,
                 PathToTmbOfPhoto: data.PathToTmbOfPhoto,
                 HolidayTimeStart: data.HolidayTimeStart,
-                HolidayTimeEnd: data.HolidayTimeEnd
+                HolidayTimeEnd: data.HolidayTimeEnd,
+                BusinessTrip: data.BusinessTrip.toString()
             });
         }).fail(function() {
             alert("Error");
@@ -118,7 +118,7 @@ document.getElementById("Settings")
                     <div className="container">
                         <div className="row"> 
                             <div className="col-lg-8 col-lg-offset-2 text-center">
-                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary text-faded" />
+                                <i className="fa fa-4x fa-heart-o wow bounceIn text-primary text-faded light-text" />
                                 <h2 className="section-heading">Hello in Your settings!</h2>
                                 <hr className="light"/>
                              </div>
@@ -133,20 +133,21 @@ document.getElementById("Settings")
                                 <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" />
                              </div>
                              <div className="col-lg-3 col-md-6 text-center">
-                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <i className="fa fa-4x fa-info wow bounceIn text-primary" />
                                 <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours First Name is - {self.state.FirstName}</p>
                                 <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Middle Name is - {self.state.MiddleName}</p>
                                 <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Last Name is - {self.state.LastName}</p>
                                 <p className="text-muted"><i className="fa fa-eye wow bounceIn text-primary" /> Yours Position in company is - {self.state.PositionInCompany}</p>
-                                 <p className="text-muted"><i className="fa fa-calendar-check-o wow bounceIn text-primary" /> Yours holidays starts at - {self.state.HolidayTimeStart}</p>
+                                <p className="text-muted"><i className="fa fa-calendar-check-o wow bounceIn text-primary" /> Yours holidays starts at - {self.state.HolidayTimeStart}</p>
                             </div>
                             <div className="col-lg-3 col-md-6 text-center">
-                                <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                                <i className="fa fa-4x fa-book wow bounceIn text-primary" />
                                 <p className="text-muted"><i className="fa fa-mobile wow bounceIn text-primary" /> Yours Private phone is - {self.state.PhonePrivate}</p>
                                 <p className="text-muted"><i className="fa fa-phone wow bounceIn text-primary" /> Yours Work phone is - {self.state.PhoneWork}</p>
                                 <p className="text-muted"><i className="fa fa-sticky-note-o wow bounceIn text-primary" /> Yours Note is - {self.state.Notes}</p>
                                 <p className="text-muted"><i className="fa fa-male wow bounceIn text-primary" /> Yours Boss is - {self.state.Boss}</p>
                                 <p className="text-muted"><i className="fa fa-calendar-times-o wow bounceIn text-primary" /> Yours holidays ends at - {self.state.HolidayTimeEnd}</p>
+                                <p className="text-muted"><i className="fa fa-road wow bounceIn text-primary" /> Yours in Business Trip ? - {self.state.BusinessTrip}</p>
                             </div>
                         </div>
                         <hr/>
@@ -157,7 +158,7 @@ document.getElementById("Settings")
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 col-lg-offset-2 text-center">
-                                <i className="fa fa-4x fa-diamond wow tada text-faded" />
+                                <i className="fa fa-4x fa-refresh wow tada text-faded" />
                                 <h2 className="section-heading">Here Your can change somethig!</h2>
                                 <hr className="light" />
                         <ul>
@@ -182,7 +183,7 @@ document.getElementById("Settings")
         <div className="container">
             <div className="row"> 
                 <div className="col-lg-8 col-lg-offset-2 text-center">
-                    <i className="fa fa-4x fa-diamond wow bounceIn text-primary text-faded" />
+                    <i className="fa fa-4x fa-heart-o wow bounceIn text-primary text-faded light-text" />
                     <h2 className="section-heading">Hello in Your settings!</h2>
                     <hr className="light"/>
                  </div>
@@ -197,7 +198,7 @@ document.getElementById("Settings")
                     <img src={this.state.PathToTmbOfPhoto} alt="ProfileImage" />
                  </div>
                  <div className="col-lg-3 col-md-6 text-center">
-                    <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                    <i className="fa fa-4x fa-info  wow bounceIn text-primary" />
                     <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours First Name is - {self.state.FirstName}</p>
                     <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Middle Name is - {self.state.MiddleName}</p>
                     <p className="text-muted"><i className="fa fa-bookmark-o wow bounceIn text-primary" /> Yours Last Name is - {self.state.LastName}</p>
@@ -205,12 +206,13 @@ document.getElementById("Settings")
                      <p className="text-muted"><i className="fa fa-calendar-check-o wow bounceIn text-primary" /> Yours holidays starts at - {self.state.HolidayTimeStart}</p>
                 </div>
                 <div className="col-lg-3 col-md-6 text-center">
-                    <i className="fa fa-4x fa-diamond wow bounceIn text-primary" />
+                    <i className="fa fa-4x fa-book wow bounceIn text-primary" />
                     <p className="text-muted"><i className="fa fa-mobile wow bounceIn text-primary" /> Yours Private phone is - {self.state.PhonePrivate}</p>
                     <p className="text-muted"><i className="fa fa-phone wow bounceIn text-primary" /> Yours Work phone is - {self.state.PhoneWork}</p>
                     <p className="text-muted"><i className="fa fa-sticky-note-o wow bounceIn text-primary" /> Yours Note is - {self.state.Notes}</p>
                     <p className="text-muted"><i className="fa fa-male wow bounceIn text-primary" /> Yours Boss is - {self.state.Boss}</p>
                     <p className="text-muted"><i className="fa fa-calendar-times-o wow bounceIn text-primary" /> Yours holidays ends at - {self.state.HolidayTimeEnd}</p>
+                    <p className="text-muted"><i className="fa fa-road wow bounceIn text-primary" /> Yours in Business Trip ? - {self.state.BusinessTrip}</p>
                 </div>
             </div>
             <hr/>
@@ -221,7 +223,7 @@ document.getElementById("Settings")
         <div className="container">
             <div className="row">
                 <div className="col-lg-8 col-lg-offset-2 text-center">
-                    <i className="fa fa-4x fa-diamond wow tada text-faded" />
+                    <i className="fa fa-4x fa-refresh wow tada text-faded" />
                     <h2 className="section-heading">Here Your can change somethig!</h2>
                     <hr className="light" />
             <ul>
