@@ -17,21 +17,20 @@ module.exports = React.createClass({
             $('#chatroom').append(msg);
         };
 
-        /*Да, я знаю что .append() это совсем ужас, но я 9ть часов потратил что бы завести
+        /*Да, я знаю что .append() и jQuery это совсем ужас, но я 9ть часов потратил что бы завести
         это через реакт.стейт, ни никак, jQuery.signalR упорно запоминает this который
         указывает уже на дохлый объект после первого же перемонтирования.
         Т.Е this._reactInternalInstance == undefined внутри контекста
-        $.connection.chatHub.client.addMessage = (name, message, color) => {...};*/
+        $.connection.chatHub.client.addMessage = (name, message, color) => {...};
+        какие бы я эксперементы не проводил и куда бы я не выносил этот функционал,
+        результат один единственный без изменения.
+        В общем, спасибо Microsoft за очень "гибкую" технологию из костылей.
 
-        //var self = this;
-        //function f(msg) {
-        //    console.log("f func", self);
-        //    self.setState({ text: self.state.text.concat(msg) });
-        //}
-        //$.connection.chatHub.client.addMessage = (name, message, color) => {
-        //    var msg = `<p class="jumbotron"><b><span style=color:${color}>${self.htmlEncode(name)}<span /></b> ${self.htmlEncode(message)}</p>`;
-        //    f(msg);
-        //};
+        $.connection.chatHub.client.addMessage = (name, message, color) => {
+            var msg = `<p class="jumbotron"><b><span style=color:${color}>${self.htmlEncode(name)}<span /></b> ${self.htmlEncode(message)}</p>`;
+            this.setState({ text: this.state.text.concat(msg) });
+        };*/
+
         $.connection.chatHub.client.onConnected = (id, userName, allUsers, color) => {
             this.setState({ Color: color, userId: id, userName: userName });
             Cookie.save("color", color);
@@ -44,9 +43,6 @@ module.exports = React.createClass({
         $.connection.chatHub.client.onNewUserConnected = (id, name, color) => { this.AddUser(id, name, color); };
         $.connection.chatHub.client.onUserDisconnected = (id, userName) => { $(`#}${id}`).remove(); };
         $.connection.hub.start().done(() => { $.connection.chatHub.server.connect(this.state.userName); });
-
-        //
-
     },
     htmlEncode: function(value) {
         const encodedValue = $("<div />").text(value).html();
