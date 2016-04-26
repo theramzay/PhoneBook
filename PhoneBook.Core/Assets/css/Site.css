@@ -33,6 +33,10 @@ a#to-down {
     padding: 70px;
 }
 
+.light-text {
+    color: white !important;
+}
+
 .navbar { box-shadow: -10px 10px 30px 20px rgba(0, 0, 0, 0.6); }
 
 
