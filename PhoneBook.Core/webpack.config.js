@@ -24,7 +24,7 @@ module.exports = {
             //'./Scripts/views/Router.jsx']
     },
     output: {
-        filename: "./Scripts/bundle.js"
+        filename: "./Assets/js/bundle.js"
     },
     module: {
         loaders: [
@@ -34,9 +34,7 @@ module.exports = {
               loader: 'babel'
           },
           { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /\.png$/, loader: "url-loader?limit=100000" },
-      { test: /\.jpg$/, loader: "file-loader" },
-      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
+      { test: /.(jpg|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
       { test: /\.json$/, loader: "json" }
 
         ]
