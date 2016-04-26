@@ -7,6 +7,178 @@ var BigCalendar = require('./BigCalendar');
 var AdminPage = require('./AdminPage');
 
 
+let AuthButton = React.createClass({
+    submitAuth: function (e) {
+        e.preventDefault();
+
+        var data = {
+            grant_type: "password",
+            username: this.refs.EmailAuth.value,
+            Password: this.refs.PasswordAuth.value
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Token",
+            data: data
+        }).success((data) => {
+            Cookie.save('userName', data.userName);
+            Cookie.save('tokenInfo', data.access_token);
+            this.getClaims();
+            this.props.updateAuthState(true, data.userName);
+            $("#authorizationModal").modal("hide");
+            this.props.clearForm();
+        }).fail((err) => {
+            alert("Error under login");
+        });
+    },
+    getClaims: function () {
+        $.ajax({
+            headers: {
+                'Authorization': "bearer " + Cookie.load('tokenInfo'),
+                'Content-Type': "application/json"
+            },
+            type: "GET",
+            url: "api/Account/AllUserInfo"
+        }).success((data) => {
+            var strOfCookies = data.Claims.reduce((x, y) => x + ";" + y.ClaimValue, "");
+            Cookie.save('claims', strOfCookies);
+        }).fail(() => { console.log("fuck"); });
+    },
+    render: function() {
+        return (
+                <div id="authorizationModal" className="modal fade" role="dialog">
+                <div className="modal-dialog">
+    <div className="modal-content">
+        <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal">&times;</button>
+            <h4 className="modal-title">Authorization</h4>
+        </div>
+        <div className="modal-body">
+            <form onSubmit={this.submitAuth}>
+                <label>Enter email</label><br />
+                <input placeholder="email" required={true} className="form-control" ref="EmailAuth" type="email" name="EmailAuth" label="Email:" /><br /><br />
+                <label>Enter password</label><br />
+                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" ref="PasswordAuth" type="password" name="PasswordAuth" label="Password:" /><br /><br />
+                <button className="btn btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+        <div className="modal-footer">
+            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+                </div>
+    </div>
+            );
+    }
+});
+
+let RegButton = React.createClass({
+    submit: function (e) {
+        e.preventDefault();
+
+        if (this.refs.PasswordReg.value === this.refs.ConfirmPassword.value) {
+            var data = {
+                Email: this.refs.Email.value,
+                Password: this.refs.PasswordReg.value,
+                ConfirmPassword: this.refs.ConfirmPassword.value
+            };
+
+            // Submit form via jQuery/AJAX
+            $.ajax({
+                type: "POST",
+                url: "api/Account/Register",
+                data: data
+            }).done(() => {
+                this.props.clearForm();
+                $("#registrationModal").modal("hide");
+            })
+                .fail(function () {
+                    console.log("failed to register");
+                });
+        } else {
+            alert("Password are not equivalented");
+        }
+    },
+    checkFirst: function () {
+        var pass = $(this.refs.PasswordReg);
+        var repass = $(this.refs.ConfirmPassword);
+        pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : "");
+        if (pass.checkValidity()) repass.pattern = pass.value;
+    },
+    checkSecond: function () {
+        var repass = $(this.refs.ConfirmPassword);
+        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : "");
+    },
+    render: function() {
+        return (
+                <div id="registrationModal" className="modal fade" role="dialog">
+                    <div className="modal-dialog">
+    <div className="modal-content">
+        <div className="modal-header">
+            <button type="button" className="close" data-dismiss="modal">&times;</button>
+            <h4 className="modal-title">Registration</h4>
+        </div>
+        <div className="modal-body">
+            <form onSubmit={this.submit}>
+                <fieldset>
+                    <legend>Registration form</legend>
+                <input placeholder="Email" required={true}
+        className="form-control" ref="Email"
+        type="email" name="Email" label="Email:" />
+<label>Enter password</label><br />
+<input placeholder="Password"
+        onChange={this.checkFirst}
+        required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+        className="form-control" ref="PasswordReg" type="password" name="Password" label="Password:" />
+ <label>Re-enter password</label><br />
+ <input placeholder="Confirm password"
+        onChange={this.checkSecond}
+        required={true} title="Please enter the same Password as above"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control"
+        ref="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:" />
+ <button className="btn btn-success" type="submit">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+<div className="modal-footer">
+    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+    </div>
+                    </div>
+    </div>
+            );
+    }
+
+});
+
+let LeftNavBar = React.createClass({
+    MainPage: function() {
+        ReactDOM.render(
+            <MainPage />,
+            document.getElementById("content")
+        );
+    },
+    SearchPage: function () {
+        ReactDOM.render(
+      <SearchPage url="api/Account/SearchUsers" searchData={this.refs.searchBox.value } />,
+    document.getElementById("content")
+          );
+    },
+    render: function() {
+        return (
+                <ul className="nav navbar-nav">
+        <li>
+            <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-2x fa-home"></i></a>
+        </li>
+        <li><input type="text" name="searchBox" id="searchBox" ref="searchBox" placeholder="search" className="form-control search-form" onChange={this.SearchPage}/></li>
+        <li><a href="#splash" className="page-scroll"><i className="fa fa-2x fa-plane"></i> To the heaven!</a></li>
+                </ul>
+            );
+    }
+});
+
 
 module.exports = React.createClass({
     getInitialState: function() {
@@ -38,7 +210,7 @@ module.exports = React.createClass({
         Cookie.save('userName', "");
         Cookie.save('tokenKey', "");
         Cookie.save('claims', "");
-        this.setState({ isAuth: false, userName: "" });
+        this.updateAuthState(false, "");
         ReactDOM.render(
             <MainPage/>,
             document.getElementById("content")
@@ -62,59 +234,12 @@ module.exports = React.createClass({
     document.getElementById("content")
 );
     },
-    MainPage: function() {
-        ReactDOM.render(
-            <MainPage/>,
-            document.getElementById("content")
-        );
-    },
-    SearchPage: function () {
-        ReactDOM.render(
-      <SearchPage url="api/Account/SearchUsers" searchData={$("#searchBox").val() }/>,
-    document.getElementById("content")
-          );
-    },
+
     AdminPage: function() {
         ReactDOM.render(<AdminPage />,document.getElementById("content"));
     },
-    // Auth
-    submitAuth: function (e) {
-        e.preventDefault();
-
-        var data = {
-            grant_type: "password",
-            username: this.refs.EmailAuth.value,
-            Password: this.refs.PasswordAuth.value
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "/Token",
-            data: data
-        }).success((data) => {
-            Cookie.save('userName', data.userName);
-            Cookie.save('tokenInfo', data.access_token);
-            this.getClaims();
-            this.setState({ isAuth: true, userName: data.userName });
-            $("#authorizationModal").modal("hide");
-        }).fail((err) => {
-            alert("Error under login");
-        });
-
-
-    },
-    getClaims: function () {
-        $.ajax({
-            headers: {
-                'Authorization': "bearer " + Cookie.load('tokenInfo'),
-                'Content-Type': "application/json"
-            },
-            type: "GET",
-            url: "api/Account/AllUserInfo"
-        }).success((data) => {
-            var strOfCookies = data.Claims.reduce((x, y) => x + ";" + y.ClaimValue, "");
-            Cookie.save('claims', strOfCookies);
-        }).fail(() => { console.log("fuck"); });
+    updateAuthState: function (state, username) {
+        this.setState({ isAuth: state, userName: username });
     },
     clearForm: function () {
         this.setState({
@@ -123,114 +248,13 @@ module.exports = React.createClass({
             ConfirmPassword: ""
         });
     },
-    // log end
-
-    // Registration
-    submit: function (e) {
-        e.preventDefault();
-
-        if (this.refs.PasswordReg.value === this.refs.ConfirmPassword.value) {
-            var data = {
-                Email: this.refs.Email.value,
-                Password: this.refs.PasswordReg.value,
-                ConfirmPassword: this.refs.ConfirmPassword.value
-            };
-
-            // Submit form via jQuery/AJAX
-            $.ajax({
-                type: "POST",
-                url: "api/Account/Register",
-                data: data
-            }).done(()=> {
-                    this.clearForm();
-                    $("#registrationModal").modal("hide");
-                })
-                .fail(function () {
-                    console.log("failed to register");
-                });
-        } else {
-            alert("Password are not equivalented");
-        }
-    },
-    checkFirst: function () {
-        var pass = $(this.refs.PasswordReg);
-        var repass = $(this.refs.ConfirmPassword);
-        pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : "");
-        if (pass.checkValidity()) repass.pattern = pass.value;
-    },
-    checkSecond: function () {
-        var repass = $(this.refs.ConfirmPassword);
-        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : "");
-    },
-    // reg end
     render: function() {
         return (
             <div>
-    <div id="registrationModal" className="modal fade" role="dialog">
-                    <div className="modal-dialog">
-    <div className="modal-content">
-        <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">Registration</h4>
-        </div>
-        <div className="modal-body">
-            <form onSubmit={this.submit}>
-                <fieldset>
-                    <legend>Registration form</legend>
-                <input placeholder="Email" required={true}
-                       className="form-control" ref="Email"
-                       type="email" name="Email" label="Email:" />
- <label>Enter password</label><br />
- <input placeholder="Password"
-        onChange={this.checkFirst}
-        required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
-        className="form-control" ref="PasswordReg" type="password" name="Password" label="Password:" />
- <label>Re-enter password</label><br />
- <input placeholder="Confirm password"
-        onChange={this.checkSecond}
-        required={true} title="Please enter the same Password as above"
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control"
-        ref="ConfirmPassword" type="password" name="ConfirmPassword" label="ConfirmPassword:" />
- <button className="btn btn-success" type="submit">Submit</button>
-                </fieldset>
-            </form>
-        </div>
-<div className="modal-footer">
-    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-    </div>
-                    </div>
-    </div>
-    <div id="authorizationModal" className="modal fade" role="dialog">
-                <div className="modal-dialog">
-    <div className="modal-content">
-        <div className="modal-header">
-            <button type="button" className="close" data-dismiss="modal">&times;</button>
-            <h4 className="modal-title">Authorization</h4>
-        </div>
-        <div className="modal-body">
-            <form onSubmit={this.submitAuth}>
-                <label>Enter email</label><br />
-                <input placeholder="email" required={true} className="form-control" ref="EmailAuth" type="email" name="EmailAuth" label="Email:" /><br /><br />
-                <label>Enter password</label><br />
-                <input placeholder="password" required={true} title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$" className="form-control" ref="PasswordAuth" type="password" name="PasswordAuth" label="Password:" /><br /><br />
-                <button className="btn btn-success" type="submit">Submit</button>
-            </form>
-        </div>
-        <div className="modal-footer">
-            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-                </div>
-    </div>
-    <ul className="nav navbar-nav">
-        <li>
-            <a href="#Home" onClick={this.MainPage} className="page-scroll"><i className="fa fa-2x fa-home"></i></a>
-        </li>
-        <li><input type="text" name="searchBox" id="searchBox" placeholder="search" className="form-control search-form" onChange={this.SearchPage} /></li>
-        <li><a href="#splash" className="page-scroll"><i className="fa fa-2x fa-plane"></i> To the heaven!</a></li>
-    </ul>
+                <RegButton clearForm={this.clearForm} updateAuthState={this.updateAuthState} />
+                <AuthButton clearForm={this.clearForm} updateAuthState={this.updateAuthState}/>
+                <LeftNavBar />
+
     <ul className="nav navbar-nav navbar-right">
         <li>
             <a className={ this.state.isAuth ? 'hidden' : '' } href="#" id="regBtn" data-toggle="modal" data-backdrop="false" data-target="#registrationModal"><i className="fa fa-user-plus"></i> Register</a>

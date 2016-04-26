@@ -31411,7 +31411,7 @@
   \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React, Cookie, ReactDOM, $) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(React, $, Cookie, ReactDOM) {'use strict';
 	
 	var Info = __webpack_require__(/*! ./Info */ 180);
 	var _MainPage = __webpack_require__(/*! ./MainPage */ 176);
@@ -31421,61 +31421,9 @@
 	var _BigCalendar = __webpack_require__(/*! ./BigCalendar */ 209);
 	var _AdminPage = __webpack_require__(/*! ./AdminPage */ 342);
 	
-	module.exports = React.createClass({
-	    displayName: 'exports',
+	var AuthButton = React.createClass({
+	    displayName: 'AuthButton',
 	
-	    getInitialState: function getInitialState() {
-	        return {
-	            Email: "",
-	            Password: "",
-	            ConfirmPassword: "",
-	            isAuth: false,
-	            userName: Cookie.load('userName')
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	
-	        if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
-	            this.setState({ isAuth: true });
-	        } else {
-	            this.setState({ isAuth: false });
-	        }
-	    },
-	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-	        if (prevState.isAuth !== this.state.isAuth) {
-	            if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
-	                this.setState({ isAuth: true });
-	            } else {
-	                this.setState({ isAuth: false });
-	            }
-	        }
-	    },
-	    logOut: function logOut() {
-	        Cookie.save('userName', "");
-	        Cookie.save('tokenKey', "");
-	        Cookie.save('claims', "");
-	        this.setState({ isAuth: false, userName: "" });
-	        ReactDOM.render(React.createElement(_MainPage, null), document.getElementById("content"));
-	    },
-	    profile: function profile() {
-	        ReactDOM.render(React.createElement(Info, { changed: true, url: 'api/Account/AllUserInfo' }), document.getElementById("content"));
-	    },
-	    BigCalendar: function BigCalendar() {
-	        ReactDOM.render(React.createElement(_BigCalendar, { url: 'api/PhoneBook/All' }), document.getElementById("content"));
-	    },
-	    Chat: function Chat() {
-	        ReactDOM.render(React.createElement(_Chat, null), document.getElementById("content"));
-	    },
-	    MainPage: function MainPage() {
-	        ReactDOM.render(React.createElement(_MainPage, null), document.getElementById("content"));
-	    },
-	    SearchPage: function SearchPage() {
-	        ReactDOM.render(React.createElement(_SearchPage, { url: 'api/Account/SearchUsers', searchData: $("#searchBox").val() }), document.getElementById("content"));
-	    },
-	    AdminPage: function AdminPage() {
-	        ReactDOM.render(React.createElement(_AdminPage, null), document.getElementById("content"));
-	    },
-	    // Auth
 	    submitAuth: function submitAuth(e) {
 	        var _this = this;
 	
@@ -31495,8 +31443,9 @@
 	            Cookie.save('userName', data.userName);
 	            Cookie.save('tokenInfo', data.access_token);
 	            _this.getClaims();
-	            _this.setState({ isAuth: true, userName: data.userName });
+	            _this.props.updateAuthState(true, data.userName);
 	            $("#authorizationModal").modal("hide");
+	            _this.props.clearForm();
 	        }).fail(function (err) {
 	            alert("Error under login");
 	        });
@@ -31518,16 +31467,79 @@
 	            console.log("fuck");
 	        });
 	    },
-	    clearForm: function clearForm() {
-	        this.setState({
-	            Email: "",
-	            Password: "",
-	            ConfirmPassword: ""
-	        });
-	    },
-	    // log end
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { id: 'authorizationModal', className: 'modal fade', role: 'dialog' },
+	            React.createElement(
+	                'div',
+	                { className: 'modal-dialog' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'modal-content' },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'modal-header' },
+	                        React.createElement(
+	                            'button',
+	                            { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                            '×'
+	                        ),
+	                        React.createElement(
+	                            'h4',
+	                            { className: 'modal-title' },
+	                            'Authorization'
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'modal-body' },
+	                        React.createElement(
+	                            'form',
+	                            { onSubmit: this.submitAuth },
+	                            React.createElement(
+	                                'label',
+	                                null,
+	                                'Enter email'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement('input', { placeholder: 'email', required: true, className: 'form-control', ref: 'EmailAuth', type: 'email', name: 'EmailAuth', label: 'Email:' }),
+	                            React.createElement('br', null),
+	                            React.createElement('br', null),
+	                            React.createElement(
+	                                'label',
+	                                null,
+	                                'Enter password'
+	                            ),
+	                            React.createElement('br', null),
+	                            React.createElement('input', { placeholder: 'password', required: true, title: 'Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols', pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$', className: 'form-control', ref: 'PasswordAuth', type: 'password', name: 'PasswordAuth', label: 'Password:' }),
+	                            React.createElement('br', null),
+	                            React.createElement('br', null),
+	                            React.createElement(
+	                                'button',
+	                                { className: 'btn btn-success', type: 'submit' },
+	                                'Submit'
+	                            )
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'modal-footer' },
+	                        React.createElement(
+	                            'button',
+	                            { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                            'Close'
+	                        )
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
 	
-	    // Registration
+	var RegButton = React.createClass({
+	    displayName: 'RegButton',
+	
 	    submit: function submit(e) {
 	        var _this2 = this;
 	
@@ -31546,7 +31558,7 @@
 	                url: "api/Account/Register",
 	                data: data
 	            }).done(function () {
-	                _this2.clearForm();
+	                _this2.props.clearForm();
 	                $("#registrationModal").modal("hide");
 	            }).fail(function () {
 	                console.log("failed to register");
@@ -31565,187 +31577,199 @@
 	        var repass = $(this.refs.ConfirmPassword);
 	        repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : "");
 	    },
-	    // reg end
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            null,
+	            { id: 'registrationModal', className: 'modal fade', role: 'dialog' },
 	            React.createElement(
 	                'div',
-	                { id: 'registrationModal', className: 'modal fade', role: 'dialog' },
+	                { className: 'modal-dialog' },
 	                React.createElement(
 	                    'div',
-	                    { className: 'modal-dialog' },
+	                    { className: 'modal-content' },
 	                    React.createElement(
 	                        'div',
-	                        { className: 'modal-content' },
+	                        { className: 'modal-header' },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-header' },
-	                            React.createElement(
-	                                'button',
-	                                { type: 'button', className: 'close', 'data-dismiss': 'modal' },
-	                                '×'
-	                            ),
-	                            React.createElement(
-	                                'h4',
-	                                { className: 'modal-title' },
-	                                'Registration'
-	                            )
+	                            'button',
+	                            { type: 'button', className: 'close', 'data-dismiss': 'modal' },
+	                            '×'
 	                        ),
 	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-body' },
-	                            React.createElement(
-	                                'form',
-	                                { onSubmit: this.submit },
-	                                React.createElement(
-	                                    'fieldset',
-	                                    null,
-	                                    React.createElement(
-	                                        'legend',
-	                                        null,
-	                                        'Registration form'
-	                                    ),
-	                                    React.createElement('input', { placeholder: 'Email', required: true,
-	                                        className: 'form-control', ref: 'Email',
-	                                        type: 'email', name: 'Email', label: 'Email:' }),
-	                                    React.createElement(
-	                                        'label',
-	                                        null,
-	                                        'Enter password'
-	                                    ),
-	                                    React.createElement('br', null),
-	                                    React.createElement('input', { placeholder: 'Password',
-	                                        onChange: this.checkFirst,
-	                                        required: true, title: 'Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols',
-	                                        pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$',
-	                                        className: 'form-control', ref: 'PasswordReg', type: 'password', name: 'Password', label: 'Password:' }),
-	                                    React.createElement(
-	                                        'label',
-	                                        null,
-	                                        'Re-enter password'
-	                                    ),
-	                                    React.createElement('br', null),
-	                                    React.createElement('input', { placeholder: 'Confirm password',
-	                                        onChange: this.checkSecond,
-	                                        required: true, title: 'Please enter the same Password as above',
-	                                        pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$', className: 'form-control',
-	                                        ref: 'ConfirmPassword', type: 'password', name: 'ConfirmPassword', label: 'ConfirmPassword:' }),
-	                                    React.createElement(
-	                                        'button',
-	                                        { className: 'btn btn-success', type: 'submit' },
-	                                        'Submit'
-	                                    )
-	                                )
-	                            )
-	                        ),
-	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-footer' },
-	                            React.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
-	                                'Close'
-	                            )
+	                            'h4',
+	                            { className: 'modal-title' },
+	                            'Registration'
 	                        )
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                { id: 'authorizationModal', className: 'modal fade', role: 'dialog' },
-	                React.createElement(
-	                    'div',
-	                    { className: 'modal-dialog' },
+	                    ),
 	                    React.createElement(
 	                        'div',
-	                        { className: 'modal-content' },
+	                        { className: 'modal-body' },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-header' },
+	                            'form',
+	                            { onSubmit: this.submit },
 	                            React.createElement(
-	                                'button',
-	                                { type: 'button', className: 'close', 'data-dismiss': 'modal' },
-	                                '×'
-	                            ),
-	                            React.createElement(
-	                                'h4',
-	                                { className: 'modal-title' },
-	                                'Authorization'
-	                            )
-	                        ),
-	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-body' },
-	                            React.createElement(
-	                                'form',
-	                                { onSubmit: this.submitAuth },
+	                                'fieldset',
+	                                null,
 	                                React.createElement(
-	                                    'label',
+	                                    'legend',
 	                                    null,
-	                                    'Enter email'
+	                                    'Registration form'
 	                                ),
-	                                React.createElement('br', null),
-	                                React.createElement('input', { placeholder: 'email', required: true, className: 'form-control', ref: 'EmailAuth', type: 'email', name: 'EmailAuth', label: 'Email:' }),
-	                                React.createElement('br', null),
-	                                React.createElement('br', null),
+	                                React.createElement('input', { placeholder: 'Email', required: true,
+	                                    className: 'form-control', ref: 'Email',
+	                                    type: 'email', name: 'Email', label: 'Email:' }),
 	                                React.createElement(
 	                                    'label',
 	                                    null,
 	                                    'Enter password'
 	                                ),
 	                                React.createElement('br', null),
-	                                React.createElement('input', { placeholder: 'password', required: true, title: 'Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols', pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$', className: 'form-control', ref: 'PasswordAuth', type: 'password', name: 'PasswordAuth', label: 'Password:' }),
+	                                React.createElement('input', { placeholder: 'Password',
+	                                    onChange: this.checkFirst,
+	                                    required: true, title: 'Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols',
+	                                    pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$',
+	                                    className: 'form-control', ref: 'PasswordReg', type: 'password', name: 'Password', label: 'Password:' }),
+	                                React.createElement(
+	                                    'label',
+	                                    null,
+	                                    'Re-enter password'
+	                                ),
 	                                React.createElement('br', null),
-	                                React.createElement('br', null),
+	                                React.createElement('input', { placeholder: 'Confirm password',
+	                                    onChange: this.checkSecond,
+	                                    required: true, title: 'Please enter the same Password as above',
+	                                    pattern: '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\\s).{8,20}$', className: 'form-control',
+	                                    ref: 'ConfirmPassword', type: 'password', name: 'ConfirmPassword', label: 'ConfirmPassword:' }),
 	                                React.createElement(
 	                                    'button',
 	                                    { className: 'btn btn-success', type: 'submit' },
 	                                    'Submit'
 	                                )
 	                            )
-	                        ),
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'modal-footer' },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'modal-footer' },
-	                            React.createElement(
-	                                'button',
-	                                { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
-	                                'Close'
-	                            )
+	                            'button',
+	                            { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                            'Close'
 	                        )
 	                    )
 	                )
-	            ),
+	            )
+	        );
+	    }
+	
+	});
+	
+	var LeftNavBar = React.createClass({
+	    displayName: 'LeftNavBar',
+	
+	    MainPage: function MainPage() {
+	        ReactDOM.render(React.createElement(_MainPage, null), document.getElementById("content"));
+	    },
+	    SearchPage: function SearchPage() {
+	        ReactDOM.render(React.createElement(_SearchPage, { url: 'api/Account/SearchUsers', searchData: this.refs.searchBox.value }), document.getElementById("content"));
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'ul',
+	            { className: 'nav navbar-nav' },
 	            React.createElement(
-	                'ul',
-	                { className: 'nav navbar-nav' },
+	                'li',
+	                null,
 	                React.createElement(
-	                    'li',
-	                    null,
-	                    React.createElement(
-	                        'a',
-	                        { href: '#Home', onClick: this.MainPage, className: 'page-scroll' },
-	                        React.createElement('i', { className: 'fa fa-2x fa-home' })
-	                    )
-	                ),
-	                React.createElement(
-	                    'li',
-	                    null,
-	                    React.createElement('input', { type: 'text', name: 'searchBox', id: 'searchBox', placeholder: 'search', className: 'form-control search-form', onChange: this.SearchPage })
-	                ),
-	                React.createElement(
-	                    'li',
-	                    null,
-	                    React.createElement(
-	                        'a',
-	                        { href: '#splash', className: 'page-scroll' },
-	                        React.createElement('i', { className: 'fa fa-2x fa-plane' }),
-	                        ' To the heaven!'
-	                    )
+	                    'a',
+	                    { href: '#Home', onClick: this.MainPage, className: 'page-scroll' },
+	                    React.createElement('i', { className: 'fa fa-2x fa-home' })
 	                )
 	            ),
+	            React.createElement(
+	                'li',
+	                null,
+	                React.createElement('input', { type: 'text', name: 'searchBox', id: 'searchBox', ref: 'searchBox', placeholder: 'search', className: 'form-control search-form', onChange: this.SearchPage })
+	            ),
+	            React.createElement(
+	                'li',
+	                null,
+	                React.createElement(
+	                    'a',
+	                    { href: '#splash', className: 'page-scroll' },
+	                    React.createElement('i', { className: 'fa fa-2x fa-plane' }),
+	                    ' To the heaven!'
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	module.exports = React.createClass({
+	    displayName: 'exports',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            Email: "",
+	            Password: "",
+	            ConfirmPassword: "",
+	            isAuth: false,
+	            userName: Cookie.load('userName')
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
+	            this.setState({ isAuth: true });
+	        } else {
+	            this.setState({ isAuth: false });
+	        }
+	    },
+	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	        if (prevState.isAuth !== this.state.isAuth) {
+	            if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
+	                this.setState({ isAuth: true });
+	            } else {
+	                this.setState({ isAuth: false });
+	            }
+	        }
+	    },
+	    logOut: function logOut() {
+	        Cookie.save('userName', "");
+	        Cookie.save('tokenKey', "");
+	        Cookie.save('claims', "");
+	        this.updateAuthState(false, "");
+	        ReactDOM.render(React.createElement(_MainPage, null), document.getElementById("content"));
+	    },
+	    profile: function profile() {
+	        ReactDOM.render(React.createElement(Info, { changed: true, url: 'api/Account/AllUserInfo' }), document.getElementById("content"));
+	    },
+	    BigCalendar: function BigCalendar() {
+	        ReactDOM.render(React.createElement(_BigCalendar, { url: 'api/PhoneBook/All' }), document.getElementById("content"));
+	    },
+	    Chat: function Chat() {
+	        ReactDOM.render(React.createElement(_Chat, null), document.getElementById("content"));
+	    },
+	
+	    AdminPage: function AdminPage() {
+	        ReactDOM.render(React.createElement(_AdminPage, null), document.getElementById("content"));
+	    },
+	    updateAuthState: function updateAuthState(state, username) {
+	        this.setState({ isAuth: state, userName: username });
+	    },
+	    clearForm: function clearForm() {
+	        this.setState({
+	            Email: "",
+	            Password: "",
+	            ConfirmPassword: ""
+	        });
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(RegButton, { clearForm: this.clearForm, updateAuthState: this.updateAuthState }),
+	            React.createElement(AuthButton, { clearForm: this.clearForm, updateAuthState: this.updateAuthState }),
+	            React.createElement(LeftNavBar, null),
 	            React.createElement(
 	                'ul',
 	                { className: 'nav navbar-nav navbar-right' },
@@ -31837,7 +31861,7 @@
 	        );
 	    }
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! react */ 164), __webpack_require__(/*! react-cookie */ 178), __webpack_require__(/*! react-dom */ 18), __webpack_require__(/*! jquery */ 6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! react */ 164), __webpack_require__(/*! jquery */ 6), __webpack_require__(/*! react-cookie */ 178), __webpack_require__(/*! react-dom */ 18)))
 
 /***/ },
 /* 178 */
@@ -56242,7 +56266,7 @@
   \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(React, $, Cookie) {'use strict';
 	
 	var PieChart = __webpack_require__(/*! react-d3-components */ 343).PieChart;
 	
@@ -56254,6 +56278,28 @@
 	module.exports = React.createClass({
 	    displayName: 'exports',
 	
+	    getInitialState: function getInitialState() {
+	        return {
+	            data: {}
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+	
+	        $.ajax({
+	            headers: {
+	                'Authorization': "bearer " + Cookie.load('tokenInfo'),
+	                'Content-Type': "application/json"
+	            },
+	            type: "GET",
+	            url: this.props.url
+	        }).success(function (users) {
+	            //var temp = users.map(u => u.); //TODO: гляннуть где то в коде есть такая реализация.
+	            _this.setState({ data: users });
+	        }).fail(function () {
+	            alert("Error");
+	        });
+	    },
 	    render: function render() {
 	        return React.createElement(PieChart, {
 	            data: data,
@@ -56263,7 +56309,7 @@
 	        });
 	    }
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! react */ 164)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! react */ 164), __webpack_require__(/*! jquery */ 6), __webpack_require__(/*! react-cookie */ 178)))
 
 /***/ },
 /* 343 */
