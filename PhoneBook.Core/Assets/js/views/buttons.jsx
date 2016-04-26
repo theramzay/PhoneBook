@@ -4,6 +4,7 @@ var Buttons = require('./buttons');
 var SearchPage = require('./SearchPage');
 var Chat = require('./Chat');
 var BigCalendar = require('./BigCalendar');
+var AdminPage = require('./AdminPage');
 
 
 
@@ -18,7 +19,6 @@ module.exports = React.createClass({
         };
     },
     componentDidMount: function () {
-        
         if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
             this.setState({ isAuth: true });
         } else {
@@ -29,10 +29,8 @@ module.exports = React.createClass({
         if(prevState.isAuth !== this.state.isAuth){
             if (typeof this.state.userName !== "undefined" && this.state.userName !== "") {
             this.setState({ isAuth: true });
-            console.log("Is auth? ", this.state.isAuth);
         } else {
             this.setState({ isAuth: false });
-            console.log("Is auth? ", this.state.isAuth);
         }
         }
     },
@@ -76,6 +74,9 @@ module.exports = React.createClass({
     document.getElementById("content")
           );
     },
+    AdminPage: function() {
+        ReactDOM.render(<AdminPage />,document.getElementById("content"));
+    },
     // Auth
     submitAuth: function (e) {
         e.preventDefault();
@@ -98,7 +99,6 @@ module.exports = React.createClass({
             $("#authorizationModal").modal("hide");
         }).fail((err) => {
             alert("Error under login");
-            console.log("error", err);
         });
 
 
@@ -129,7 +129,6 @@ module.exports = React.createClass({
     submit: function (e) {
         e.preventDefault();
 
-        console.log(this.state);
         if (this.refs.PasswordReg.value === this.refs.ConfirmPassword.value) {
             var data = {
                 Email: this.refs.Email.value,
@@ -156,13 +155,11 @@ module.exports = React.createClass({
     checkFirst: function () {
         var pass = $(this.refs.PasswordReg);
         var repass = $(this.refs.ConfirmPassword);
-        console.log("check first pass", pass.val(), repass.val());
         pass.setCustomValidity(pass.validity.patternMismatch ? pass.title : "");
         if (pass.checkValidity()) repass.pattern = pass.value;
     },
     checkSecond: function () {
         var repass = $(this.refs.ConfirmPassword);
-        console.log("check second pass", repass.val());
         repass.setCustomValidity(repass.validity.patternMismatch ? repass.title : "");
     },
     // reg end
@@ -249,6 +246,7 @@ module.exports = React.createClass({
                     <a href="#Settings" className="page-scroll" onClick={this.profile}><i className="fa fa-cogs"></i> Settings</a>
                     <a href="#Chat" className="page-scroll" onClick={this.Chat}><i className="fa fa-comment"></i> Chat</a>
                     <a href="#Calendar" className="page-scroll" onClick={this.BigCalendar}><i className="fa fa-calendar-check-o" aria-hidden="true"></i> Calendar</a>
+                    <a href="#AdminPanel" className="page-scroll" onClick={this.AdminPage}><i className="fa fa-calendar-check-o" aria-hidden="true"></i> Admin Panel</a>
                 </li>
                 <li role="separator" className="divider"></li>
                 <li className="dropdown-header">Bye</li>

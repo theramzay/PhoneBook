@@ -337,6 +337,7 @@
     <Content Include="Assets\js\hubs.js" />
     <Content Include="webpack.config.js" />
     <Content Include=".babelrc" />
+    <Content Include="Assets\js\views\AdminPage.jsx" />
     <None Include="Properties\PublishProfiles\PhoneBook.pubxml" />
     <Content Include="Assets\js\Parallax.js" />
     <Content Include="Web.config">
