@@ -36,11 +36,11 @@ namespace PhoneBook.Domain.Infrastructure
             var result = await _applicationUserManager.CreateAsync(user, u.Password);
             if (result.Succeeded)
             {
-                // создаем claim для хранения года рождения
+                
                 var identityClaim = new IdentityUserClaim { ClaimType = ClaimTypes.Role, ClaimValue = "user" };
-                // добавляем claim пользователю
+                
                 user.Claims.Add(identityClaim);
-                // сохраняем изменения
+                
                 result = await _applicationUserManager.UpdateAsync(user);
                 return result;
             }
