@@ -20,13 +20,10 @@ module.exports = React.createClass({
             type: "GET",
             url: this.props.url
         }).success((users) => {
-            var temp = users.map(u => u.); //TODO: гляннуть где то в коде есть такая реализация.
+            //var temp = users.map(u => u.); //TODO: гляннуть где то в коде есть такая реализация.
             this.setState({data:users});
         }).fail(function () {
             alert("Error");
-        });
-        this.setState({
-            isChanged: false
         });
     },
     render: function () {
