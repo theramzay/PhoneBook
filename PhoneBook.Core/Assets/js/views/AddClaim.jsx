@@ -3,7 +3,7 @@ module.exports = React.createClass({
     return {
       Email: '',
       NameOfClaim: '',
-      Users: []
+      Emails: []
     };
   },
   getFromServer: function () {
@@ -15,7 +15,7 @@ module.exports = React.createClass({
       url: '/api/PhoneBook/All'
     }).success((data) => {
       console.log(data);
-      this.setState({ Users: data });
+      this.setState({Emails: data.map(u => u.Email)});
     }).fail(function (error) {
       console.log("error: ", error.responseText);
       alert(error.responseText);
@@ -47,36 +47,26 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-
         <form onSubmit={this.sendToServer}>
-
           <select
             className="form-control"
             ref="EmailOfUser">
-
-            {this.state.Users.map((u) => {
+            {this.state.Emails.map((e) => {
               return (
-                <option value={u.Email}>
-                  {u.Email}
+                <option value={e}>
+                  {e}
                 </option>
               );
             })}
           </select>
-
           <select
             className="form-control"
             ref="NameOfClaim">
-
             <option value="Admin">Administrator</option>
-
             <option value="User">User</option>
-
           </select>
-
           <button className="btn btn-success" type="submit">Submit</button>
-
         </form>
-
       </div>
     );
   }
