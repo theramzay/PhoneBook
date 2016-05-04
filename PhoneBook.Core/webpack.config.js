@@ -17,7 +17,6 @@ module.exports = {
             './Assets/css/bootstrap.min.css',
             './Assets/css/animate.min.css',
             './Assets/css/creative.css',
-            //'./Content/creative/jquery.easing.min.js',
             './Assets/js/jquery.fittext.js',
             './Assets/js/creative.js',
             './Assets/js/views/App.jsx']
