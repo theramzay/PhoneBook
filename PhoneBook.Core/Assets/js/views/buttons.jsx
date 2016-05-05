@@ -310,13 +310,6 @@ let LeftNavBar = React.createClass({
             onChange={this.SearchPage}/>
         </li>
 
-        <li>
-          <a href="#splash" className="page-scroll">
-            <i className="fa fa-2x fa-plane">
-            </i> To the heaven!
-          </a>
-        </li>
-
       </ul>
     );
   }
