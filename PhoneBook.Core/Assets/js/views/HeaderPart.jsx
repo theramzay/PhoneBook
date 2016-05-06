@@ -15,7 +15,7 @@ module.exports = React.createClass({
         <div className="header-content-inner">
           <h1>Phone Book</h1>
           <hr />
-          <p>We are thinking when your are dreaming!</p>
+          <p>We are thinking when you are dreaming!</p>
           <a href="#content" id="to-down">
             <i className="fa fa-arrow-down" />
           </a>
