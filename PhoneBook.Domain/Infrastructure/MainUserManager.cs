@@ -28,22 +28,16 @@ namespace PhoneBook.Domain.Infrastructure
                 Password = u.Password,
                 Id = u.Id,
                 HolidayTimeStart = DateTime.Now,
-                HolidayTimeEnd = DateTime.Now + new TimeSpan(10,0,0,0),
+                HolidayTimeEnd = DateTime.Now + new TimeSpan(10, 0, 0, 0),
                 BusinessTrip = false,
                 EmailConfirmed = u.EmailConfirmed,
                 UserName = u.Email
             };
             var result = await _applicationUserManager.CreateAsync(user, u.Password);
-            if (result.Succeeded)
-            {
-                // создаем claim для хранения года рождения
-                var identityClaim = new IdentityUserClaim { ClaimType = ClaimTypes.Role, ClaimValue = "user" };
-                // добавляем claim пользователю
-                user.Claims.Add(identityClaim);
-                // сохраняем изменения
-                result = await _applicationUserManager.UpdateAsync(user);
-                return result;
-            }
+            if (!result.Succeeded) return result;
+            var identityClaim = new IdentityUserClaim {ClaimType = ClaimTypes.Role, ClaimValue = "user"};
+            user.Claims.Add(identityClaim);
+            result = await _applicationUserManager.UpdateAsync(user);
             return result;
         }
 
@@ -52,15 +46,11 @@ namespace PhoneBook.Domain.Infrastructure
             return await _applicationUserManager.UpdateAsync(u);
         }
 
-        public async Task<User> FindAsync(string email,string password)
+        public async Task<User> FindAsync(string email, string password)
         {
             var user = await _applicationUserManager.FindByEmailAsync(email);
-            var check = await _applicationUserManager.CheckPasswordAsync(user,password);
-            if (check)
-            {
-                return user;
-            }
-            return (User) null;
+            var check = await _applicationUserManager.CheckPasswordAsync(user, password);
+            return check ? user : null;
         }
 
         public async Task<User> FindAsync(UserLoginInfo userLoginInfo)
@@ -70,7 +60,7 @@ namespace PhoneBook.Domain.Infrastructure
 
         public IQueryable<User> FindByFirstName(string firstName)
         {
-            return _applicationUserManager.Users.Where(u => u.FirstName.Contains(firstName)).Select(u=> u);
+            return _applicationUserManager.Users.Where(u => u.FirstName.Contains(firstName)).Select(u => u);
         }
 
         public async Task<ClaimsIdentity> CreateIdentityAsync(User user, string authenticationType)
@@ -121,7 +111,7 @@ namespace PhoneBook.Domain.Infrastructure
 
         public async Task<IdentityResult> ChangePasswordAsync(string id, string currentPassword, string newPassword)
         {
-            return await 
+            return await
                 _applicationUserManager.ChangePasswordAsync(
                     _applicationUserManager.FindById(id).Id, currentPassword, newPassword);
         }

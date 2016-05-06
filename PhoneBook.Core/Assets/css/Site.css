@@ -30,7 +30,11 @@ textarea { max-width: 280px; }
 a#to-down {
     color: white;
     font-size: 200%;
-    padding: 70px;
+    padding: 50px;
+}
+
+.light-text {
+    color: white !important;
 }
 
 .navbar { box-shadow: -10px 10px 30px 20px rgba(0, 0, 0, 0.6); }
