@@ -3,6 +3,7 @@ var MainPage = require('./MainPage');
 var Buttons = require('./buttons');
 var SearchPage = require('./SearchPage');
 var Chat = require('./Chat');
+var ChatWS = require('./ChatWS');
 var BigCalendar = require('./BigCalendar');
 var AdminPage = require('./AdminPage');
 
@@ -373,6 +374,12 @@ module.exports = React.createClass({
       document.getElementById("content")
     );
   },
+  ChatWS: function() {
+    ReactDOM.render(
+      <ChatWS userName={this.state.userName}/>,
+      document.getElementById("content")
+    );
+  },
 
   AdminPage: function() {
     ReactDOM.render(
@@ -471,6 +478,14 @@ module.exports = React.createClass({
                 onClick={this.Chat}>
                 <i className="fa fa-comment">
                 </i> Chat
+              </a>
+
+              <a
+                href="#ChatWS"
+                className="page-scroll"
+                onClick={this.ChatWS}>
+                <i className="fa fa-comment">
+                </i> ChatWS
               </a>
 
               <a
