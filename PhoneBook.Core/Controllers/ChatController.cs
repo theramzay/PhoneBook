@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Web.WebSockets;
 using PhoneBook.Core.Models;
+using PhoneBook.Core.Util;
 
 namespace PhoneBook.Core.Controllers
 {
@@ -24,7 +25,7 @@ namespace PhoneBook.Core.Controllers
             private static readonly WebSocketCollection Sockets =
                 new WebSocketCollection();
 
-            ChatUser User = new ChatUser();
+            ChatModels User = new ChatModels();
 
             public ChatSocketHandler(string name)
             {
@@ -37,21 +38,16 @@ namespace PhoneBook.Core.Controllers
             public override void OnOpen()
             {
                 Sockets.Add(this);
-                Sockets.Broadcast(
-                    $"<h3><i style=color:{User.Color}>{User.Name} joined.</i><h3>");
-                Send($"<h3><i style=color:{User.Color}>Welcome {User.Name}.</i><h3>");
+                Sockets.Broadcast(MessagesHelper.Create(color: User.Color, message: "joined.", type: "joined", from: User.Name));
+                Send(MessagesHelper.Create(color: User.Color, message: "Welcome", type: "welcome", from: User.Name));
             }
 
-            public override void OnMessage(string message)
-            {
-                Sockets.Broadcast($"<p class=\"jumbotron\"><b><span style=color:{User.Color}>{User.Name}<span /></b> {message}</p>");
-            }
+            public override void OnMessage(string message) => Sockets.Broadcast(MessagesHelper.Create(color: User.Color, message: message, type: "standard", from: User.Name));
 
             public override void OnClose()
             {
                 Sockets.Remove(this);
-                Sockets.Broadcast(
-                    $"<h3><i style=color:{User.Color}>{User.Name} left.</i><h3>");
+                Sockets.Broadcast(MessagesHelper.Create(color: User.Color, message: "left.", type: "logout", from: User.Name));
             }
         }
     }
