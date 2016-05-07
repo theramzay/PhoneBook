@@ -12,7 +12,6 @@ $.ajax({
   type: "GET",
   url: "/api/PhoneBook/All"
 }).success((data) => {
-  console.log(data);
   tempUsers = data;
 }).fail(function (error) {
   console.log("error: ", error.responseText);
