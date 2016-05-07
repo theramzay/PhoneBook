@@ -10,7 +10,7 @@ namespace PhoneBook.Core.Controllers
 {
     public class ChatHub : Hub
     {
-        static List<ChatUser> Users = new List<ChatUser>();
+        static List<ChatModels> Users = new List<ChatModels>();
 
         // Отправка сообщений
         public void Send(string name, string message,string color)
@@ -28,7 +28,7 @@ namespace PhoneBook.Core.Controllers
             {
                 var random = new Random();
                 var color = $"#{random.Next(0x1000000):X6}";
-                Users.Add(new ChatUser { ConnectionId = id, Name = userName, Color = color});
+                Users.Add(new ChatModels { ConnectionId = id, Name = userName, Color = color});
 
                 // Посылаем сообщение текущему пользователю
                 Clients.Caller.onConnected(id, userName, Users,color);
