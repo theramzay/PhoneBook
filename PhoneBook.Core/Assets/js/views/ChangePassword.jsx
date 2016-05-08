@@ -5,11 +5,10 @@ module.exports = React.createClass({
   SendToServer: function(es) {
     es.preventDefault();
     var data = {
-      OldPassword: $("#OldPassword").val(),
-      NewPassword: $("#NewPassword").val(),
-      ConfirmPassword: $("#ConfPassword").val()
+      OldPassword: this.refs.OldPassword.value,
+      NewPassword: this.refs.NewPassword.value,
+      ConfirmPassword: this.refs.ConfPassword.value
     };
-    //console.log(data);
     $.ajax({
       headers: {
         'Authorization': "bearer " + Cookie.load('tokenInfo')
@@ -38,7 +37,7 @@ module.exports = React.createClass({
             title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
             placeholder="Old Password"
-            id="OldPassword"
+            ref="OldPassword"
             className="form-control"/>
 
           <input
@@ -47,7 +46,7 @@ module.exports = React.createClass({
             title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
             placeholder="New Password"
-            id="NewPassword"
+            ref="NewPassword"
             className="form-control"/>
 
           <input
@@ -56,7 +55,7 @@ module.exports = React.createClass({
             title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
             pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
             placeholder="Confirm Password"
-            id="ConfPassword"
+            ref="ConfPassword"
             className="form-control"/>
 
           <button className="btn btn-success" type="submit">Submit</button>
