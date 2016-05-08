@@ -8,12 +8,12 @@ module.exports = React.createClass({
   SendToServer: function(es) {
     es.preventDefault();
     var data = {
-      FirstName: $("#FirstNameEdit").val(),
-      MiddleName: $("#MiddleNameEdit").val(),
-      LastName: $("#LastNameEdit").val(),
-      PhonePrivate: $("#PhonePrivateEdit").val(),
-      PhoneWork: $("#PhoneWorkEdit").val(),
-      Notes: $("#NotesEdit").val()
+      FirstName: this.refs.FirstNameEdit.value,
+      MiddleName: this.refs.MiddleNameEdit.value,
+      LastName: this.refs.LastNameEdit.value,
+      PhonePrivate: this.refs.PhonePrivateEdit.value,
+      PhoneWork: this.refs.PhoneWorkEdit.value,
+      Notes: this.refs.NotesEdit.value
     };
     $.ajax({
       headers: {
@@ -47,7 +47,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.FirstName}
-            id="FirstNameEdit"
+            ref="FirstNameEdit"
             className="form-control"/>
 
 
@@ -58,7 +58,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.MiddleName}
-            id="MiddleNameEdit"
+            ref="MiddleNameEdit"
             className="form-control"/>
 
 
@@ -69,7 +69,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.LastName}
-            id="LastNameEdit"
+            ref="LastNameEdit"
             className="form-control"/>
 
 
@@ -80,7 +80,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.PhonePrivate}
-            id="PhonePrivateEdit"
+            ref="PhonePrivateEdit"
             className="form-control"/>
 
 
@@ -91,7 +91,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.PhoneWork}
-            id="PhoneWorkEdit"
+            ref="PhoneWorkEdit"
             className="form-control"/>
 
 
@@ -102,7 +102,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.Notes}
-            id="NotesEdit"
+            ref="NotesEdit"
             className="form-control"/>
 
           <button className="btn btn-success" type="submit">Submit</button>
