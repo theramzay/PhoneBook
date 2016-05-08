@@ -13,20 +13,15 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function () {
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo'),
-        'Content-Type': "application/json"
-      },
-      type: "GET",
-      url: this.props.url
-    }).success((users) => {
-      this.setState({
-        events: users.map(u => ({ title: u.FirstName, start: u.HolidayTimeStart, end: u.HolidayTimeEnd }))
-      });
-    }).fail(function () {
-      alert("Error");
-    });
+      fetch(this.props.url, {
+    	method: 'GET',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + Cookie.load('tokenInfo')
+      })
+    }).then(r => r.json()).then(users=>this.setState({
+      events: users.map(u => ({ title: u.FirstName, start: u.HolidayTimeStart, end: u.HolidayTimeEnd }))
+    }));
   },
   render() {
     return (
