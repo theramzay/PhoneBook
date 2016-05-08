@@ -1,7 +1,7 @@
 var ChatWS = React.createClass({
   getInitialState: function() {
     return {
-      socket: new WebSocket(`ws://localhost:10184/api/Chat?name=${this.props.userName}`),
+        socket: new WebSocket(`ws://${location.hostname}/api/Chat?name=${this.props.userName}`),
       msgs: []
     };
   },
@@ -10,7 +10,8 @@ var ChatWS = React.createClass({
       this.setState({msgs:this.state.msgs.concat(JSON.parse(e.data))});
     };
   },
-  onSubmit: function() {
+  onSubmit: function(e) {
+    e.preventDefault();
     this.state.socket.send(this.refs.message.value);
     this.refs.message.value = "";
   },
@@ -23,23 +24,23 @@ var ChatWS = React.createClass({
         <div ref="chatroom">
           {this.state.msgs.map(m => {
             switch (m.Type) {
-              case 'joined':  return <h3 key={m.Message}>
+              case 'joined':  return <h3 key={m.Message+Date.now()}>
                 <i style={{color: `${m.Color}`}}>
                   {m.From} {m.Message}
                 </i>
               </h3>
-              case 'welcome': return <h3 key={m.Message}>
+              case 'welcome': return <h3 key={m.Message+Date.now()}>
                 <i style={{color: `${m.Color}`}}>{m.Message} {m.From}.</i>
               </h3>
-              case 'logout': return <h3 key={m.Message}>
+              case 'logout': return <h3 key={m.Message+Date.now()}>
                 <i style={{color: `${m.Color}`}}>
                   {m.From} {m.Message}
                 </i>
               </h3>
-              case 'standard':return <p key={m.Message} className="jumbotron">
+              case 'standard':return <p key={m.Message+Date.now()} className="jumbotron">
                 <b>
                   <span style={{color: `${m.Color}`}}>
-                    {m.From}
+                    {m.From}:
                   </span>
                 </b>
                 {m.Message}
