@@ -96,8 +96,8 @@ let AuthButton = React.createClass({
                 <input
                   placeholder="password"
                   required={true}
-                  title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                  title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                   className="form-control"
                   ref="PasswordAuth"
                   type="password"
@@ -217,8 +217,8 @@ let RegButton = React.createClass({
                     placeholder="Password"
                     onChange={this.checkFirst}
                     required={true}
-                    title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                    title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                     className="form-control"
                     ref="PasswordReg"
                     type="password"
@@ -235,7 +235,7 @@ let RegButton = React.createClass({
                     onChange={this.checkSecond}
                     required={true}
                     title="Please enter the same Password as above"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                     className="form-control"
                     ref="ConfirmPassword"
                     type="password"
@@ -383,7 +383,7 @@ module.exports = React.createClass({
 
   AdminPage: function() {
     ReactDOM.render(
-      <AdminPage />,
+      <AdminPage url="api/PhoneBook/All" />,
       document.getElementById("content")
     );
   },
