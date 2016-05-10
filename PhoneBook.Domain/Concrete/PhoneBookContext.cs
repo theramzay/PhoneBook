@@ -4,18 +4,18 @@ using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Concrete
 {
-    public class DBcon : IdentityDbContext<User>, IRepository
+    public class PhoneBookContext : IdentityDbContext<User>, IRepository
     {
-        public DBcon() : base("DBcon", true)
+        public PhoneBookContext() : base("PhoneBookContext", true)
         {
             Configuration.ProxyCreationEnabled = true;
             Configuration.LazyLoadingEnabled = true;
             
         }
 
-        public  DBcon Create()
+        public  PhoneBookContext Create()
         {
-            return new DBcon();
+            return new PhoneBookContext();
         }
     }
 }
