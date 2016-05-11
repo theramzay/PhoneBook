@@ -29,6 +29,7 @@ namespace PhoneBook.Domain.Infrastructure
                 Id = u.Id,
                 HolidayTimeStart = DateTime.Now,
                 HolidayTimeEnd = DateTime.Now + new TimeSpan(10, 0, 0, 0),
+                DayOfRegistration = DateTime.Now,
                 BusinessTrip = false,
                 EmailConfirmed = u.EmailConfirmed,
                 UserName = u.Email

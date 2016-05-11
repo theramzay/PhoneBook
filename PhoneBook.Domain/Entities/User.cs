@@ -23,6 +23,7 @@ namespace PhoneBook.Domain.Entities
         public bool BusinessTrip { get; set; }
         public string Boss { get; set; } //Temp implementation TODO: create relation
         public string NotesForBoss { get; set; }
+        public DateTime DayOfRegistration { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(IMainUserManager manager, string authenticationType)
         {
