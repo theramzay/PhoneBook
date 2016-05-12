@@ -34,8 +34,8 @@ module.exports = React.createClass({
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="Old Password"
             ref="OldPassword"
             className="form-control"/>
@@ -43,8 +43,8 @@ module.exports = React.createClass({
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="New Password"
             ref="NewPassword"
             className="form-control"/>
@@ -52,8 +52,8 @@ module.exports = React.createClass({
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="Confirm Password"
             ref="ConfPassword"
             className="form-control"/>
