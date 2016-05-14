@@ -3,14 +3,14 @@ using PhoneBook.Domain.Concrete;
 
 namespace PhoneBook.Domain.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<DBcon>
+    internal sealed class Configuration : DbMigrationsConfiguration<PhoneBookContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DBcon context)
+        protected override void Seed(PhoneBookContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -126,29 +126,23 @@ namespace PhoneBook.Core.Controllers
 
         // POST api/Account/UpdateAllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UpdateAllUserInfo")]
-        public async Task<IHttpActionResult> UpdateAllUserInfo(PersonalUserInfoViewModer updatedUser)
+        [Route("UpdateUserInfo")]
+        public async Task<IHttpActionResult> UpdateUserInfo(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (updatedUser.Email != null)
-                user.Email = updatedUser.Email;
-            if (updatedUser.FirstName != null)
+            if (updatedUser.FirstName != "")
                 user.FirstName = updatedUser.FirstName;
-            if (updatedUser.MiddleName != null)
+            if (updatedUser.MiddleName != "")
                 user.MiddleName = updatedUser.MiddleName;
-            if (updatedUser.LastName != null)
+            if (updatedUser.LastName != "")
                 user.LastName = updatedUser.LastName;
-            if (updatedUser.PositionInCompany != null)
-                user.PositionInCompany = updatedUser.PositionInCompany;
-            if (updatedUser.PhonePrivate != null)
+            if (updatedUser.PhonePrivate != "")
                 user.PhonePrivate = updatedUser.PhonePrivate;
-            if (updatedUser.PhoneWork != null)
+            if (updatedUser.PhoneWork != "")
                 user.PhoneWork = updatedUser.PhoneWork;
-            if (updatedUser.Notes != null)
+            if (updatedUser.Notes != "")
                 user.Notes = updatedUser.Notes;
-            if (updatedUser.NotesForBoss != null)
-                user.Notes = updatedUser.NotesForBoss;
             var response = await UserManager.UpdateAsync(user);
             return response.Succeeded
                 ? Ok(new {Msg = response.Errors, IsOk = response.Succeeded})
@@ -158,30 +152,30 @@ namespace PhoneBook.Core.Controllers
 
         // POST api/Account/UpdateAllUserInfoByAdmin
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UpdateAllUserInfoByAdmin")]
-        public async Task<IHttpActionResult> UpdateAllUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
+        [Route("UpdateUserInfoByAdmin")]
+        public async Task<IHttpActionResult> UpdateUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
             var user = await UserManager.FindByEmailAsync(updatedUser.Email);
-            if (updatedUser.Email != null)
+            if (updatedUser.Email != "")
                 user.Email = updatedUser.Email;
-            if (updatedUser.FirstName != null)
+            if (updatedUser.FirstName != "")
                 user.FirstName = updatedUser.FirstName;
-            if (updatedUser.MiddleName != null)
+            if (updatedUser.MiddleName != "")
                 user.MiddleName = updatedUser.MiddleName;
-            if (updatedUser.LastName != null)
+            if (updatedUser.LastName != "")
                 user.LastName = updatedUser.LastName;
-            if (updatedUser.PositionInCompany != null)
+            if (updatedUser.PositionInCompany != "")
                 user.PositionInCompany = updatedUser.PositionInCompany;
-            if (updatedUser.PhonePrivate != null)
+            if (updatedUser.PhonePrivate != "")
                 user.PhonePrivate = updatedUser.PhonePrivate;
-            if (updatedUser.PhoneWork != null)
+            if (updatedUser.PhoneWork != "")
                 user.PhoneWork = updatedUser.PhoneWork;
-            if (updatedUser.Notes != null)
+            if (updatedUser.Notes != "")
                 user.Notes = updatedUser.Notes;
-            if (updatedUser.Boss != null)
+            if (updatedUser.Boss != "")
                 user.Boss = updatedUser.Boss;
-            if (updatedUser.NotesForBoss != null)
+            if (updatedUser.NotesForBoss != "")
                 user.NotesForBoss = updatedUser.NotesForBoss;
 
             if (updatedUser.HolidayTimeStart != null)

@@ -7,42 +7,33 @@ module.exports = React.createClass({
     };
   },
   getFromServer: function () {
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "GET",
-      url: '/api/PhoneBook/All'
-    }).success((data) => {
-      console.log(data);
-      this.setState({Emails: data.map(u => u.Email)});
-    }).fail(function (error) {
-      console.log("error: ", error.responseText);
-      alert(error.responseText);
-    });
+    fetch('/api/PhoneBook/All', {
+    method: 'GET',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "bearer " + Cookie.load('tokenInfo')
+    })
+  })
+  .then(r => r.json())
+  .then(users=>this.setState({Emails: users.map(u => u.Email)}));
   },
   componentDidMount: function() {
     this.getFromServer();
   },
-  sendToServer: function() {
+  sendToServer: function(e) {
+    e.preventDefault();
     var data = {
       Email: this.refs.EmailOfUser.value,
       NameOfClaim: this.refs.NameOfClaim.value
     }
-    console.log(data);
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(()=> {
-      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
-    }).fail(function (error) {
-      console.log("error: ", error.responseText);
-      alert(error.responseText);
-    });
+    fetch(this.props.url, {
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "bearer " + Cookie.load('tokenInfo')
+    }),
+    body: JSON.stringify(data)
+  }).then(()=>ReactDOM.unmountComponentAtNode(document.getElementById('Settings')));
   },
   render: function() {
     return (

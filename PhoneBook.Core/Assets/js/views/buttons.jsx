@@ -18,6 +18,27 @@ let AuthButton = React.createClass({
       Password: this.refs.PasswordAuth.value
     };
 
+/*    var formData = new FormData();
+    formData.append('grant_type','password');
+    formData.append('username',this.refs.EmailAuth.value);
+    formData.append('Password',this.refs.PasswordAuth.value)
+
+    fetch('/Token', {
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest"
+    }),
+    body: formData
+  }).then(r=>{
+    Cookie.save('userName', data.userName);
+    Cookie.save('tokenInfo', data.access_token);
+    this.getClaims();
+    this.props.updateAuthState(true, data.userName);
+    $("#authorizationModal").modal("hide");
+    this.props.clearForm();
+  });*/
+
     $.ajax({
       type: "POST",
       url: "/Token",
@@ -34,18 +55,19 @@ let AuthButton = React.createClass({
     });
   },
   getClaims: function () {
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo'),
-        'Content-Type': "application/json"
-      },
-      type: "GET",
-      url: "api/Account/AllUserInfo"
-    }).success((data) => {
+    fetch('api/Account/AllUserInfo', {
+      method: 'GET',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + Cookie.load('tokenInfo')
+      })
+    })
+    .then(r => r.json())
+    .then(data=>{
       var strOfCookies = data.Claims.reduce((x, y) => x + ";" + y.ClaimValue, "");
       Cookie.save('claims', strOfCookies);
-    }).fail(() => { console.log("fuck"); });
-  },
+    });
+},
   render: function() {
     return (
       <div
@@ -96,8 +118,8 @@ let AuthButton = React.createClass({
                 <input
                   placeholder="password"
                   required={true}
-                  title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                  title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                   className="form-control"
                   ref="PasswordAuth"
                   type="password"
@@ -141,18 +163,18 @@ let RegButton = React.createClass({
         ConfirmPassword: this.refs.ConfirmPassword.value
       };
 
-      // Submit form via jQuery/AJAX
-      $.ajax({
-        type: "POST",
-        url: "api/Account/Register",
-        data: data
-      }).done(() => {
-        this.props.clearForm();
-        $("#registrationModal").modal("hide");
-      })
-      .fail(function () {
-        console.log("failed to register");
-      });
+      fetch('api/Account/Register', {
+      method: 'POST',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + Cookie.load('tokenInfo')
+      }),
+      body: JSON.stringify(data)
+    }).then(()=>{
+      this.props.clearForm();
+      $("#registrationModal").modal("hide");
+    });
+
     } else {
       alert("Password are not equivalented");
     }
@@ -217,8 +239,8 @@ let RegButton = React.createClass({
                     placeholder="Password"
                     onChange={this.checkFirst}
                     required={true}
-                    title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                    title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                     className="form-control"
                     ref="PasswordReg"
                     type="password"
@@ -235,7 +257,7 @@ let RegButton = React.createClass({
                     onChange={this.checkSecond}
                     required={true}
                     title="Please enter the same Password as above"
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
                     className="form-control"
                     ref="ConfirmPassword"
                     type="password"
@@ -383,7 +405,7 @@ module.exports = React.createClass({
 
   AdminPage: function() {
     ReactDOM.render(
-      <AdminPage />,
+      <AdminPage url="api/PhoneBook/All" />,
       document.getElementById("content")
     );
   },

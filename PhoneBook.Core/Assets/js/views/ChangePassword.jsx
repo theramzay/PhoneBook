@@ -5,22 +5,19 @@ module.exports = React.createClass({
   SendToServer: function(es) {
     es.preventDefault();
     var data = {
-      OldPassword: $("#OldPassword").val(),
-      NewPassword: $("#NewPassword").val(),
-      ConfirmPassword: $("#ConfPassword").val()
+      OldPassword: this.refs.OldPassword.value,
+      NewPassword: this.refs.NewPassword.value,
+      ConfirmPassword: this.refs.ConfPassword.value
     };
-    //console.log(data);
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(function () {
-      React.unmountComponentAtNode(document.getElementById('Settings'));
-    }).fail(function(ee) {
-      alert(ee);
+    fetch(this.props.url, {
+      method: 'POST',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + Cookie.load('tokenInfo')
+      }),
+      body: JSON.stringify(data)
+    }).then(()=>{
+      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
     });
   },
   componentDidMount: function() {
@@ -35,28 +32,28 @@ module.exports = React.createClass({
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="Old Password"
-            id="OldPassword"
+            ref="OldPassword"
             className="form-control"/>
 
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="New Password"
-            id="NewPassword"
+            ref="NewPassword"
             className="form-control"/>
 
           <input
             type="password"
             required={true}
-            title="Password between 8 and 20 characters, including UPPER/lowercase, numbers and symbols"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$"
+            title="Password must be more then 8 characters, including UPPER/lowercase and digits"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
             placeholder="Confirm Password"
-            id="ConfPassword"
+            ref="ConfPassword"
             className="form-control"/>
 
           <button className="btn btn-success" type="submit">Submit</button>

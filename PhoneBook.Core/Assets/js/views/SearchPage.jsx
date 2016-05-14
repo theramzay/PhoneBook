@@ -5,17 +5,16 @@ require("react-datepicker/dist/react-datepicker.css");
 
 var tempUsers = [];
 
-$.ajax({
-  headers: {
-    'Authorization': "bearer " + Cookie.load('tokenInfo')
-  },
-  type: "GET",
-  url: "/api/PhoneBook/All"
-}).success((data) => {
+fetch('api/PhoneBook/All', {
+  method: 'GET',
+  headers: new Headers({
+    "Content-Type": "application/json",
+    "Authorization": "bearer " + Cookie.load('tokenInfo')
+  })
+})
+.then(r => r.json())
+.then(data=>{
   tempUsers = data;
-}).fail(function (error) {
-  console.log("error: ", error.responseText);
-  alert(error.responseText);
 });
 
 
@@ -47,18 +46,16 @@ var AdminUserForm = React.createClass({
       BusinessTrip: this.refs.BusinessTripEdit.value
     };
 
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: "/api/Account/UpdateAllUserInfoByAdmin",
-      data: data
-    }).success(function() {
-      console.log("ok");
-    }).fail(function(error) {
-      console.log("error: ", error.msg);
-    });
+
+    fetch('api/Account/UpdateUserInfoByAdmin', {
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "bearer " + Cookie.load('tokenInfo')
+    }),
+    body: JSON.stringify(data)
+  });
+
   },
   handleFirstDatePick: function(date) {
     this.setState({
@@ -301,19 +298,17 @@ module.exports = React.createClass({
 
   },
   loadFromServer: function() {
-    var self = this;
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo'),
-        'Content-Type': "application/json"
-      },
-      type: "GET",
-      url: this.props.url + "?searchData=" + this.state.searchData
-    }).success(function(data) {
-      self.setState({
-        founded: data
+      fetch(this.props.url + "?searchData=" + this.state.searchData, {
+        method: 'GET',
+        headers: new Headers({
+          "Content-Type": "application/json",
+          "Authorization": "bearer " + Cookie.load('tokenInfo')
+        })
+      })
+      .then(r => r.json())
+      .then(data=>{
+        this.setState({founded: data})
       });
-    });
   },
   componentWillReceiveProps: function(newProp) {
     this.setState({ searchData: newProp.searchData });

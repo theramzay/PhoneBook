@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="Concrete\DBcon.cs" />
+    <Compile Include="Concrete\PhoneBookContext.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Abstract\IMainUserManager.cs" />
@@ -120,6 +120,10 @@
     <Compile Include="Migrations\201603011952012_updateHolidayProp.Designer.cs">
       <DependentUpon>201603011952012_updateHolidayProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605080727587_AddUserDateOfReg.cs" />
+    <Compile Include="Migrations\201605080727587_AddUserDateOfReg.Designer.cs">
+      <DependentUpon>201605080727587_AddUserDateOfReg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603011952012_updateHolidayProp.resx">
       <DependentUpon>201603011952012_updateHolidayProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605080727587_AddUserDateOfReg.resx">
+      <DependentUpon>201605080727587_AddUserDateOfReg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

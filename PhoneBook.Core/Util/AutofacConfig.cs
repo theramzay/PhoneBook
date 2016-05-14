@@ -25,16 +25,17 @@ namespace PhoneBook.Core.Util
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<AccountController>().InstancePerRequest();
+            builder.RegisterType<PhoneBookContext>().InstancePerRequest();
             // OPTIONAL: Register the Autofac filter provider.
             //builder.RegisterWebApiFilterProvider(config);
 
             //dependenses resolving
             builder.RegisterType<MainUserManager>().As<IMainUserManager>().InstancePerRequest();
-            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>().WithParameter("context", new DBcon());
+            builder.Register(c => new UserStore<User>(c.Resolve<PhoneBookContext>())).AsImplementedInterfaces().InstancePerRequest();
 
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
-            builder.RegisterType<DBcon>().As<IRepository>().InstancePerRequest();
+            builder.RegisterType<PhoneBookContext>().As<IRepository>().InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
@@ -61,11 +62,11 @@ namespace PhoneBook.Core.Util
 
             //dependenses resolving
             builder.RegisterType<MainUserManager>().As<IMainUserManager>().InstancePerRequest();
-            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>().WithParameter("context", new DBcon());
+            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>().WithParameter("context", new PhoneBookContext());
 
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
-            builder.RegisterType<DBcon>().As<IRepository>().InstancePerRequest();
+            builder.RegisterType<PhoneBookContext>().As<IRepository>().InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

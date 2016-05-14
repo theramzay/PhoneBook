@@ -97,7 +97,7 @@ module.exports = React.createClass({
 
           Notes={this.state.Notes}
 
-          url="api/Account/UpdateAllUserInfo"/>,
+          url="api/Account/UpdateUserInfo"/>,
         document.getElementById("Settings")
       );
       this.state.c = true;

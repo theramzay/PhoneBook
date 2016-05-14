@@ -8,31 +8,32 @@ module.exports = React.createClass({
   SendToServer: function(es) {
     es.preventDefault();
     var data = {
-      FirstName: $("#FirstNameEdit").val(),
-      MiddleName: $("#MiddleNameEdit").val(),
-      LastName: $("#LastNameEdit").val(),
-      PhonePrivate: $("#PhonePrivateEdit").val(),
-      PhoneWork: $("#PhoneWorkEdit").val(),
-      Notes: $("#NotesEdit").val()
+      FirstName: this.refs.FirstNameEdit.value,
+      MiddleName: this.refs.MiddleNameEdit.value,
+      LastName: this.refs.LastNameEdit.value,
+      PhonePrivate: this.refs.PhonePrivateEdit.value,
+      PhoneWork: this.refs.PhoneWorkEdit.value,
+      Notes: this.refs.NotesEdit.value
     };
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(function () {
-      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
-      ReactDOM.render(
-        <Info
-          changed={true}
-          url="api/Account/AllUserInfo"/>,
-        document.getElementById("content")
-      );
-    }).fail(function(ee) {
-      alert(ee);
-    });
+
+    fetch(this.props.url, {
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "bearer " + Cookie.load('tokenInfo')
+    }),
+    body: JSON.stringify(data)
+  }).then(()=>{
+    ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
+    ReactDOM.render(
+      <Info
+        changed={true}
+        url="api/Account/AllUserInfo"/>,
+      document.getElementById("content")
+    );
+  });
+
+
   },
   render: function() {
     return (
@@ -47,7 +48,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.FirstName}
-            id="FirstNameEdit"
+            ref="FirstNameEdit"
             className="form-control"/>
 
 
@@ -58,7 +59,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.MiddleName}
-            id="MiddleNameEdit"
+            ref="MiddleNameEdit"
             className="form-control"/>
 
 
@@ -69,7 +70,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.LastName}
-            id="LastNameEdit"
+            ref="LastNameEdit"
             className="form-control"/>
 
 
@@ -80,7 +81,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.PhonePrivate}
-            id="PhonePrivateEdit"
+            ref="PhonePrivateEdit"
             className="form-control"/>
 
 
@@ -91,7 +92,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.PhoneWork}
-            id="PhoneWorkEdit"
+            ref="PhoneWorkEdit"
             className="form-control"/>
 
 
@@ -102,7 +103,7 @@ module.exports = React.createClass({
           <input
             type="text"
             placeholder={this.props.Notes}
-            id="NotesEdit"
+            ref="NotesEdit"
             className="form-control"/>
 
           <button className="btn btn-success" type="submit">Submit</button>
