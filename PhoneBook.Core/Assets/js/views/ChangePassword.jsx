@@ -9,17 +9,15 @@ module.exports = React.createClass({
       NewPassword: this.refs.NewPassword.value,
       ConfirmPassword: this.refs.ConfPassword.value
     };
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(function () {
-      React.unmountComponentAtNode(document.getElementById('Settings'));
-    }).fail(function(ee) {
-      alert(ee);
+    fetch(this.props.url, {
+      method: 'POST',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "bearer " + Cookie.load('tokenInfo')
+      }),
+      body: JSON.stringify(data)
+    }).then(()=>{
+      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
     });
   },
   componentDidMount: function() {

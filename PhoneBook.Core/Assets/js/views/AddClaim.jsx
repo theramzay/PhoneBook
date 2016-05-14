@@ -33,23 +33,7 @@ module.exports = React.createClass({
       "Authorization": "bearer " + Cookie.load('tokenInfo')
     }),
     body: JSON.stringify(data)
-  }).then(x=>console.log(x));
-/*console.log(data);
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(()=> {
-      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
-    }).fail(function (error) {
-      console.log("error: ", error.responseText);
-      alert(error.responseText);
-    });*/
-
-
+  }).then(()=>ReactDOM.unmountComponentAtNode(document.getElementById('Settings')));
   },
   render: function() {
     return (

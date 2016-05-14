@@ -15,24 +15,25 @@ module.exports = React.createClass({
       PhoneWork: this.refs.PhoneWorkEdit.value,
       Notes: this.refs.NotesEdit.value
     };
-    $.ajax({
-      headers: {
-        'Authorization': "bearer " + Cookie.load('tokenInfo')
-      },
-      type: "POST",
-      url: this.props.url,
-      data: data
-    }).success(function () {
-      ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
-      ReactDOM.render(
-        <Info
-          changed={true}
-          url="api/Account/AllUserInfo"/>,
-        document.getElementById("content")
-      );
-    }).fail(function(ee) {
-      alert(ee);
-    });
+
+    fetch(this.props.url, {
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "bearer " + Cookie.load('tokenInfo')
+    }),
+    body: JSON.stringify(data)
+  }).then(()=>{
+    ReactDOM.unmountComponentAtNode(document.getElementById('Settings'));
+    ReactDOM.render(
+      <Info
+        changed={true}
+        url="api/Account/AllUserInfo"/>,
+      document.getElementById("content")
+    );
+  });
+
+
   },
   render: function() {
     return (
