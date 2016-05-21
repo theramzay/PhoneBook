@@ -30,7 +30,10 @@ module.exports = {
           {
               test: /\.jsx?/,
               include: APP_DIR,
-              loader: 'babel'
+              loader: 'babel',
+              query: {
+                  presets: ['es2015','react']
+              }
           },
           { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /.(jpg|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
