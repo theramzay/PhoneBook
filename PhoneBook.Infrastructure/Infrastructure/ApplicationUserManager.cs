@@ -5,7 +5,7 @@ using Owin.Security.AesDataProtectorProvider;
 using Owin.Security.AesDataProtectorProvider.CrypticProviders;
 using PhoneBook.Domain.Entities;
 
-namespace PhoneBook.Domain.Infrastructure
+namespace PhoneBook.Infrastructure.Infrastructure
 {
     public class ApplicationUserManager : UserManager<User>
     {

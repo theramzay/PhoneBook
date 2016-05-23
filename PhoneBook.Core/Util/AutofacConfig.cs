@@ -7,9 +7,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Owin;
 using PhoneBook.Core.Controllers;
 using PhoneBook.Domain.Abstract;
-using PhoneBook.Domain.Concrete;
 using PhoneBook.Domain.Entities;
-using PhoneBook.Domain.Infrastructure;
+using PhoneBook.Infrastructure.Concrete;
+using PhoneBook.Infrastructure.Infrastructure;
 
 namespace PhoneBook.Core.Util
 {

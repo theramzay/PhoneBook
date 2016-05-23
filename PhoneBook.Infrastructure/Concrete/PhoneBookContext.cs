@@ -2,7 +2,7 @@
 using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
 
-namespace PhoneBook.Domain.Concrete
+namespace PhoneBook.Infrastructure.Concrete
 {
     public class PhoneBookContext : IdentityDbContext<User>, IRepository
     {
