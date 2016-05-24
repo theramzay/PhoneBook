@@ -35,7 +35,6 @@ namespace PhoneBook.Core.Util
 
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
-            builder.RegisterType<PhoneBookContext>().As<IRepository>().InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
@@ -66,7 +65,6 @@ namespace PhoneBook.Core.Util
 
 
             builder.RegisterType<ApplicationUserManager>().AsSelf();
-            builder.RegisterType<PhoneBookContext>().As<IRepository>().InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
