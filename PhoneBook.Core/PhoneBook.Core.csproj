@@ -269,7 +269,6 @@
     <Compile Include="Controllers\ChatHub.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -374,6 +373,10 @@
     <ProjectReference Include="..\PhoneBook.Domain\PhoneBook.Domain.csproj">
       <Project>{ba95303e-dad5-441f-9f96-40fa2c8de699}</Project>
       <Name>PhoneBook.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PhoneBook.Infrastructure\PhoneBook.Infrastructure.csproj">
+      <Project>{e05853f1-0edb-48ba-a23f-e6848c6391d8}</Project>
+      <Name>PhoneBook.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

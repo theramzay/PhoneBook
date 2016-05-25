@@ -1,7 +1,7 @@
 using System.Data.Entity.Migrations;
-using PhoneBook.Domain.Concrete;
+using PhoneBook.Infrastructure.Concrete;
 
-namespace PhoneBook.Domain.Migrations
+namespace PhoneBook.Infrastructure.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<PhoneBookContext>
     {

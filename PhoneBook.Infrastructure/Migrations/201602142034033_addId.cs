@@ -1,6 +1,6 @@
 using System.Data.Entity.Migrations;
 
-namespace PhoneBook.Domain.Migrations
+namespace PhoneBook.Infrastructure.Migrations
 {
     public partial class addId : DbMigration
     {

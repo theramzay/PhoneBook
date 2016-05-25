@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
 
-namespace PhoneBook.Domain.Infrastructure
+namespace PhoneBook.Infrastructure.Infrastructure
 {
     public class MainUserManager : IMainUserManager
     {

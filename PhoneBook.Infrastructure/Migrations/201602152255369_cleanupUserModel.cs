@@ -1,4 +1,4 @@
-namespace PhoneBook.Domain.Migrations
+namespace PhoneBook.Infrastructure.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
