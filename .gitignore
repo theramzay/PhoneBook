@@ -30,5 +30,4 @@ packages/
 .vs/
 [Tt]est[Rr]esult*
 PhoneBook.Core/node_modules/*
-PhoneBook.Core/Assets/js/bundle.js
-PhoneBook.Core/Assets/js/bundle.js.map
+PhoneBook.Core/Assets/bundle.*
