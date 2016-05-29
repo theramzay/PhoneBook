@@ -178,7 +178,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background: url('splash.jpg') center 0 no-repeat fixed;
+    background: url(~/Assets/imgs/splash.jpg) center 0 no-repeat fixed;
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
