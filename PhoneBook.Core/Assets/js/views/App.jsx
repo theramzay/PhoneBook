@@ -5,6 +5,7 @@ var Splash = require('./HeaderPart.jsx');
 
 require('font-awesome/css/font-awesome.css');
 
+
 ReactDOM.render(
   <MainPage />,
   document.getElementById('content')
