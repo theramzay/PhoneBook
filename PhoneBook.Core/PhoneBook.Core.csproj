@@ -290,7 +290,6 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <None Include="Assets\js\views\HeaderPart.jsx" />
     <Content Include="Assets\js\views\ChatWS.js" />
-    <Content Include="b9558d2ad00e69ac99cfe09f81ca5de9.jpg" />
     <Content Include="Assets\css\animate.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\js\bootstrap.js" />
