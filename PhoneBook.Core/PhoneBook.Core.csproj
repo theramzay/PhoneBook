@@ -293,7 +293,8 @@
     <Content Include="Assets\bundle.css" />
     <Content Include="Assets\bundle.js" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
-    <Content Include="Assets\js\views\ChatWS.js" />
+    <Content Include="Assets\imgs\splash.jpg" />
+    <None Include="Assets\js\views\ChatWS.jsx" />
     <Content Include="Assets\css\animate.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\js\bootstrap.js" />
