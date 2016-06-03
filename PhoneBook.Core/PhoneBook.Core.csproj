@@ -288,9 +288,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
     <None Include="Assets\js\views\HeaderPart.jsx" />
-    <Content Include="Assets\js\views\ChatWS.js" />
-    <Content Include="b9558d2ad00e69ac99cfe09f81ca5de9.jpg" />
+    <Content Include="Assets\bundle.css" />
+    <Content Include="Assets\bundle.js" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\imgs\splash.jpg" />
+    <None Include="Assets\js\views\ChatWS.jsx" />
     <Content Include="Assets\css\animate.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\js\bootstrap.js" />
@@ -302,7 +306,6 @@
     <Content Include="Assets\js\creative.js" />
     <Content Include="Assets\js\jquery.easing.min.js" />
     <Content Include="Assets\js\jquery.fittext.js" />
-    <Content Include="Assets\css\splash.jpg" />
     <Content Include="Assets\js\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
@@ -331,7 +334,6 @@
     <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="package.json" />
-    <Content Include="Assets\js\bundle.js" />
     <Content Include="Assets\js\hubs.js" />
     <Content Include="webpack.config.js" />
     <Content Include="Assets\js\views\AdminPage.jsx" />
@@ -363,7 +365,6 @@
     <Content Include="Assets\js\views\EditInfo.jsx" />
     <Content Include="Assets\js\views\ImageUpload.jsx" />
     <Content Include="Assets\js\views\ChangePassword.jsx" />
-    <Content Include="Assets\js\bundle.js.map" />
     <Content Include="Assets\js\views\AddClaim.jsx" />
     <Content Include="Assets\js\views\Router.jsx" />
     <Content Include="Assets\js\views\Chat.jsx" />
