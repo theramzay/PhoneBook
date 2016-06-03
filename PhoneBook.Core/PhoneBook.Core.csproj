@@ -288,9 +288,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Assets\fonts\fontawesome-webfont.ttf" />
     <None Include="Assets\js\views\HeaderPart.jsx" />
     <Content Include="Assets\bundle.css" />
     <Content Include="Assets\bundle.js" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\js\views\ChatWS.js" />
     <Content Include="Assets\css\animate.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
