@@ -23,7 +23,7 @@ module.exports = {
             //'./Scripts/views/Router.jsx']
     },
     output: {
-        filename: "./Assets/js/bundle.js"
+        filename: "./Assets/bundle.js"
     },
     module: {
         loaders: [
@@ -35,8 +35,9 @@ module.exports = {
                   presets: ['es2015','react']
               }
           },
-          { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /.(jpg|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000' },
+          { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize!", "url-loader?limit=100000") },
+      { test: /.(jpg|png)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000&name=Assets/imgs/[name].[ext]' },
+      { test: /.(woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000&name=Assets/fonts/[name].[ext]' },
       { test: /\.json$/, loader: "json" }
 
         ]
@@ -50,9 +51,9 @@ module.exports = {
       ReactDOM: "react-dom",
       Cookie: "react-cookie"
   }),
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.UglifyJsPlugin(),
-  new ExtractTextPlugin('bundle.css')
+  //new webpack.optimize.DedupePlugin(),
+  //new webpack.optimize.UglifyJsPlugin(),
+  new ExtractTextPlugin('Assets/bundle.css')
     ],
     resolve: {
         extensions: ['', '.js', '.jsx']
