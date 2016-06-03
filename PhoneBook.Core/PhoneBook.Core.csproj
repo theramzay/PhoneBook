@@ -305,7 +305,6 @@
     <Content Include="Assets\js\creative.js" />
     <Content Include="Assets\js\jquery.easing.min.js" />
     <Content Include="Assets\js\jquery.fittext.js" />
-    <Content Include="Assets\css\splash.jpg" />
     <Content Include="Assets\js\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
