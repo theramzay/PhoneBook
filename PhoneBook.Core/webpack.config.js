@@ -5,7 +5,6 @@ var path = require('path');
 var webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 var APP_DIR = path.resolve(__dirname, 'Assets/js');
 
 module.exports = {
@@ -20,7 +19,6 @@ module.exports = {
             './Assets/js/jquery.fittext.js',
             './Assets/js/creative.js',
             './Assets/js/views/App.jsx']
-            //'./Scripts/views/Router.jsx']
     },
     output: {
         filename: "./Assets/bundle.js"
