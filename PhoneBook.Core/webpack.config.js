@@ -1,11 +1,11 @@
 ﻿/// <binding />
 "use strict";
 var WebpackNotifierPlugin = require('webpack-notifier');
-var path = require('path');
+var Path = require('path');
 var Webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var APP_DIR = path.resolve(__dirname, 'Assets/js');
+var APP_DIR = Path.resolve(__dirname, 'Assets/js');
 
 module.exports = {
     entry: {
