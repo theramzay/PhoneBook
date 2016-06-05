@@ -5,7 +5,7 @@ var Path = require('path');
 var Webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var APP_DIR = Path.resolve(__dirname, 'Assets/js');
+var AppDir = Path.resolve(__dirname, 'Assets/js');
 
 module.exports = {
     entry: {
@@ -27,7 +27,7 @@ module.exports = {
         loaders: [
           {
               test: /\.jsx?/,
-              include: APP_DIR,
+              include: AppDir,
               loader: 'babel',
               query: {
                   presets: ['es2015','react']
