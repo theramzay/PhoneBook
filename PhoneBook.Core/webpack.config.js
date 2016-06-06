@@ -49,8 +49,7 @@ module.exports = {
       ReactDOM: "react-dom",
       Cookie: "react-cookie"
   }),
-  //new webpack.optimize.DedupePlugin(),
-  //new webpack.optimize.UglifyJsPlugin(),
+  new Webpack.optimize.DedupePlugin(),
   new ExtractTextPlugin('Assets/bundle.css')
     ],
     resolve: {
