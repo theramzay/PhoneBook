@@ -280,12 +280,7 @@ namespace PhoneBook.Core.Controllers
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok(result);
+            return !result.Succeeded ? GetErrorResult(result) : Ok(result);
         }
 
         // POST api/Account/SetPassword
