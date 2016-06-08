@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using PhoneBook.Domain.Entities;
 
 namespace PhoneBook.Domain.Abstract
 {
-    public interface IMainUserManager
+    public interface IMainUserManager: IDisposable
     {
         Task<IdentityResult> ChangePasswordAsync(string email, string currentPassword, string newPassword);
         Task<IdentityResult> CreateAsync(User u);

@@ -116,5 +116,10 @@ namespace PhoneBook.Infrastructure.Infrastructure
                 _applicationUserManager.ChangePasswordAsync(
                     _applicationUserManager.FindById(id).Id, currentPassword, newPassword);
         }
+
+        public void Dispose()
+        {
+            _applicationUserManager.Dispose();
+        }
     }
 }
