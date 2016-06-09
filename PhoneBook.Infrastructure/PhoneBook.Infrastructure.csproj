@@ -120,6 +120,10 @@
     <Compile Include="Migrations\201605080727587_AddUserDateOfReg.Designer.cs">
       <DependentUpon>201605080727587_AddUserDateOfReg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606231911401_moving_update.cs" />
+    <Compile Include="Migrations\201606231911401_moving_update.Designer.cs">
+      <DependentUpon>201606231911401_moving_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605080727587_AddUserDateOfReg.resx">
       <DependentUpon>201605080727587_AddUserDateOfReg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231911401_moving_update.resx">
+      <DependentUpon>201606231911401_moving_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
