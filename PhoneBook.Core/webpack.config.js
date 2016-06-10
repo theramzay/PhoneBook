@@ -2,7 +2,7 @@
 "use strict";
 var WebpackNotifierPlugin = require('webpack-notifier');
 var path = require('path');
-var webpack = require("webpack");
+var Webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var APP_DIR = path.resolve(__dirname, 'Assets/js');
@@ -42,7 +42,7 @@ module.exports = {
     },
     plugins: [
   new WebpackNotifierPlugin(),
-  new webpack.ProvidePlugin({
+  new Webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
       React: "react",
