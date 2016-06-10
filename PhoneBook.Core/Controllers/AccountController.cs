@@ -57,6 +57,7 @@ namespace PhoneBook.Core.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
+        [Authorize(Roles = "user")]
         public UserInfoViewModel GetUserInfo()
         {
             var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
@@ -72,6 +73,7 @@ namespace PhoneBook.Core.Controllers
         // GET api/Account/AllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("AllUserInfo")]
+        [Authorize(Roles = "user")]
         public async Task<PersonalUserInfoViewModer> GetAllUserInfo()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
