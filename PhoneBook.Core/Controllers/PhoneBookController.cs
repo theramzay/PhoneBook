@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
 using PhoneBook.Core.Models;
 using PhoneBook.Domain.Abstract;
 using PhoneBook.Domain.Entities;
@@ -47,7 +46,6 @@ namespace PhoneBook.Core.Controllers
         [Route("ClaimTest")]
         [HttpGet]
         [Authorize(Roles = "user")]
-        //[ClaimAuth(Role = "user")]
         public IHttpActionResult ClaimTest()
         {
             return Ok(new {Message = "Hello!", lol = "yep"});
@@ -56,7 +54,6 @@ namespace PhoneBook.Core.Controllers
         [Route("ClaimTestModer")]
         [HttpGet]
         [Authorize(Roles = "Moder")]
-        //[ClaimAuth(Role = "user")]
         public IHttpActionResult ClaimTestModer()
         {
             return Ok(new {Message = "Hello!", lol = "yep"});
