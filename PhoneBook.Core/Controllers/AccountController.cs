@@ -129,6 +129,7 @@ namespace PhoneBook.Core.Controllers
         // POST api/Account/UpdateAllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UpdateUserInfo")]
+        [Authorize(Roles = "user")]
         public async Task<IHttpActionResult> UpdateUserInfo(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
@@ -155,6 +156,7 @@ namespace PhoneBook.Core.Controllers
         // POST api/Account/UpdateAllUserInfoByAdmin
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UpdateUserInfoByAdmin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> UpdateUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
