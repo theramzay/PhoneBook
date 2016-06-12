@@ -200,6 +200,7 @@ namespace PhoneBook.Core.Controllers
         [Route("Upload")]
         // POST api/Account/Upload
         [MimeMultipart]
+        [Authorize(Roles = "user")]
         public async Task<IHttpActionResult> Upload()
         {
             var uploadPath = HttpContext.Current.Server.MapPath("~/Assets/imgs/ProfileImages");
