@@ -229,6 +229,7 @@ namespace PhoneBook.Core.Controllers
 
         // POST api/Account/Logout
         [Route("Logout")]
+        [Authorize(Roles = "user")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
