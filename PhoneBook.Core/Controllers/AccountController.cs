@@ -275,6 +275,7 @@ namespace PhoneBook.Core.Controllers
         [Route("ChangePassword")]
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Authorize(Roles = "user")]
         //public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
