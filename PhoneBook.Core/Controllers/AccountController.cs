@@ -292,6 +292,7 @@ namespace PhoneBook.Core.Controllers
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
