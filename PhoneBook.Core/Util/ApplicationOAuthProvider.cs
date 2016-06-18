@@ -27,7 +27,6 @@ namespace PhoneBook.Core.Util
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetAutofacLifetimeScope().Resolve<IMainUserManager>();
-            //var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             var user = await userManager.FindAsync(context.UserName, context.Password);
 
