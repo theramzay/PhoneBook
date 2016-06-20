@@ -26,8 +26,6 @@ namespace PhoneBook.Core.Util
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<AccountController>().InstancePerRequest();
             builder.RegisterType<PhoneBookContext>().InstancePerRequest();
-            // OPTIONAL: Register the Autofac filter provider.
-            //builder.RegisterWebApiFilterProvider(config);
 
             //dependenses resolving
             builder.RegisterType<MainUserManager>().As<IMainUserManager>().InstancePerRequest();
@@ -56,8 +54,6 @@ namespace PhoneBook.Core.Util
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<AccountController>().InstancePerRequest();
-            // OPTIONAL: Register the Autofac filter provider.
-            //builder.RegisterWebApiFilterProvider(config);
 
             //dependenses resolving
             builder.RegisterType<MainUserManager>().As<IMainUserManager>().InstancePerRequest();
