@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.Http.Headers;
 
 namespace PhoneBook.Core.Areas.HelpPage
@@ -165,12 +166,8 @@ namespace PhoneBook.Core.Areas.HelpPage
             {
                 hashCode ^= ParameterType.GetHashCode();
             }
-            foreach (var parameterName in ParameterNames)
-            {
-                hashCode ^= parameterName.ToUpperInvariant().GetHashCode();
-            }
 
-            return hashCode;
+            return ParameterNames.Aggregate(hashCode, (current, parameterName) => current ^ parameterName.ToUpperInvariant().GetHashCode());
         }
     }
 }
