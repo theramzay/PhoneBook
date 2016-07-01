@@ -57,6 +57,7 @@ namespace PhoneBook.Core.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
+        [Authorize(Roles = "user")]
         public UserInfoViewModel GetUserInfo()
         {
             var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
@@ -72,6 +73,7 @@ namespace PhoneBook.Core.Controllers
         // GET api/Account/AllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("AllUserInfo")]
+        [Authorize(Roles = "user")]
         public async Task<PersonalUserInfoViewModer> GetAllUserInfo()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -127,6 +129,7 @@ namespace PhoneBook.Core.Controllers
         // POST api/Account/UpdateAllUserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UpdateUserInfo")]
+        [Authorize(Roles = "user")]
         public async Task<IHttpActionResult> UpdateUserInfo(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
@@ -153,6 +156,7 @@ namespace PhoneBook.Core.Controllers
         // POST api/Account/UpdateAllUserInfoByAdmin
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UpdateUserInfoByAdmin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> UpdateUserInfoByAdmin(PersonalUserInfoViewModer updatedUser)
         {
             if (!ModelState.IsValid) return BadRequest("Wrong model");
@@ -196,6 +200,7 @@ namespace PhoneBook.Core.Controllers
         [Route("Upload")]
         // POST api/Account/Upload
         [MimeMultipart]
+        [Authorize(Roles = "user")]
         public async Task<IHttpActionResult> Upload()
         {
             var uploadPath = HttpContext.Current.Server.MapPath("~/Assets/imgs/ProfileImages");
@@ -224,6 +229,7 @@ namespace PhoneBook.Core.Controllers
 
         // POST api/Account/Logout
         [Route("Logout")]
+        [Authorize(Roles = "user")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -269,6 +275,7 @@ namespace PhoneBook.Core.Controllers
         [Route("ChangePassword")]
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Authorize(Roles = "user")]
         //public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
@@ -280,16 +287,12 @@ namespace PhoneBook.Core.Controllers
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok(result);
+            return !result.Succeeded ? GetErrorResult(result) : Ok(result);
         }
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -299,12 +302,7 @@ namespace PhoneBook.Core.Controllers
 
             var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/AddExternalLogin
@@ -336,12 +334,7 @@ namespace PhoneBook.Core.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
                 new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/RemoveLogin
@@ -550,23 +543,19 @@ namespace PhoneBook.Core.Controllers
             }
 
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-            return Ok();
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing && _userManager != null)
-        //    {
-        //        _userManager.Dispose();
-        //        _userManager = null;
-        //    }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && _userManager != null)
+            {
+                _userManager.Dispose();
+                _userManager = null;
+            }
 
-        //    base.Dispose(disposing);
-        //}
+            base.Dispose(disposing);
+        }
 
         #region Helpers
 

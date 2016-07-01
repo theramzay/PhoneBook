@@ -11,8 +11,7 @@ namespace PhoneBook.Core.Util
 
         public override string GetLocalFileName(HttpContentHeaders headers)
         {
-            if (headers != null &&
-                headers.ContentDisposition != null)
+            if (headers?.ContentDisposition != null)
             {
                 return headers
                     .ContentDisposition

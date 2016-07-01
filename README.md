@@ -1,6 +1,6 @@
-PhoneBook - the One journal for you company 
+PhoneBook - the One journal for you company
 -----
-[![Status Ventis](https://img.shields.io/badge/status-ventis-yellow.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/github/ramzzzay/phonebook?branch=Development&svg=true)](https://ci.appveyor.com/project/ramzzzay/phonebook/branch/Development)
+[![Status Aquana](https://img.shields.io/badge/status-aquana-yellowgreen.svg)](https://github.com/ForNeVeR/andivionian-status-classifier) [![Build status](https://ci.appveyor.com/api/projects/status/github/ramzzzay/phonebook?branch=Development&svg=true)](https://ci.appveyor.com/project/ramzzzay/phonebook/branch/Development)
 
 About
 -----

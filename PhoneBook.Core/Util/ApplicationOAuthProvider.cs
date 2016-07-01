@@ -27,7 +27,6 @@ namespace PhoneBook.Core.Util
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetAutofacLifetimeScope().Resolve<IMainUserManager>();
-            //var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             var user = await userManager.FindAsync(context.UserName, context.Password);
 
@@ -71,14 +70,12 @@ namespace PhoneBook.Core.Util
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId == _publicClientId)
-            {
-                var expectedRootUri = new Uri(context.Request.Uri, "/");
+            if (context.ClientId != _publicClientId) return Task.FromResult<object>(null);
+            var expectedRootUri = new Uri(context.Request.Uri, "/");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
-                {
-                    context.Validated();
-                }
+            if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+            {
+                context.Validated();
             }
 
             return Task.FromResult<object>(null);

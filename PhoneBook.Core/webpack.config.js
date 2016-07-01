@@ -1,12 +1,11 @@
 ﻿/// <binding />
 "use strict";
 var WebpackNotifierPlugin = require('webpack-notifier');
-var path = require('path');
-var webpack = require("webpack");
+var Path = require('path');
+var Webpack = require("webpack");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'Assets/js');
+var AppDir = Path.resolve(__dirname, 'Assets/js');
 
 module.exports = {
     entry: {
@@ -20,7 +19,6 @@ module.exports = {
             './Assets/js/jquery.fittext.js',
             './Assets/js/creative.js',
             './Assets/js/views/App.jsx']
-            //'./Scripts/views/Router.jsx']
     },
     output: {
         filename: "./Assets/bundle.js"
@@ -29,7 +27,7 @@ module.exports = {
         loaders: [
           {
               test: /\.jsx?/,
-              include: APP_DIR,
+              include: AppDir,
               loader: 'babel',
               query: {
                   presets: ['es2015','react']
@@ -44,15 +42,14 @@ module.exports = {
     },
     plugins: [
   new WebpackNotifierPlugin(),
-  new webpack.ProvidePlugin({
+  new Webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
       React: "react",
       ReactDOM: "react-dom",
       Cookie: "react-cookie"
   }),
-  //new webpack.optimize.DedupePlugin(),
-  //new webpack.optimize.UglifyJsPlugin(),
+  new Webpack.optimize.DedupePlugin(),
   new ExtractTextPlugin('Assets/bundle.css')
     ],
     resolve: {

@@ -22,23 +22,6 @@ namespace PhoneBook.Core
         {
             AutofacConfig.Configure(app);
 
-
-            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
-            //var httpConfiguration = new HttpConfiguration();
-
-            //// Configure Web API Routes:
-            //// - Enable Attribute Mapping
-            //// - Enable Default routes at /api.
-            //httpConfiguration.MapHttpAttributeRoutes();
-            //httpConfiguration.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
-
-            //app.UseOAuthAuthorizationServer(new MyOAuthOptions());
-            //app.UseJwtBearerAuthentication(new MyJwtOptions());
-
             // Configure & enable the application for OAuth based flow
             PublicClientId = "self";
             app.UseOAuthBearerTokens(
@@ -56,9 +39,6 @@ namespace PhoneBook.Core
             app.UseGoogleAuthentication(
                 clientId: "746837581939-gimncv6el35gvkhchcqghq92h38j35c7.apps.googleusercontent.com",
                 clientSecret: "zikgTnP-l2K4PVAmH4wtiij9");
-
-            //app.UseWebApi(httpConfiguration);
-            //ConfigureAuth(app);
             app.MapSignalR();
         }
     }

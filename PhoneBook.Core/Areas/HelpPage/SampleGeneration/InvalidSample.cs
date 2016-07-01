@@ -3,7 +3,8 @@ using System;
 namespace PhoneBook.Core.Areas.HelpPage
 {
     /// <summary>
-    /// This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+    ///     This represents an invalid sample on the help page. There's a display template named InvalidSample associated with
+    ///     this class.
     /// </summary>
     public class InvalidSample
     {
@@ -16,11 +17,11 @@ namespace PhoneBook.Core.Areas.HelpPage
             ErrorMessage = errorMessage;
         }
 
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get; }
 
         public override bool Equals(object obj)
         {
-            InvalidSample other = obj as InvalidSample;
+            var other = obj as InvalidSample;
             return other != null && ErrorMessage == other.ErrorMessage;
         }
 
