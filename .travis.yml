@@ -1,4 +1,4 @@
-language: csharp
+language: csharp,node_js
 solution: PhoneBook.sln
 node_js:
   - "6"
