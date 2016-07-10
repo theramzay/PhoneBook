@@ -9,3 +9,4 @@ install:
   - nuget restore PhoneBook.sln
   - cd PhoneBook.Core
   - npm install
+  - cd ..
