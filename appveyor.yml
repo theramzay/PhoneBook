@@ -1,3 +1,6 @@
+environment:
+  nodejs_version: "6"
 before_build:
+- ps: Install-Product node $env:nodejs_version
 - nuget restore
 - cd PhoneBook.Core && npm install && npm start
