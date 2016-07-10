@@ -1,5 +1,7 @@
 language: csharp
 solution: PhoneBook.sln
+node_js:
+  - "6"
 install:
   - nuget restore PhoneBook.sln
   - cd PhoneBook.Core
